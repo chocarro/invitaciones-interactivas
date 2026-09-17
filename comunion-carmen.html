@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Primera Comunión — Carmen</title>
+  <meta name="description" content="Te invito a celebrar mi Primera Comunión el 16 de Mayo de 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose-soft: #fbf2ef;
+      --rose-accent: #e8c5be;
+      --rose-deep: #b3736b;
+      --gold: #cbb279;
+      --gold-dark: #8c733f;
+      --cream: #fdfaf7;
+      --text: #3c3433;
+      --text-light: #7a6e6d;
+      --font-cursive: 'Great Vibes', cursive;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Montserrat', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #382c2b;
+      background-image: radial-gradient(circle at 50% 30%, #523f3d 0%, #221817 100%);
+      font-family: var(--font-sans);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .card-shell {
+      width: 100%;
+      max-width: 440px;
+      background: var(--cream);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .top-badge {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--rose-accent);
+      color: var(--rose-deep);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .music-bell-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Screen 1: Ribbon Cover */
+    .cover-ribbon-screen {
+      background: linear-gradient(180deg, #f9edf0 0%, #f1dcde 100%);
+      padding: 55px 20px 45px;
+      text-align: center;
+      position: relative;
+    }
+
+    .cover-ribbon-screen.hidden { display: none; }
+
+    .cross-symbol {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 15px;
+      color: var(--gold);
+    }
+
+    .cover-script {
+      font-family: var(--font-cursive);
+      font-size: 52px;
+      color: var(--rose-deep);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .cover-subtitle {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    /* Interactive Silk Ribbon */
+    .ribbon-box {
+      width: 250px;
+      height: 220px;
+      margin: 0 auto 25px;
+      background: #ffffff;
+      border-radius: 14px;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(179, 115, 107, 0.25);
+      border: 1px solid var(--rose-accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Horizontal ribbon band */
+    .ribbon-h {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 28px;
+      background: linear-gradient(180deg, #f0dfb3 0%, var(--gold) 50%, #b09556 100%);
+      transform: translateY(-50%);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Vertical ribbon band */
+    .ribbon-v {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 28px;
+      background: linear-gradient(90deg, #f0dfb3 0%, var(--gold) 50%, #b09556 100%);
+      transform: translateX(-50%);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .ribbon-bow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff7d6 0%, var(--gold) 70%, #9e7f3c 100%);
+      box-shadow: 0 8px 20px rgba(140, 115, 63, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3b2a08;
+      font-size: 26px;
+      animation: pulseBow 2s infinite ease-in-out;
+      z-index: 5;
+    }
+
+    @keyframes pulseBow {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    .btn-untie {
+      background: linear-gradient(135deg, var(--rose-deep), #8c524c);
+      color: white;
+      border: none;
+      padding: 13px 32px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(179, 115, 107, 0.4);
+      transition: all 0.3s;
+    }
+
+    .btn-untie:hover { transform: translateY(-2px); }
+
+    /* Screen 2: Full Content */
+    .communion-main {
+      display: none;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .communion-main.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-floral {
+      padding: 45px 20px 25px;
+      text-align: center;
+      background: linear-gradient(180deg, #fcedf0 0%, var(--cream) 100%);
+    }
+
+    .carmen-name {
+      font-family: var(--font-cursive);
+      font-size: 68px;
+      color: var(--rose-deep);
+      line-height: 0.9;
+      margin-bottom: 6px;
+    }
+
+    .communion-tag {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+    }
+
+    .portrait-wrap {
+      padding: 15px 25px;
+      text-align: center;
+    }
+
+    .portrait-frame {
+      border: 8px solid #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(179, 115, 107, 0.15);
+      background: #fff;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .blessing-quote {
+      padding: 25px 24px 10px;
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* Calendar */
+    .communion-calendar {
+      background: #ffffff;
+      margin: 20px 20px 30px;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--rose-accent);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .cal-title-comm {
+      font-family: var(--font-cursive);
+      font-size: 38px;
+      color: var(--rose-deep);
+      margin-bottom: 10px;
+    }
+
+    .cal-grid-mini {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .cal-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 12px;
+    }
+
+    .cal-pill.selected {
+      background: var(--rose-soft);
+      border: 2px solid var(--rose-deep);
+    }
+
+    .cal-num {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--rose-deep);
+    }
+
+    /* Countdown */
+    .countdown-carmen {
+      background: linear-gradient(135deg, #b3736b, #844c45);
+      margin: 0 20px 30px;
+      padding: 22px 15px;
+      border-radius: 16px;
+      text-align: center;
+      color: white;
+    }
+
+    .cnt-carmen-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .cnt-carmen-item {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 8px 4px;
+    }
+
+    .cnt-val { font-family: var(--font-serif); font-size: 24px; font-weight: 700; }
+    .cnt-lbl { font-size: 9px; text-transform: uppercase; opacity: 0.9; }
+
+    /* Ceremony & Banquet */
+    .event-card {
+      background: #ffffff;
+      margin: 0 20px 20px;
+      padding: 22px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--rose-accent);
+      text-align: center;
+    }
+
+    .event-icon { font-size: 28px; margin-bottom: 8px; }
+    .event-title { font-family: var(--font-serif); font-size: 22px; color: var(--rose-deep); margin-bottom: 4px; }
+    .event-time { font-size: 13px; font-weight: 600; color: var(--gold-dark); margin-bottom: 8px; }
+    .event-place { font-size: 13px; color: var(--text-light); margin-bottom: 14px; line-height: 1.4; }
+
+    .btn-map {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--rose-soft);
+      border: 1px solid var(--rose-accent);
+      color: var(--rose-deep);
+      text-decoration: none;
+      padding: 9px 20px;
+      border-radius: 25px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .btn-map:hover { background: var(--rose-deep); color: white; }
+
+    /* Guestbook / Deseos para Carmen */
+    .guestbook-section {
+      background: #ffffff;
+      margin: 0 20px 25px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--rose-accent);
+    }
+
+    .msg-board {
+      max-height: 160px;
+      overflow-y: auto;
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .msg-bubble {
+      background: var(--rose-soft);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.4;
+      border-left: 3px solid var(--rose-deep);
+    }
+
+    .msg-author {
+      font-weight: 600;
+      color: var(--rose-deep);
+      margin-top: 4px;
+      font-size: 11px;
+    }
+
+    /* RSVP */
+    .rsvp-carmen {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(179, 115, 107, 0.1);
+      border: 1px solid var(--rose-accent);
+    }
+
+    .input-carmen {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e0d0cc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+    }
+
+    .btn-submit-carmen {
+      width: 100%;
+      background: linear-gradient(135deg, var(--rose-deep), #8c524c);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .footer-carmen {
+      text-align: center;
+      padding: 30px 20px;
+      background: #f7e8eb;
+      font-family: var(--font-cursive);
+      font-size: 40px;
+      color: var(--rose-deep);
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <button id="bellBtn" class="music-bell-btn" title="Sonido de campanas celestiales">🔔</button>
+
+  <div class="card-shell">
+
+    <!-- Screen 1: Cover with Ribbon -->
+    <div id="ribbonScreen" class="cover-ribbon-screen">
+      <svg class="cross-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="12" y1="2" x2="12" y2="22"/>
+        <line x1="5" y1="8" x2="19" y2="8"/>
+      </svg>
+      <div class="cover-script">Carmen</div>
+      <div class="cover-subtitle">Mi Primera Comunión</div>
+
+      <div class="ribbon-box" onclick="untieRibbon()">
+        <div class="ribbon-h"></div>
+        <div class="ribbon-v"></div>
+        <div class="ribbon-bow">✨</div>
+      </div>
+
+      <button class="btn-untie" onclick="untieRibbon()">Desatar Lazo y Abrir</button>
+    </div>
+
+    <!-- Screen 2: Main Invitation -->
+    <div id="carmenContent" class="communion-main">
+
+      <header class="header-floral">
+        <p class="communion-tag">Mi Primera Comunión</p>
+        <h1 class="carmen-name">Carmen</h1>
+        <p style="font-family: var(--font-serif); font-size: 15px; color: var(--gold-dark); letter-spacing: 2px;">16 DE MAYO DE 2026</p>
+      </header>
+
+      <div class="portrait-wrap">
+        <div class="portrait-frame">
+          <img src="https://images.unsplash.com/photo-1543332164-6e82f355badc?auto=format&fit=crop&w=800&q=80" alt="Carmen en su comunión">
+        </div>
+      </div>
+
+      <p class="blessing-quote">
+        "Jesús, quédate siempre en mi corazón y acompáñame en cada paso de mi vida."<br>
+        ¡Me llena de alegría que me acompañes en este día tan especial!
+      </p>
+
+      <!-- Calendar Strip -->
+      <section class="communion-calendar">
+        <div class="cal-title-comm">Mayo 2026</div>
+        <div class="cal-grid-mini">
+          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Jue</span><span class="cal-num" style="color:#888;">14</span></div>
+          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Vie</span><span class="cal-num" style="color:#888;">15</span></div>
+          <div class="cal-pill selected"><span style="font-size: 11px; font-weight:700; color:var(--rose-deep);">SÁB</span><span class="cal-num">16</span></div>
+          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Dom</span><span class="cal-num" style="color:#888;">17</span></div>
+          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Lun</span><span class="cal-num" style="color:#888;">18</span></div>
+        </div>
+      </section>
+
+      <!-- Countdown -->
+      <section class="countdown-carmen">
+        <div style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">Cuenta atrás para mi gran día</div>
+        <div class="cnt-carmen-grid">
+          <div class="cnt-carmen-item"><div class="cnt-val" id="cDays">00</div><div class="cnt-lbl">Días</div></div>
+          <div class="cnt-carmen-item"><div class="cnt-val" id="cHours">00</div><div class="cnt-lbl">Horas</div></div>
+          <div class="cnt-carmen-item"><div class="cnt-val" id="cMinutes">00</div><div class="cnt-lbl">Min</div></div>
+          <div class="cnt-carmen-item"><div class="cnt-val" id="cSeconds">00</div><div class="cnt-lbl">Seg</div></div>
+        </div>
+      </section>
+
+      <!-- Event 1: Ceremony -->
+      <section class="event-card">
+        <div class="event-icon">⛪</div>
+        <h3 class="event-title">Santa Misa de Comunión</h3>
+        <div class="event-time">12:00 horas</div>
+        <p class="event-place">Parroquia de San Jerónimo el Real<br>Calle Moreto, 4, Madrid</p>
+        <a href="https://maps.google.com/?q=San+Jeronimo+el+Real+Madrid" target="_blank" rel="noopener" class="btn-map">Ver Iglesia en Mapa</a>
+      </section>
+
+      <!-- Event 2: Banquet & Games -->
+      <section class="event-card">
+        <div class="event-icon">🌸</div>
+        <h3 class="event-title">Comida & Juegos al Aire Libre</h3>
+        <div class="event-time">A partir de las 14:30 horas</div>
+        <p class="event-place">Finca Los Rosales<br>Carretera de El Pardo, Km 3, Madrid</p>
+        <a href="https://maps.google.com/?q=El+Pardo+Madrid" target="_blank" rel="noopener" class="btn-map">Ver Finca en Mapa</a>
+      </section>
+
+      <!-- Digital Guestbook / Mensajes para Carmen -->
+      <section class="guestbook-section">
+        <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--rose-deep); text-align: center; margin-bottom: 6px;">Libro de Recuerdos</h3>
+        <p style="font-size: 12px; color: var(--text-light); text-align: center; margin-bottom: 12px;">Deja tu mensaje o bendición para que Carmen lo guarde:</p>
+
+        <div id="messagesList" class="msg-board">
+          <div class="msg-bubble">
+            "¡Qué Dios bendiga tu camino hoy y siempre, preciosa Carmen! Con todo el amor de tus tíos."
+            <div class="msg-author">— Tía Laura y Tío Andrés</div>
+          </div>
+          <div class="msg-bubble">
+            "¡Estamos deseando verte vestida de blanco y darte un achuchón gigante!"
+            <div class="msg-author">— Abuela Mercedes</div>
+          </div>
+        </div>
+
+        <input type="text" id="signerName" class="input-carmen" placeholder="Tu nombre">
+        <textarea id="signerMsg" class="input-carmen" rows="2" placeholder="Escribe tu dedicatoria..."></textarea>
+        <button class="btn-submit-carmen" style="padding: 10px;" onclick="addMessage()">Publicar Mensaje</button>
+      </section>
+
+      <!-- RSVP -->
+      <section class="rsvp-carmen">
+        <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--rose-deep); text-align: center; margin-bottom: 6px;">Confirmación de Familia</h3>
+        <p style="font-size: 12px; color: var(--text-light); text-align: center; margin-bottom: 16px;">Por favor avísanos antes del 20 de Abril</p>
+
+        <form id="carmenRsvpForm" onsubmit="handleCarmenRSVP(event)">
+          <input type="text" id="familyNames" class="input-carmen" placeholder="Familia / Nombre completo *" required>
+          <input type="number" id="adultsCount" class="input-carmen" placeholder="Número de Adultos" min="1" value="2">
+          <input type="number" id="kidsCount" class="input-carmen" placeholder="Número de Niños" min="0" value="1">
+          <input type="text" id="allergies" class="input-carmen" placeholder="Alergias o menú celíaco/vegano">
+          <button type="submit" class="btn-submit-carmen">Confirmar Asistencia</button>
+        </form>
+        <div id="carmenSuccess" style="display: none; text-align: center; padding: 15px; color: var(--rose-deep); font-weight: 600;">
+          ¡Gracias por confirmar! Nos vemos el 16 de Mayo.
+        </div>
+      </section>
+
+      <footer class="footer-carmen">
+        ¡Gracias por acompañarme!
+        <div style="font-family: var(--font-sans); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-top: 6px;">Carmen — 2026</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function untieRibbon() {
+      document.getElementById('ribbonScreen').classList.add('hidden');
+      document.getElementById('carmenContent').classList.add('active');
+      playCelestialChime();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Countdown to 16 May 2026 12:00
+    const targetCommunion = new Date('2026-05-16T12:00:00').getTime();
+    function updateCommunionCountdown() {
+      const now = new Date().getTime();
+      const diff = targetCommunion - now;
+      if (diff > 0) {
+        document.getElementById('cDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('cHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('cMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('cSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }
+    setInterval(updateCommunionCountdown, 1000);
+    updateCommunionCountdown();
+
+    function addMessage() {
+      const name = document.getElementById('signerName').value.trim();
+      const text = document.getElementById('signerMsg').value.trim();
+      if (!name || !text) {
+        alert('Por favor indica tu nombre y mensaje');
+        return;
+      }
+      const board = document.getElementById('messagesList');
+      const item = document.createElement('div');
+      item.className = 'msg-bubble';
+      item.innerHTML = `"${text}"<div class="msg-author">— ${name}</div>`;
+      board.prepend(item);
+      document.getElementById('signerName').value = '';
+      document.getElementById('signerMsg').value = '';
+      playCelestialChime();
+    }
+
+    function handleCarmenRSVP(e) {
+      e.preventDefault();
+      document.getElementById('carmenRsvpForm').style.display = 'none';
+      document.getElementById('carmenSuccess').style.display = 'block';
+      playCelestialChime();
+    }
+
+    // Web Audio Celestial Bells
+    let audioCtx = null;
+    function playCelestialChime() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const tones = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+      const now = audioCtx.currentTime;
+      tones.forEach((f, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now + i * 0.12);
+        gain.gain.setValueAtTime(0, now + i * 0.12);
+        gain.gain.linearRampToValueAtTime(0.08, now + i * 0.12 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 2.0);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + i * 0.12);
+        osc.stop(now + i * 0.12 + 2.0);
+      });
+    }
+
+    document.getElementById('bellBtn').addEventListener('click', playCelestialChime);
+  </script>
+</body>
+</html>

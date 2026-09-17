@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentina & Lucas — Invitación de Boda</title>
+  <meta name="description" content="Nuestra historia de amor continúa el 24 de Octubre de 2026. Te esperamos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --burgundy-dark: #280a11;
+      --burgundy-rich: #4f101d;
+      --burgundy-light: #721929;
+      --cream-light: #faf7f0;
+      --cream-parchment: #f3ecde;
+      --gold-primary: #d4af37;
+      --gold-glow: #f3e5ab;
+      --gold-deep: #9d7c1a;
+      --text-dark: #231d1d;
+      --text-muted: #6b6360;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-script: 'Italianno', cursive;
+      --font-body: 'Montserrat', sans-serif;
+      --font-royal: 'Cinzel', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #140508;
+      background-image: radial-gradient(circle at 50% 30%, #310d15 0%, #100306 100%);
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 10px;
+    }
+
+    .invitation-shell {
+      width: 100%;
+      max-width: 440px;
+      background: var(--cream-light);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Fixed top badges */
+    .nav-badge {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(40, 10, 17, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-glow);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+    }
+
+    .nav-badge:hover {
+      background: var(--burgundy-rich);
+      color: #fff;
+    }
+
+    .audio-disc-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #1c080b;
+      border: 2px solid var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+
+    .audio-disc-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .vinyl-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle, #333 0, #333 2px, #111 3px, #111 5px);
+      border: 1px solid var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vinyl-center {
+      width: 8px;
+      height: 8px;
+      background: var(--gold-primary);
+      border-radius: 50%;
+    }
+
+    .spinning .vinyl-icon {
+      animation: spinVinyl 3s linear infinite;
+    }
+
+    @keyframes spinVinyl {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===================================================
+       1. ENVELOPE / TICKET ENTRANCE
+    =================================================== */
+    .intro-screen {
+      background: linear-gradient(180deg, var(--burgundy-dark) 0%, #170407 100%);
+      padding: 50px 24px;
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+    }
+
+    .intro-screen.hidden {
+      display: none;
+    }
+
+    .intro-title {
+      font-family: var(--font-royal);
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+    }
+
+    .intro-names {
+      font-family: var(--font-script);
+      font-size: 56px;
+      line-height: 0.95;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      margin-bottom: 24px;
+    }
+
+    /* Golden Ticket / Cinema Envelope */
+    .ticket-card {
+      background: var(--cream-parchment);
+      border-radius: 12px;
+      padding: 24px 20px;
+      margin: 0 auto 30px;
+      color: var(--text-dark);
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      border: 1px solid var(--gold-primary);
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .ticket-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .ticket-card::before, .ticket-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      background: #170407;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    .ticket-card::before { left: -12px; }
+    .ticket-card::after { right: -12px; }
+
+    .ticket-gold-seal {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 16px;
+      background: radial-gradient(circle at 35% 35%, #fff0b8, var(--gold-primary) 60%, var(--gold-deep) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.7);
+      animation: pulseGold 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGold {
+      0%, 100% { transform: scale(1); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+      50% { transform: scale(1.06); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6); }
+    }
+
+    .seal-monogram {
+      font-family: var(--font-royal);
+      font-size: 18px;
+      font-weight: 700;
+      color: #3b2a04;
+    }
+
+    .ticket-text {
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--burgundy-rich);
+      margin-bottom: 6px;
+    }
+
+    .ticket-date {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--burgundy-dark);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .ticket-barcode {
+      width: 80%;
+      height: 28px;
+      margin: 0 auto;
+      background: repeating-linear-gradient(90deg, #111 0, #111 2px, transparent 2px, transparent 4px, #111 4px, #111 7px, transparent 7px, transparent 9px);
+      opacity: 0.6;
+    }
+
+    .btn-open-gold {
+      background: linear-gradient(135deg, var(--gold-glow) 0%, var(--gold-primary) 50%, var(--gold-deep) 100%);
+      border: none;
+      color: #261603;
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-family: var(--font-royal);
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+      transition: all 0.3s;
+    }
+
+    .btn-open-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+    }
+
+    /* ===================================================
+       2. MAIN BODY
+    =================================================== */
+    .main-invitation {
+      display: none;
+      animation: fadeInPage 0.8s ease;
+    }
+
+    .main-invitation.active {
+      display: block;
+    }
+
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero Top Header */
+    .header-burgundy {
+      background: linear-gradient(180deg, var(--burgundy-rich) 0%, var(--burgundy-dark) 100%);
+      color: white;
+      padding: 55px 24px 45px;
+      text-align: center;
+      position: relative;
+      border-bottom: 4px double var(--gold-primary);
+    }
+
+    .header-subtitle {
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+    }
+
+    .header-title {
+      font-family: var(--font-script);
+      font-size: 60px;
+      line-height: 0.95;
+      color: #ffffff;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .header-date-badge {
+      font-family: var(--font-royal);
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--gold-glow);
+      border-top: 1px solid rgba(212, 175, 55, 0.5);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+      display: inline-block;
+      padding: 6px 20px;
+      margin-top: 6px;
+    }
+
+    /* Vintage Photo Strip */
+    .photo-strip-section {
+      padding: 25px 20px 10px;
+      text-align: center;
+    }
+
+    .photo-strip {
+      background: #111;
+      padding: 12px 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    /* Film holes */
+    .film-sprocket-top, .film-sprocket-bottom {
+      display: flex;
+      justify-content: space-around;
+      padding: 4px 0;
+    }
+
+    .hole {
+      width: 10px;
+      height: 7px;
+      background: #ffffff;
+      border-radius: 2px;
+      opacity: 0.8;
+    }
+
+    .film-main-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+      filter: contrast(110%) brightness(95%);
+    }
+
+    .film-caption {
+      color: #d4af37;
+      font-family: var(--font-script);
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    /* Elegant Text Announcement */
+    .intro-text-section {
+      padding: 30px 24px;
+      text-align: center;
+    }
+
+    .quote-lead {
+      font-family: var(--font-royal);
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--burgundy-rich);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .story-paragraph {
+      font-family: var(--font-display);
+      font-size: 16px;
+      line-height: 1.7;
+      color: #4a4341;
+      font-style: italic;
+    }
+
+    /* Calendar Grid with Heart Badge on 24 */
+    .calendar-container {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      border: 1px solid #ebdcc5;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .cal-header-title {
+      font-family: var(--font-script);
+      font-size: 34px;
+      color: var(--burgundy-rich);
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .cal-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .cal-table th {
+      color: var(--gold-deep);
+      font-weight: 600;
+      padding-bottom: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .cal-table td {
+      padding: 8px 4px;
+      color: #666;
+      position: relative;
+    }
+
+    .cal-table td.active-day {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .heart-badge {
+      background: var(--burgundy-rich);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(79, 16, 29, 0.4);
+      border: 1.5px solid var(--gold-primary);
+    }
+
+    /* Live Countdown */
+    .countdown-wine {
+      background: linear-gradient(135deg, var(--burgundy-rich), var(--burgundy-dark));
+      margin: 0 20px 30px;
+      padding: 24px 16px;
+      border-radius: 16px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 10px 25px rgba(40, 10, 17, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .countdown-wine-title {
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-glow);
+      margin-bottom: 15px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .countdown-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 10px;
+      padding: 10px 4px;
+    }
+
+    .cnt-num {
+      font-family: var(--font-display);
+      font-size: 26px;
+      color: var(--gold-glow);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .cnt-txt {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #d1bcbc;
+    }
+
+    /* Timeline Section with Elegant Curves */
+    .timeline-wrap {
+      padding: 10px 20px 30px;
+    }
+
+    .section-ribbon {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .script-subtitle {
+      font-family: var(--font-script);
+      font-size: 40px;
+      color: var(--burgundy-rich);
+      line-height: 0.9;
+    }
+
+    .royal-heading {
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-top: 4px;
+    }
+
+    .timeline-curve-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      border: 1px solid #ebdcc5;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    }
+
+    .t-event {
+      display: flex;
+      gap: 16px;
+      position: relative;
+      padding-bottom: 24px;
+    }
+
+    .t-event:last-child {
+      padding-bottom: 0;
+    }
+
+    .t-event::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 32px;
+      bottom: -4px;
+      width: 2px;
+      background: #e8d8bd;
+    }
+
+    .t-event:last-child::before {
+      display: none;
+    }
+
+    .t-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--burgundy-rich);
+      color: var(--gold-glow);
+      border: 2px solid var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+
+    .t-content {
+      flex: 1;
+    }
+
+    .t-hour {
+      font-family: var(--font-royal);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--burgundy-rich);
+      margin-bottom: 2px;
+    }
+
+    .t-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .t-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Location Card */
+    .loc-card-wine {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      border: 1px solid #ebdcc5;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    }
+
+    .loc-image-frame {
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      height: 160px;
+    }
+
+    .loc-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .btn-gold-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--burgundy-rich);
+      color: #ffffff;
+      text-decoration: none;
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 12px 26px;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 1px solid var(--gold-primary);
+      transition: all 0.3s;
+      cursor: pointer;
+      margin-top: 14px;
+    }
+
+    .btn-gold-action:hover {
+      background: #25060c;
+      transform: translateY(-2px);
+    }
+
+    /* Dress Code with Pantone Swatches */
+    .dresscode-wrap {
+      background: var(--cream-parchment);
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      border: 1px solid #dfd2be;
+      text-align: center;
+    }
+
+    .pantone-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 18px 0;
+      flex-wrap: wrap;
+    }
+
+    .pantone-card {
+      background: #ffffff;
+      padding: 5px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      width: 60px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .pantone-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .pantone-color {
+      height: 48px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .pantone-label {
+      font-size: 8px;
+      font-weight: 600;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    /* Wishes & IBAN */
+    .bank-card {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px dashed var(--gold-primary);
+    }
+
+    .iban-display {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--burgundy-rich);
+      background: #fdfaf4;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 12px 0;
+      border: 1px solid #ebdcc5;
+    }
+
+    /* RSVP Form */
+    .rsvp-card-wine {
+      background: #ffffff;
+      margin: 0 20px 35px;
+      padding: 26px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      border: 1px solid #ebdcc5;
+    }
+
+    .form-row {
+      margin-bottom: 16px;
+    }
+
+    .form-row label {
+      display: block;
+      font-family: var(--font-royal);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--burgundy-rich);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .form-row input, .form-row select, .form-row textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d8ccb8;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      background: #fdfcf9;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+      border-color: var(--gold-deep);
+    }
+
+    .btn-submit-wine {
+      width: 100%;
+      background: linear-gradient(135deg, var(--burgundy-rich), var(--burgundy-dark));
+      color: var(--gold-glow);
+      border: 1px solid var(--gold-primary);
+      padding: 14px;
+      border-radius: 30px;
+      font-family: var(--font-royal);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(79, 16, 29, 0.4);
+      transition: all 0.3s;
+    }
+
+    .btn-submit-wine:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 16, 29, 0.6);
+    }
+
+    .confirmation-msg {
+      display: none;
+      text-align: center;
+      padding: 20px 10px;
+      animation: fadeInPage 0.4s ease;
+    }
+
+    .wine-footer {
+      background: var(--burgundy-dark);
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      border-top: 2px solid var(--gold-primary);
+    }
+
+    .wine-footer-script {
+      font-family: var(--font-script);
+      font-size: 44px;
+      color: var(--gold-glow);
+      margin-bottom: 6px;
+    }
+
+    .toast-popup {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #280a11;
+      color: #fff;
+      border: 1px solid var(--gold-primary);
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 12px;
+      z-index: 2000;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <button id="vinylBtn" class="audio-disc-btn" title="Música romántica">
+    <div class="vinyl-icon">
+      <div class="vinyl-center"></div>
+    </div>
+  </button>
+
+  <div class="invitation-shell">
+
+    <!-- Screen 1: Ticket & Wax Seal Intro -->
+    <div id="introScreen" class="intro-screen">
+      <div class="intro-title">Pase de Invitación Exclusivo</div>
+      <div class="intro-names">Valentina & Lucas</div>
+
+      <div class="ticket-card" onclick="revealWedding()">
+        <div class="ticket-gold-seal">
+          <span class="seal-monogram">V & L</span>
+        </div>
+        <div class="ticket-text">Nuestra Boda Real</div>
+        <div class="ticket-date">24 . OCTUBRE . 2026</div>
+        <p style="font-size: 12px; color: #721929; margin-bottom: 12px; font-style: italic;">Palacio de Montarco — Ciudad Rodrigo</p>
+        <div class="ticket-barcode"></div>
+      </div>
+
+      <button class="btn-open-gold" onclick="revealWedding()">Abrir Invitación</button>
+    </div>
+
+    <!-- Screen 2: Full Wedding Story & Details -->
+    <div id="mainWedding" class="main-invitation">
+
+      <header class="header-burgundy">
+        <div class="header-subtitle">Nuestra Boda</div>
+        <h1 class="header-title">Valentina & Lucas</h1>
+        <div class="header-date-badge">24 DE OCTUBRE DE 2026</div>
+      </header>
+
+      <!-- Vintage Cinema Film Strip -->
+      <section class="photo-strip-section">
+        <div class="photo-strip">
+          <div class="film-sprocket-top">
+            <span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span>
+          </div>
+          <img class="film-main-img" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80" alt="Valentina & Lucas" loading="lazy">
+          <div class="film-caption">Story of Our Love</div>
+          <div class="film-sprocket-bottom">
+            <span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span><span class="hole"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Romantic Announcement -->
+      <section class="intro-text-section">
+        <div class="quote-lead">Querida familia y amigos</div>
+        <p class="story-paragraph">
+          "Nos conocimos en una tarde de otoño y prometimos caminar siempre de la mano. Hoy damos el paso más hermoso de nuestras vidas y no tendría sentido sin vosotros a nuestro lado."
+        </p>
+      </section>
+
+      <!-- Interactive Calendar with Marked 24 -->
+      <section class="calendar-container">
+        <div class="cal-header-title">Octubre 2026</div>
+        <table class="cal-table">
+          <thead>
+            <tr>
+              <th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sá</th><th>Do</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td>
+            </tr>
+            <tr>
+              <td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td>
+            </tr>
+            <tr>
+              <td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td>
+            </tr>
+            <tr>
+              <td>19</td><td>20</td><td>21</td><td>22</td><td>23</td>
+              <td class="active-day"><span class="heart-badge">24</span></td>
+              <td>25</td>
+            </tr>
+            <tr>
+              <td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Countdown -->
+      <section class="countdown-wine">
+        <div class="countdown-wine-title">La cuenta atrás ha comenzado</div>
+        <div class="countdown-grid">
+          <div class="countdown-card">
+            <div class="cnt-num" id="cdDays">00</div>
+            <div class="cnt-txt">Días</div>
+          </div>
+          <div class="countdown-card">
+            <div class="cnt-num" id="cdHours">00</div>
+            <div class="cnt-txt">Horas</div>
+          </div>
+          <div class="countdown-card">
+            <div class="cnt-num" id="cdMinutes">00</div>
+            <div class="cnt-txt">Minutos</div>
+          </div>
+          <div class="countdown-card">
+            <div class="cnt-num" id="cdSeconds">00</div>
+            <div class="cnt-txt">Segundos</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline with Curves -->
+      <section class="timeline-wrap">
+        <div class="section-ribbon">
+          <div class="script-subtitle">Timing del Día</div>
+          <div class="royal-heading">Cronograma del Enlace</div>
+        </div>
+
+        <div class="timeline-curve-box">
+          <div class="t-event">
+            <div class="t-circle">✦</div>
+            <div class="t-content">
+              <div class="t-hour">16:30 h</div>
+              <div class="t-name">Ceremonia Religiosa</div>
+              <div class="t-desc">Catedral de Santa María. Se ruega puntualidad.</div>
+            </div>
+          </div>
+          <div class="t-event">
+            <div class="t-circle">🍸</div>
+            <div class="t-content">
+              <div class="t-hour">18:00 h</div>
+              <div class="t-name">Cóctel de Bienvenida</div>
+              <div class="t-desc">Jardines del claustro con cuarteto de cuerdas y aperitivos.</div>
+            </div>
+          </div>
+          <div class="t-event">
+            <div class="t-circle">🍽️</div>
+            <div class="t-content">
+              <div class="t-hour">20:30 h</div>
+              <div class="t-name">Banquete de Gala</div>
+              <div class="t-desc">Salón de los Tapices. Degustación y brindis de honor.</div>
+            </div>
+          </div>
+          <div class="t-event">
+            <div class="t-circle">✨</div>
+            <div class="t-content">
+              <div class="t-hour">23:30 h</div>
+              <div class="t-name">Apertura de Baile & Fiesta</div>
+              <div class="t-desc">Vals nupcial, barra libre gourmet y recena de madrugada.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Venue & Location -->
+      <section class="loc-card-wine">
+        <div class="loc-image-frame">
+          <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80" alt="Palacio">
+        </div>
+        <div class="royal-heading" style="margin-bottom: 6px;">Ubicación</div>
+        <h3 style="font-family: var(--font-display); font-size: 22px; color: var(--burgundy-rich); margin-bottom: 6px;">Palacio de Montarco</h3>
+        <p style="font-size: 13px; color: var(--text-muted);">Plaza del Conde, 2, 37500 Ciudad Rodrigo, Salamanca</p>
+        <a href="https://maps.google.com/?q=Palacio+de+Montarco+Ciudad+Rodrigo" target="_blank" rel="noopener" class="btn-gold-action">
+          Ver Ruta en Google Maps
+        </a>
+      </section>
+
+      <!-- Dress Code Pantone Swatches -->
+      <section class="dresscode-wrap">
+        <div class="script-subtitle">Dress Code</div>
+        <div class="royal-heading">Black Tie / Traje Oscuro & Vestido Largo</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">
+          Gama cromática recomendada para la ocasión:
+        </p>
+
+        <div class="pantone-row">
+          <div class="pantone-card" onclick="showPopup('Tono Borgoña Imperial')">
+            <div class="pantone-color" style="background: #4f101d;"></div>
+            <div class="pantone-label">Burgundy</div>
+          </div>
+          <div class="pantone-card" onclick="showPopup('Tono Oro Viejo')">
+            <div class="pantone-color" style="background: #c5a059;"></div>
+            <div class="pantone-label">Old Gold</div>
+          </div>
+          <div class="pantone-card" onclick="showPopup('Tono Rosa Terciopelo')">
+            <div class="pantone-color" style="background: #c2959d;"></div>
+            <div class="pantone-label">Velvet Rose</div>
+          </div>
+          <div class="pantone-card" onclick="showPopup('Tono Verde Bosque')">
+            <div class="pantone-color" style="background: #253d2c;"></div>
+            <div class="pantone-label">Forest</div>
+          </div>
+          <div class="pantone-card" onclick="showPopup('Tono Champán Seda')">
+            <div class="pantone-color" style="background: #e8ded2;"></div>
+            <div class="pantone-label">Champagne</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gift Details -->
+      <section class="bank-card">
+        <div class="script-subtitle">Detalle & Agradecimiento</div>
+        <p style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted); font-style: italic; margin-top: 6px;">
+          El mayor regalo es compartir este día irrepetible con vosotros. Si deseáis colaborar en nuestro viaje soñado a Japón:
+        </p>
+        <div class="iban-display" id="wineIban">ES12 0049 1500 0512 3456 7890</div>
+        <button class="btn-gold-action" style="margin-top: 0;" onclick="copyWineIban()">Copiar Número de Cuenta</button>
+      </section>
+
+      <!-- RSVP Form -->
+      <section class="rsvp-card-wine">
+        <div class="section-ribbon">
+          <div class="script-subtitle">Confirmación de Asistencia</div>
+          <div class="royal-heading">Rogamos confirmación antes del 1 de Septiembre</div>
+        </div>
+
+        <form id="wineRsvpForm" onsubmit="handleWineRSVP(event)">
+          <div class="form-row">
+            <label for="wineName">Nombre de los invitados *</label>
+            <input type="text" id="wineName" placeholder="Ej. Ana Belén y David Ortiz" required>
+          </div>
+
+          <div class="form-row">
+            <label for="wineAttending">¿Nos acompañaréis? *</label>
+            <select id="wineAttending">
+              <option value="Sí, asistiremos con ilusión">¡Sí, allí estaremos!</option>
+              <option value="No podremos asistir">Lamentablemente no podremos ir</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="wineDiet">Alergias o menú infantil / vegetariano</label>
+            <input type="text" id="wineDiet" placeholder="Celíaco, alérgico a frutos secos...">
+          </div>
+
+          <div class="form-row">
+            <label for="wineSong">Una canción que no puede faltar en la fiesta</label>
+            <input type="text" id="wineSong" placeholder="Ej. Dancing Queen - ABBA">
+          </div>
+
+          <button type="submit" class="btn-submit-wine">Enviar Confirmación</button>
+        </form>
+
+        <div id="wineConfirmation" class="confirmation-msg">
+          <div style="font-size: 32px; color: var(--gold-deep); margin-bottom: 10px;">❦</div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; color: var(--burgundy-rich); margin-bottom: 6px;">¡Confirmación Registrada!</h3>
+          <p id="wineDetailsText" style="font-size: 13px; color: var(--text-muted); line-height: 1.5;"></p>
+          <button class="btn-gold-action" onclick="sendWineWhatsApp()">Avisar por WhatsApp</button>
+        </div>
+      </section>
+
+      <footer class="wine-footer">
+        <div class="wine-footer-script">¡Os esperamos con impaciencia!</div>
+        <div style="font-family: var(--font-royal); font-size: 11px; letter-spacing: 3px; color: var(--gold-glow);">VALENTINA & LUCAS — 2026</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <div id="toastPopup" class="toast-popup">Copiado</div>
+
+  <script>
+    function revealWedding() {
+      document.getElementById('introScreen').classList.add('hidden');
+      document.getElementById('mainWedding').classList.add('active');
+      playHarpGliss();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Countdown to 24 Oct 2026 16:30
+    const targetTime = new Date('2026-10-24T16:30:00').getTime();
+
+    function updateWineCountdown() {
+      const now = new Date().getTime();
+      const diff = targetTime - now;
+
+      if (diff > 0) {
+        document.getElementById('cdDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('cdHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('cdMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('cdSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }
+    setInterval(updateWineCountdown, 1000);
+    updateWineCountdown();
+
+    function copyWineIban() {
+      const iban = document.getElementById('wineIban').innerText;
+      navigator.clipboard.writeText(iban).then(() => {
+        showPopup('¡Número de cuenta copiado con éxito!');
+      }).catch(() => {
+        showPopup('ES12 0049 1500 0512 3456 7890');
+      });
+    }
+
+    function showPopup(msg) {
+      const popup = document.getElementById('toastPopup');
+      popup.innerText = msg;
+      popup.classList.add('show');
+      setTimeout(() => popup.classList.remove('show'), 2500);
+    }
+
+    let wineRsvp = {};
+    function handleWineRSVP(e) {
+      e.preventDefault();
+      const name = document.getElementById('wineName').value;
+      const status = document.getElementById('wineAttending').value;
+      const diet = document.getElementById('wineDiet').value || 'Ninguna';
+      const song = document.getElementById('wineSong').value || 'Ninguna';
+
+      wineRsvp = { name, status, diet, song };
+      localStorage.setItem('boda_valentina_lucas_rsvp', JSON.stringify(wineRsvp));
+
+      document.getElementById('wineRsvpForm').style.display = 'none';
+      const conf = document.getElementById('wineConfirmation');
+      document.getElementById('wineDetailsText').innerHTML = 
+        `Muchísimas gracias, <strong>${name}</strong>.<br>Estado: <em>${status}</em>.<br>Menú/Alergias: ${diet}. Canción: ${song}.`;
+      conf.style.display = 'block';
+
+      showPopup('¡Respuesta guardada con éxito!');
+      playHarpGliss();
+    }
+
+    function sendWineWhatsApp() {
+      if (!wineRsvp.name) return;
+      const msg = `¡Hola Valentina y Lucas! Soy ${wineRsvp.name}. Hemos confirmado: ${wineRsvp.status}. Alergias: ${wineRsvp.diet}. ¡Nos vemos en Salamanca!`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // Audio Synthesizer Waltz Simulation
+    let ctx = null;
+    let isPlayingAudio = false;
+    let timerId = null;
+
+    function getAudioContext() {
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+
+    function playTone(freq, start, dur = 1.4, vol = 0.08) {
+      const c = getAudioContext();
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, start);
+
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(vol, start + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+
+      osc.connect(gain);
+      gain.connect(c.destination);
+
+      osc.start(start);
+      osc.stop(start + dur);
+    }
+
+    function playHarpGliss() {
+      const c = getAudioContext();
+      const now = c.currentTime;
+      [392, 493.88, 587.33, 783.99, 987.77].forEach((f, i) => {
+        playTone(f, now + i * 0.09, 1.8, 0.1);
+      });
+    }
+
+    const vinylBtn = document.getElementById('vinylBtn');
+    vinylBtn.addEventListener('click', () => {
+      getAudioContext();
+      isPlayingAudio = !isPlayingAudio;
+
+      if (isPlayingAudio) {
+        vinylBtn.classList.add('spinning');
+        showPopup('Vals nupcial activado');
+
+        const melody = [
+          { f: 587.33, d: 0.6 },
+          { f: 659.25, d: 0.6 },
+          { f: 783.99, d: 0.9 },
+          { f: 659.25, d: 0.6 },
+          { f: 587.33, d: 1.2 },
+          { f: 493.88, d: 0.6 },
+          { f: 523.25, d: 1.2 }
+        ];
+        let noteIdx = 0;
+
+        function runMelody() {
+          if (!isPlayingAudio) return;
+          const n = melody[noteIdx % melody.length];
+          playTone(n.f, ctx.currentTime, n.d * 1.5, 0.07);
+          noteIdx++;
+        }
+
+        runMelody();
+        timerId = setInterval(runMelody, 900);
+      } else {
+        vinylBtn.classList.remove('spinning');
+        clearInterval(timerId);
+        showPopup('Música en pausa');
+      }
+    });
+  </script>
+</body>
+</html>

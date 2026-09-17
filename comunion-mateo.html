@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primera Comunión — Mateo</title>
+  <meta name="description" content="Te invito a mi Primera Comunión el 23 de Mayo de 2026 en Madrid.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy-deep: #0e1c36;
+      --navy-dark: #192a4e;
+      --navy-light: #2c426f;
+      --gold-royal: #cda250;
+      --gold-soft: #ebd59b;
+      --white: #ffffff;
+      --cream: #faf9f6;
+      --text: #202738;
+      --text-muted: #5e6b82;
+      --font-serif: 'Prata', serif;
+      --font-royal: 'Cinzel', serif;
+      --font-sans: 'Montserrat', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #091224;
+      background-image: radial-gradient(circle at 50% 25%, #16284e 0%, #060c18 100%);
+      font-family: var(--font-sans);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .shell-container {
+      width: 100%;
+      max-width: 440px;
+      background: var(--cream);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nav-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(14, 28, 54, 0.85);
+      border: 1px solid var(--gold-royal);
+      color: var(--gold-soft);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+
+    .audio-btn-mateo {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(14, 28, 54, 0.85);
+      border: 1px solid var(--gold-royal);
+      color: var(--gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Screen 1: Royal Seal Envelope */
+    .intro-mateo {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, #081122 100%);
+      padding: 60px 20px 45px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .intro-mateo.hidden { display: none; }
+
+    .cross-gold {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      color: var(--gold-royal);
+    }
+
+    .seal-box-mateo {
+      width: 250px;
+      height: 190px;
+      margin: 25px auto 30px;
+      background: var(--navy-dark);
+      border-radius: 14px;
+      position: relative;
+      border: 1.5px solid var(--gold-royal);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .royal-wax {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fbe8b5, var(--gold-royal) 60%, #87621a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2b1d03;
+      font-family: var(--font-royal);
+      font-size: 28px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      border: 2px solid #ffffff;
+      animation: pulseSeal 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseSeal {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .btn-open-mateo {
+      background: linear-gradient(135deg, var(--gold-soft), var(--gold-royal));
+      border: none;
+      color: #0b1424;
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 13px 32px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(205, 162, 80, 0.4);
+    }
+
+    /* Screen 2: Main Invitation */
+    .content-mateo {
+      display: none;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .content-mateo.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-mateo {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-dark) 100%);
+      color: white;
+      text-align: center;
+      padding: 50px 20px 40px;
+      border-bottom: 3px solid var(--gold-royal);
+    }
+
+    .mateo-name {
+      font-family: var(--font-royal);
+      font-size: 42px;
+      letter-spacing: 3px;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+    }
+
+    .mateo-subtitle {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #c0cadb;
+    }
+
+    .photo-frame-mateo {
+      padding: 25px 25px 10px;
+    }
+
+    .photo-inner {
+      border: 6px solid #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(14, 28, 54, 0.15);
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quote-mateo {
+      text-align: center;
+      padding: 24px 20px;
+      font-family: var(--font-serif);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .countdown-mateo-box {
+      background: var(--navy-deep);
+      margin: 0 20px 30px;
+      padding: 22px 15px;
+      border-radius: 16px;
+      border: 1px solid var(--gold-royal);
+      color: white;
+      text-align: center;
+    }
+
+    .cnt-mateo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .cnt-mateo-col {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 8px;
+    }
+
+    .cnt-m-val { font-family: var(--font-serif); font-size: 24px; color: var(--gold-soft); font-weight: 700; }
+    .cnt-m-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: #a9b8d1; }
+
+    /* Timeline */
+    .timeline-mateo {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      border: 1px solid #dbe2ef;
+    }
+
+    .t-row-m {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .t-row-m:last-child { margin-bottom: 0; }
+
+    .t-badge-m {
+      width: 38px;
+      height: 38px;
+      background: var(--navy-deep);
+      color: var(--gold-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+      border: 1px solid var(--gold-royal);
+    }
+
+    /* Venue Card */
+    .venue-card-m {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 22px 20px;
+      border-radius: 16px;
+      text-align: center;
+      border: 1px solid #dbe2ef;
+    }
+
+    .btn-venue-m {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--navy-deep);
+      color: var(--gold-soft);
+      border: 1px solid var(--gold-royal);
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    /* RSVP Form */
+    .rsvp-box-m {
+      background: #ffffff;
+      margin: 0 20px 35px;
+      padding: 26px 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      border: 1px solid #dbe2ef;
+    }
+
+    .m-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #c7d2e5;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+    }
+
+    .btn-submit-m {
+      width: 100%;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy-dark));
+      color: var(--gold-soft);
+      border: 1px solid var(--gold-royal);
+      padding: 14px;
+      border-radius: 30px;
+      font-family: var(--font-royal);
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .footer-m {
+      background: var(--navy-deep);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 2px solid var(--gold-royal);
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <button id="bellBtnMateo" class="audio-btn-mateo" title="Campanas">🔔</button>
+
+  <div class="shell-container">
+
+    <!-- Screen 1: Royal Navy Wax Seal -->
+    <div id="introMateo" class="intro-mateo">
+      <svg class="cross-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="12" y1="2" x2="12" y2="22"/>
+        <line x1="5" y1="8" x2="19" y2="8"/>
+      </svg>
+      <h1 style="font-family: var(--font-royal); font-size: 13px; letter-spacing: 3px; color: var(--gold-royal); margin-bottom: 6px;">SOLEMNE INVITACIÓN</h1>
+      <div style="font-family: var(--font-serif); font-size: 38px; color: #fff; margin-bottom: 16px;">Mateo</div>
+
+      <div class="seal-box-mateo" onclick="openMateo()">
+        <div class="royal-wax">M</div>
+      </div>
+
+      <p style="font-size: 12px; color: #a9b8d1; margin-bottom: 20px; font-style: italic;">Pulsa el sello para descubrir la invitación</p>
+      <button class="btn-open-mateo" onclick="openMateo()">Abrir Invitación</button>
+    </div>
+
+    <!-- Screen 2: Main Event -->
+    <div id="contentMateo" class="content-mateo">
+
+      <header class="header-mateo">
+        <p class="mateo-subtitle">Primera Comunión</p>
+        <h2 class="mateo-name">MATEO</h2>
+        <div style="font-family: var(--font-serif); font-size: 15px; color: var(--gold-soft); letter-spacing: 2px;">23 DE MAYO DE 2026</div>
+      </header>
+
+      <div class="photo-frame-mateo">
+        <div class="photo-inner">
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80" alt="Mateo">
+        </div>
+      </div>
+
+      <p class="quote-mateo">
+        "Hoy recibo por primera vez a Jesús en mi corazón. Es un día de fiesta y alegría que deseo compartir con todos vosotros."
+      </p>
+
+      <!-- Countdown -->
+      <section class="countdown-mateo-box">
+        <div style="font-family: var(--font-royal); font-size: 11px; letter-spacing: 2px; color: var(--gold-soft);">CUENTA ATRÁS</div>
+        <div class="cnt-mateo-grid">
+          <div class="cnt-mateo-col"><div class="cnt-m-val" id="mDays">00</div><div class="cnt-m-lbl">Días</div></div>
+          <div class="cnt-mateo-col"><div class="cnt-m-val" id="mHours">00</div><div class="cnt-m-lbl">Horas</div></div>
+          <div class="cnt-mateo-col"><div class="cnt-m-val" id="mMinutes">00</div><div class="cnt-m-lbl">Min</div></div>
+          <div class="cnt-mateo-col"><div class="cnt-m-val" id="mSeconds">00</div><div class="cnt-m-lbl">Seg</div></div>
+        </div>
+      </section>
+
+      <!-- Program / Timeline -->
+      <section class="timeline-mateo">
+        <h3 style="font-family: var(--font-royal); font-size: 18px; color: var(--navy-deep); text-align: center; margin-bottom: 20px;">PROGRAMA DEL DÍA</h3>
+        
+        <div class="t-row-m">
+          <div class="t-badge-m">1</div>
+          <div>
+            <div style="font-weight: 700; color: var(--navy-deep); font-size: 14px;">11:30 h — Celebración de la Eucaristía</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Parroquia de San Fermín de los Navarros (Madrid).</div>
+          </div>
+        </div>
+
+        <div class="t-row-m">
+          <div class="t-badge-m">2</div>
+          <div>
+            <div style="font-weight: 700; color: var(--navy-deep); font-size: 14px;">14:00 h — Almuerzo de Celebración</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Restaurante El Olivar de Mirabal (Boadilla).</div>
+          </div>
+        </div>
+
+        <div class="t-row-m">
+          <div class="t-badge-m">3</div>
+          <div>
+            <div style="font-weight: 700; color: var(--navy-deep); font-size: 14px;">17:00 h — Magia & Candy Bar Infantil</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Animación, castillo hinchable y merienda dulce.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Venues -->
+      <section class="venue-card-m">
+        <div style="font-size: 24px; margin-bottom: 6px;">📍</div>
+        <h4 style="font-family: var(--font-serif); font-size: 20px; color: var(--navy-deep);">El Olivar de Mirabal</h4>
+        <p style="font-size: 13px; color: var(--text-muted);">Calle Monte Amor, 2, 28660 Boadilla del Monte, Madrid</p>
+        <a href="https://maps.google.com/?q=Boadilla+del+Monte+Madrid" target="_blank" rel="noopener" class="btn-venue-m">
+          Cómo Llegar
+        </a>
+      </section>
+
+      <!-- RSVP with Menu Selection -->
+      <section class="rsvp-box-m">
+        <h3 style="font-family: var(--font-royal); font-size: 17px; color: var(--navy-deep); text-align: center; margin-bottom: 6px;">CONFIRMACIÓN</h3>
+        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 16px;">Agradecemos confirmar antes del 1 de Mayo</p>
+
+        <form id="mateoForm" onsubmit="submitMateoForm(event)">
+          <input type="text" id="mName" class="m-input" placeholder="Nombre completo o Familia *" required>
+          
+          <select id="mMenuAdult" class="m-input">
+            <option value="Solomillo">Menú Adultos: Solomillo ibérico con reducción</option>
+            <option value="Lubina">Menú Adultos: Lubina a la espalda con verduras</option>
+            <option value="Vegetariano">Menú Adultos: Opción Vegetariana</option>
+          </select>
+
+          <input type="number" id="mKids" class="m-input" placeholder="¿Cuántos menús infantiles?" min="0" value="1">
+          <input type="text" id="mAllergy" class="m-input" placeholder="Alergias o intolerancias">
+
+          <button type="submit" class="btn-submit-m">Enviar Confirmación</button>
+        </form>
+
+        <div id="mConfMsg" style="display:none; text-align:center; padding:15px; color: var(--navy-deep); font-weight:700;">
+          ¡Confirmación registrada con éxito! Nos vemos el 23 de Mayo.
+        </div>
+      </section>
+
+      <footer class="footer-m">
+        <div style="font-family: var(--font-royal); font-size: 18px; color: var(--gold-soft); margin-bottom: 4px;">¡TE ESPERO!</div>
+        <div style="font-size: 11px; letter-spacing: 2px; color: #a9b8d1;">MATEO — 23.05.2026</div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function openMateo() {
+      document.getElementById('introMateo').classList.add('hidden');
+      document.getElementById('contentMateo').classList.add('active');
+      playRoyalBell();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const mTarget = new Date('2026-05-23T11:30:00').getTime();
+    function updateMCountdown() {
+      const now = new Date().getTime();
+      const diff = mTarget - now;
+      if (diff > 0) {
+        document.getElementById('mDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('mHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('mMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('mSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }
+    setInterval(updateMCountdown, 1000);
+    updateMCountdown();
+
+    function submitMateoForm(e) {
+      e.preventDefault();
+      document.getElementById('mateoForm').style.display = 'none';
+      document.getElementById('mConfMsg').style.display = 'block';
+      playRoyalBell();
+    }
+
+    let aCtx = null;
+    function playRoyalBell() {
+      if (!aCtx) aCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (aCtx.state === 'suspended') aCtx.resume();
+      const notes = [440, 554.37, 659.25, 880];
+      const now = aCtx.currentTime;
+      notes.forEach((f, i) => {
+        const o = aCtx.createOscillator();
+        const g = aCtx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f, now + i * 0.1);
+        g.gain.setValueAtTime(0, now + i * 0.1);
+        g.gain.linearRampToValueAtTime(0.09, now + i * 0.1 + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.1 + 1.8);
+        o.connect(g);
+        g.connect(aCtx.destination);
+        o.start(now + i * 0.1);
+        o.stop(now + i * 0.1 + 1.8);
+      });
+    }
+
+    document.getElementById('bellBtnMateo').addEventListener('click', playRoyalBell);
+  </script>
+</body>
+</html>

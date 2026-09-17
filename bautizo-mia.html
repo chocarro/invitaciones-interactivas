@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santo Bautizo — Mía</title>
+  <meta name="description" content="Mi Santo Bautismo el 20 de Junio de 2026. ¡Ven a celebrar conmigo!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-soft: #fcf6f7;
+      --pink-cloud: #fae4ea;
+      --pink-rose: #df9aa8;
+      --pink-deep: #a85868;
+      --gold-sparkle: #dfbe76;
+      --text: #3d3537;
+      --text-muted: #796d70;
+      --font-soft: 'Comfortaa', cursive, sans-serif;
+      --font-serif: 'Playfair Display', serif;
+      --font-script: 'Pinyon Script', cursive;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #2b1f23;
+      background-image: radial-gradient(circle at 50% 30%, #4a343b 0%, #1e1317 100%);
+      font-family: var(--font-soft);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .baby-shell {
+      width: 100%;
+      max-width: 440px;
+      background: var(--pink-soft);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .badge-nav {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--pink-rose);
+      color: var(--pink-deep);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .lullaby-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid var(--pink-rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Screen 1: Cloud & Heart Envelope */
+    .screen-cloud {
+      background: linear-gradient(180deg, #fcedf1 0%, #f6dbe2 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+      position: relative;
+    }
+
+    .screen-cloud.hidden { display: none; }
+
+    .cloud-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      animation: floatCloud 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCloud {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    .baby-envelope-card {
+      width: 250px;
+      height: 200px;
+      margin: 20px auto 30px;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(223, 154, 168, 0.35);
+      border: 2px dashed var(--pink-rose);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .heart-seal {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fce4ea 0%, #df9aa8 80%, #be6d7d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 6px 18px rgba(168, 88, 104, 0.35);
+      animation: heartBeat 1.8s infinite ease-in-out;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .btn-open-baby {
+      background: linear-gradient(135deg, var(--pink-rose), var(--pink-deep));
+      color: white;
+      border: none;
+      padding: 13px 34px;
+      border-radius: 30px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(168, 88, 104, 0.4);
+    }
+
+    /* Screen 2: Main Invitation */
+    .baby-main {
+      display: none;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .baby-main.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .baby-header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      background: linear-gradient(180deg, #fae6ec 0%, var(--pink-soft) 100%);
+    }
+
+    .mia-name {
+      font-family: var(--font-script);
+      font-size: 72px;
+      color: var(--pink-deep);
+      line-height: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .baby-photo-box {
+      padding: 10px 25px 20px;
+      text-align: center;
+    }
+
+    .baby-photo-frame {
+      border: 8px solid #ffffff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(168, 88, 104, 0.15);
+      background: white;
+    }
+
+    .baby-photo-frame img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .baby-quote {
+      text-align: center;
+      padding: 20px 25px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* Padrinos Card */
+    .godparents-card {
+      background: #ffffff;
+      margin: 0 20px 25px;
+      padding: 22px 20px;
+      border-radius: 18px;
+      text-align: center;
+      border: 1px solid var(--pink-cloud);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .padrinos-badge {
+      display: inline-block;
+      background: var(--pink-cloud);
+      color: var(--pink-deep);
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .padrinos-names {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--pink-deep);
+      margin-bottom: 6px;
+    }
+
+    /* Countdown */
+    .baby-countdown {
+      background: linear-gradient(135deg, var(--pink-rose), var(--pink-deep));
+      color: white;
+      margin: 0 20px 25px;
+      padding: 22px 15px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .baby-timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .baby-timer-pill {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 8px 4px;
+    }
+
+    /* Itinerary */
+    .baby-itinerary {
+      background: #ffffff;
+      margin: 0 20px 25px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--pink-cloud);
+    }
+
+    .itin-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .itin-item:last-child { margin-bottom: 0; }
+
+    .itin-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--pink-cloud);
+      color: var(--pink-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    /* RSVP */
+    .baby-rsvp {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--pink-cloud);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+    }
+
+    .baby-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ebccd3;
+      border-radius: 10px;
+      font-family: var(--font-soft);
+      font-size: 13px;
+      margin-bottom: 12px;
+      background: #fdfafb;
+    }
+
+    .baby-footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #fae4ea;
+      color: var(--pink-deep);
+      font-family: var(--font-script);
+      font-size: 42px;
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <button id="lullabyBtn" class="lullaby-btn" title="Canción de cuna">⭐</button>
+
+  <div class="baby-shell">
+
+    <!-- Screen 1: Sweet Cloud Intro -->
+    <div id="cloudScreen" class="screen-cloud">
+      <div class="cloud-icon">☁️</div>
+      <div style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink-deep); font-weight: 700; margin-bottom: 6px;">SANTO BAUTISMO</div>
+      <div style="font-family: var(--font-script); font-size: 56px; color: var(--pink-deep); margin-bottom: 15px;">Mía</div>
+
+      <div class="baby-envelope-card" onclick="openMia()">
+        <div class="heart-seal">💖</div>
+        <p style="font-size: 11px; color: var(--pink-deep); font-weight: 700; margin-top: 14px; text-transform: uppercase; letter-spacing: 1px;">Toca para abrir</p>
+      </div>
+
+      <button class="btn-open-baby" onclick="openMia()">Abrir Invitación</button>
+    </div>
+
+    <!-- Screen 2: Baby Details -->
+    <div id="miaContent" class="baby-main">
+
+      <header class="baby-header">
+        <p style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink-rose); font-weight: 700;">MI BAUTIZO</p>
+        <h1 class="mia-name">Mía</h1>
+        <p style="font-family: var(--font-serif); font-size: 15px; color: var(--gold-sparkle); letter-spacing: 2px;">20 DE JUNIO DE 2026</p>
+      </header>
+
+      <div class="baby-photo-box">
+        <div class="baby-photo-frame">
+          <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80" alt="Bebé Mía">
+        </div>
+      </div>
+
+      <p class="baby-quote">
+        "Con una sonrisa que ilumina el mundo y un corazón lleno de luz, hoy recibo el sacramento del Bautismo rodeada de quienes más me aman."
+      </p>
+
+      <!-- Godparents Card -->
+      <section class="godparents-card">
+        <div class="padrinos-badge">Mis Padrinos</div>
+        <div class="padrinos-names">Lucía & Alejandro</div>
+        <p style="font-size: 12px; color: var(--text-muted); font-style: italic;">
+          "Gracias por ser mi guía y protegerme con tanto cariño."
+        </p>
+      </section>
+
+      <!-- Countdown -->
+      <section class="baby-countdown">
+        <div style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">Faltan muy poquitos días</div>
+        <div class="baby-timer-grid">
+          <div class="baby-timer-pill"><div id="bDays" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Días</div></div>
+          <div class="baby-timer-pill"><div id="bHours" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Horas</div></div>
+          <div class="baby-timer-pill"><div id="bMinutes" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Min</div></div>
+          <div class="baby-timer-pill"><div id="bSeconds" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Seg</div></div>
+        </div>
+      </section>
+
+      <!-- Itinerary -->
+      <section class="baby-itinerary">
+        <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--pink-deep); text-align: center; margin-bottom: 18px;">Celebración</h3>
+        
+        <div class="itin-item">
+          <div class="itin-dot">🕊️</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--pink-deep);">12:30 h — Sacramento del Bautismo</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Parroquia Nuestra Señora del Pilar (Madrid).</div>
+          </div>
+        </div>
+
+        <div class="itin-item">
+          <div class="itin-dot">🍰</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--pink-deep);">14:30 h — Brunch Familiar & Tarta</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Jardín de Aranjuez — Salón Mirador.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section class="baby-rsvp">
+        <h3 style="font-family: var(--font-serif); font-size: 20px; color: var(--pink-deep); text-align: center; margin-bottom: 6px;">¿Vendrás a celebrar?</h3>
+        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 14px;">Confírmanos antes del 5 de Junio</p>
+
+        <form id="miaForm" onsubmit="submitMia(event)">
+          <input type="text" id="miaGuest" class="baby-input" placeholder="Tu nombre / Familia *" required>
+          <input type="number" id="miaCount" class="baby-input" placeholder="Número de personas" min="1" value="2">
+          <textarea id="miaWishes" class="baby-input" rows="2" placeholder="Deseos o bendiciones para Mía..."></textarea>
+          <button type="submit" class="btn-open-baby" style="width: 100%;">¡Allí Estaremos!</button>
+        </form>
+
+        <div id="miaSuccess" style="display: none; text-align: center; padding: 15px; color: var(--pink-deep); font-weight: 700;">
+          ¡Qué ilusión que vengas! Mía te espera con una sonrisa.
+        </div>
+      </section>
+
+      <footer class="baby-footer">
+        Con todo mi cariño, Mía
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function openMia() {
+      document.getElementById('cloudScreen').classList.add('hidden');
+      document.getElementById('miaContent').classList.add('active');
+      playLullabyMelody();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const bTarget = new Date('2026-06-20T12:30:00').getTime();
+    function updateMiaTimer() {
+      const now = new Date().getTime();
+      const diff = bTarget - now;
+      if (diff > 0) {
+        document.getElementById('bDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('bHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('bMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('bSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }
+    setInterval(updateMiaTimer, 1000);
+    updateMiaTimer();
+
+    function submitMia(e) {
+      e.preventDefault();
+      document.getElementById('miaForm').style.display = 'none';
+      document.getElementById('miaSuccess').style.display = 'block';
+      playLullabyMelody();
+    }
+
+    let bCtx = null;
+    function playLullabyMelody() {
+      if (!bCtx) bCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (bCtx.state === 'suspended') bCtx.resume();
+
+      const notes = [523.25, 587.33, 659.25, 783.99, 880, 1046.50];
+      const now = bCtx.currentTime;
+      notes.forEach((f, i) => {
+        const o = bCtx.createOscillator();
+        const g = bCtx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f, now + i * 0.14);
+        g.gain.setValueAtTime(0, now + i * 0.14);
+        g.gain.linearRampToValueAtTime(0.08, now + i * 0.14 + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.14 + 1.6);
+        o.connect(g);
+        g.connect(bCtx.destination);
+        o.start(now + i * 0.14);
+        o.stop(now + i * 0.14 + 1.6);
+      });
+    }
+
+    document.getElementById('lullabyBtn').addEventListener('click', playLullabyMelody);
+  </script>
+</body>
+</html>

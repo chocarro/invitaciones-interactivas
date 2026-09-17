@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Martina's 30th — VIP Birthday Party</title>
+  <meta name="description" content="Celebramos mis 30 por todo lo alto. Rooftop, cócteles y música en directo el 19 de Septiembre de 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Syne:wght@700;800&family=Italianno&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0b0e;
+      --bg-card: #13161c;
+      --gold-bright: #ffdf78;
+      --gold-metallic: #d4af37;
+      --gold-dark: #99751e;
+      --purple-accent: #9d4edd;
+      --pink-neon: #ff007f;
+      --text: #f0f2f5;
+      --text-muted: #9ba1ad;
+      --font-club: 'Syne', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-script: 'Italianno', cursive;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 10%, #20182b 0%, #060709 100%);
+      font-family: var(--font-body);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .vip-shell {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-card);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 223, 120, 0.25);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nav-gold {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(19, 22, 28, 0.85);
+      border: 1px solid var(--gold-metallic);
+      color: var(--gold-bright);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+
+    .dj-sound-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(19, 22, 28, 0.85);
+      border: 1px solid var(--gold-bright);
+      color: var(--gold-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Screen 1: Holographic VIP Access Pass */
+    .vip-pass-screen {
+      padding: 60px 20px 45px;
+      text-align: center;
+      position: relative;
+    }
+
+    .vip-pass-screen.hidden { display: none; }
+
+    .vip-badge {
+      width: 260px;
+      height: 340px;
+      margin: 20px auto 30px;
+      background: linear-gradient(135deg, #1c202a 0%, #0d0f14 100%);
+      border-radius: 20px;
+      border: 2px solid var(--gold-metallic);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .vip-badge:hover { transform: scale(1.03); }
+
+    /* Shimmer light beam */
+    .vip-badge::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255, 223, 120, 0.15) 50%, transparent 60%);
+      animation: sweepShimmer 4s infinite linear;
+    }
+
+    @keyframes sweepShimmer {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .lanyard-hole {
+      width: 38px;
+      height: 8px;
+      background: #000;
+      border-radius: 10px;
+      border: 1px solid var(--gold-metallic);
+      margin-bottom: 10px;
+    }
+
+    .btn-enter-club {
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold-metallic));
+      color: #0d0f14;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 30px;
+      font-family: var(--font-club);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 223, 120, 0.4);
+    }
+
+    /* Screen 2: Party Invitation */
+    .party-content {
+      display: none;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .party-content.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-party {
+      padding: 55px 20px 30px;
+      text-align: center;
+      background: linear-gradient(180deg, #1d1828 0%, var(--bg-card) 100%);
+      border-bottom: 1px solid rgba(255, 223, 120, 0.2);
+    }
+
+    .dirty-thirty {
+      font-family: var(--font-script);
+      font-size: 50px;
+      color: var(--gold-bright);
+      line-height: 1;
+    }
+
+    .party-name {
+      font-family: var(--font-club);
+      font-size: 52px;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: #ffffff;
+      margin-bottom: 8px;
+      text-shadow: 0 0 20px rgba(255, 223, 120, 0.3);
+    }
+
+    .party-photo-box {
+      padding: 15px 20px;
+    }
+
+    .party-photo-frame {
+      border: 2px solid var(--gold-metallic);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .party-photo-frame img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+      filter: contrast(110%);
+    }
+
+    .photo-overlay-tag {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: rgba(10, 11, 14, 0.85);
+      border: 1px solid var(--gold-bright);
+      color: var(--gold-bright);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Countdown */
+    .party-countdown {
+      background: linear-gradient(135deg, #1c152b, #120e1c);
+      margin: 15px 20px 25px;
+      padding: 22px 15px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 223, 120, 0.3);
+      text-align: center;
+    }
+
+    .party-cnt-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .party-cnt-col {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 8px 4px;
+    }
+
+    /* Timing */
+    .party-timing {
+      background: #181c24;
+      margin: 0 20px 25px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .timing-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .timing-row:last-child { margin-bottom: 0; }
+
+    .t-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold-metallic), var(--gold-dark));
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Interactive DJ Box */
+    .dj-box {
+      background: #181c24;
+      margin: 0 20px 25px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(157, 78, 221, 0.4);
+    }
+
+    .song-item {
+      background: #222733;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-top: 6px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--gold-bright);
+    }
+
+    /* Venue */
+    .venue-rooftop {
+      background: #181c24;
+      margin: 0 20px 25px;
+      padding: 22px 20px;
+      border-radius: 18px;
+      text-align: center;
+      border: 1px solid rgba(255, 223, 120, 0.2);
+    }
+
+    /* RSVP */
+    .rsvp-martina {
+      background: #181c24;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 223, 120, 0.3);
+    }
+
+    .club-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #333a4a;
+      border-radius: 10px;
+      background: #0d0f14;
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .footer-party {
+      background: #0d0f14;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255, 223, 120, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <button id="djBtn" class="dj-sound-btn" title="Party Beat">🎧</button>
+
+  <div class="vip-shell">
+
+    <!-- Screen 1: VIP Pass -->
+    <div id="vipScreen" class="vip-pass-screen">
+      <div style="font-family: var(--font-club); font-size: 11px; letter-spacing: 4px; color: var(--gold-bright); text-transform: uppercase;">ALL ACCESS VIP</div>
+      <div class="dirty-thirty">Dirty Thirty</div>
+
+      <div class="vip-badge" onclick="enterParty()">
+        <div class="lanyard-hole"></div>
+        <div style="font-size: 10px; letter-spacing: 3px; color: #8892a4; text-transform: uppercase;">ROOFTOP PARTY PASS</div>
+        <div style="font-family: var(--font-club); font-size: 34px; color: var(--gold-bright); line-height: 1;">MARTINA</div>
+        <div style="font-family: var(--font-body); font-size: 20px; font-weight: 800; color: #fff;">MIS 30 AÑOS</div>
+        <div style="font-size: 12px; color: var(--gold-metallic); letter-spacing: 2px;">19 . SEP . 2026</div>
+        <div style="font-size: 9px; color: #667285; letter-spacing: 2px;">BARCODE: #M30-VIP-2026</div>
+      </div>
+
+      <button class="btn-enter-club" onclick="enterParty()">Entrar a la Fiesta</button>
+    </div>
+
+    <!-- Screen 2: Party Invitation -->
+    <div id="partyContent" class="party-content">
+
+      <header class="hero-party">
+        <div class="dirty-thirty">¡Cumplo 30 y lo celebramos!</div>
+        <h1 class="party-name">MARTINA</h1>
+        <p style="font-size: 12px; letter-spacing: 3px; color: var(--gold-bright); font-weight: 700;">19 DE SEPTIEMBRE DE 2026 — 20:30 H</p>
+      </header>
+
+      <div class="party-photo-box">
+        <div class="party-photo-frame">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Martina Cumpleaños">
+          <div class="photo-overlay-tag">Golden 30th</div>
+        </div>
+      </div>
+
+      <p style="text-align: center; padding: 15px 24px; font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+        "Los 20 fueron increíbles, pero los 30 van a ser inolvidables. Prepárate para una noche de terraza, cócteles al atardecer y música hasta que salga el sol."
+      </p>
+
+      <!-- Countdown -->
+      <section class="party-countdown">
+        <div style="font-family: var(--font-club); font-size: 11px; letter-spacing: 2px; color: var(--gold-bright);">COUNTDOWN TO PARTY</div>
+        <div class="party-cnt-grid">
+          <div class="party-cnt-col"><div id="pDays" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Días</div></div>
+          <div class="party-cnt-col"><div id="pHours" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Horas</div></div>
+          <div class="party-cnt-col"><div id="pMinutes" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Min</div></div>
+          <div class="party-cnt-col"><div id="pSeconds" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Seg</div></div>
+        </div>
+      </section>
+
+      <!-- Timing -->
+      <section class="party-timing">
+        <h3 style="font-family: var(--font-club); font-size: 16px; color: var(--gold-bright); margin-bottom: 16px; letter-spacing: 1px;">PLANNING DE LA NOCHE</h3>
+
+        <div class="timing-row">
+          <div class="t-icon-box">🍸</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px;">20:30 h — Golden Hour Welcome Drinks</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Aperitivos gourmet y cava al atardecer.</div>
+          </div>
+        </div>
+
+        <div class="timing-row">
+          <div class="t-icon-box">🎂</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px;">22:30 h — Tarta, Velas & Brindis 30</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Soplamos las velas con champán y bengalas.</div>
+          </div>
+        </div>
+
+        <div class="timing-row">
+          <div class="t-icon-box">🪩</div>
+          <div>
+            <div style="font-weight: 700; font-size: 13px;">23:00 h — DJ Session & Dancefloor</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Pop, electrónica y hits de los 2000.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DJ Song Request Box -->
+      <section class="dj-box">
+        <h3 style="font-family: var(--font-club); font-size: 15px; color: var(--gold-bright); margin-bottom: 6px;">🎵 Pide tu temazo al DJ</h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">¿Qué canción no puede faltar para que lo des todo en la pista?</p>
+
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="songInput" class="club-input" style="margin-bottom:0;" placeholder="Artista - Canción">
+          <button class="btn-enter-club" style="padding: 10px 18px;" onclick="addSong()">Pedir</button>
+        </div>
+
+        <div id="playlistContainer" style="margin-top: 10px;">
+          <div class="song-item"><span>Dua Lipa — Levitating</span><span>🔥</span></div>
+          <div class="song-item"><span>Gala — Freed from Desire</span><span>🔥</span></div>
+        </div>
+      </section>
+
+      <!-- Venue & Location -->
+      <section class="venue-rooftop">
+        <div style="font-size: 24px; margin-bottom: 6px;">🏙️</div>
+        <h4 style="font-family: var(--font-club); font-size: 18px; color: var(--gold-bright);">Skyline Rooftop Lounge</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Gran Vía, 54, Planta 12, Madrid</p>
+        <a href="https://maps.google.com/?q=Gran+Via+54+Madrid" target="_blank" rel="noopener" class="btn-enter-club" style="display:inline-block; margin-top:12px; text-decoration:none;">
+          Ver en Google Maps
+        </a>
+      </section>
+
+      <!-- Dress Code -->
+      <section style="background: #181c24; margin: 0 20px 25px; padding: 20px; border-radius: 18px; text-align: center;">
+        <div style="font-family: var(--font-club); font-size: 14px; color: var(--gold-bright); letter-spacing: 2px;">DRESS CODE</div>
+        <div style="font-weight: 700; font-size: 15px; margin-top: 4px;">Cocktail Chic & Touch of Gold</div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Saca tus mejores galas para una noche con mucho brillo.</p>
+      </section>
+
+      <!-- RSVP -->
+      <section class="rsvp-martina">
+        <h3 style="font-family: var(--font-club); font-size: 16px; color: var(--gold-bright); text-align: center; margin-bottom: 6px;">CONFIRMA TU ASISTENCIA</h3>
+        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 14px;">Lista de invitados VIP antes del 5 de Septiembre</p>
+
+        <form id="partyForm" onsubmit="submitParty(event)">
+          <input type="text" id="partyGuest" class="club-input" placeholder="Tu nombre *" required>
+          <select id="partyDrink" class="club-input">
+            <option value="Gin Tonic">Bebida favorita: Gin Tonic Premium</option>
+            <option value="Aperol">Bebida favorita: Aperol Spritz</option>
+            <option value="Vino/Cerveza">Bebida favorita: Vino / Cerveza</option>
+            <option value="Mocktail 0.0">Bebida favorita: Mocktail sin alcohol</option>
+          </select>
+          <button type="submit" class="btn-enter-club" style="width: 100%;">¡Voy a darlo todo!</button>
+        </form>
+        <div id="partySuccess" style="display:none; text-align:center; padding:15px; color: var(--gold-bright); font-weight:700;">
+          ¡Acceso VIP confirmado! Tu nombre está en la lista de puerta.
+        </div>
+      </section>
+
+      <footer class="footer-party">
+        <div style="font-family: var(--font-club); font-size: 16px; color: var(--gold-bright);">MARTINA'S 30TH</div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">A night to remember forever</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function enterParty() {
+      document.getElementById('vipScreen').classList.add('hidden');
+      document.getElementById('partyContent').classList.add('active');
+      playClubBeat();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const pTarget = new Date('2026-09-19T20:30:00').getTime();
+    function updatePartyTimer() {
+      const now = new Date().getTime();
+      const diff = pTarget - now;
+      if (diff > 0) {
+        document.getElementById('pDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('pHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('pMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('pSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }
+    setInterval(updatePartyTimer, 1000);
+    updatePartyTimer();
+
+    function addSong() {
+      const input = document.getElementById('songInput');
+      const val = input.value.trim();
+      if (!val) return;
+      const list = document.getElementById('playlistContainer');
+      const row = document.createElement('div');
+      row.className = 'song-item';
+      row.innerHTML = `<span>${val}</span><span>🔥</span>`;
+      list.prepend(row);
+      input.value = '';
+      playClubBeat();
+    }
+
+    function submitParty(e) {
+      e.preventDefault();
+      document.getElementById('partyForm').style.display = 'none';
+      document.getElementById('partySuccess').style.display = 'block';
+      playClubBeat();
+    }
+
+    let pCtx = null;
+    function playClubBeat() {
+      if (!pCtx) pCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (pCtx.state === 'suspended') pCtx.resume();
+
+      const chords = [220, 261.63, 329.63, 440];
+      const now = pCtx.currentTime;
+      chords.forEach((f, i) => {
+        const o = pCtx.createOscillator();
+        const g = pCtx.createGain();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(f, now + i * 0.08);
+        g.gain.setValueAtTime(0, now + i * 0.08);
+        g.gain.linearRampToValueAtTime(0.06, now + i * 0.08 + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 1.2);
+        o.connect(g);
+        g.connect(pCtx.destination);
+        o.start(now + i * 0.08);
+        o.stop(now + i * 0.08 + 1.2);
+      });
+    }
+
+    document.getElementById('djBtn').addEventListener('click', playClubBeat);
+  </script>
+</body>
+</html>

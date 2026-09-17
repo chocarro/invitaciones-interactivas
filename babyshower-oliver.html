@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Shower — ¡Bienvenido Oliver!</title>
+  <meta name="description" content="Celebramos la pronta llegada de Oliver el 8 de Agosto de 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Shrikhand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --terracotta: #b86246;
+      --terracotta-dark: #8c422b;
+      --sand-bg: #f9f4ed;
+      --sand-card: #f2e9dc;
+      --mustard: #d49c44;
+      --olive: #6c785b;
+      --text: #2f2824;
+      --text-muted: #756a62;
+      --font-fun: 'Shrikhand', cursive;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #2b1f1a;
+      background-image: radial-gradient(circle at 50% 30%, #472f26 0%, #1a120f 100%);
+      font-family: var(--font-body);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 20px 10px;
+    }
+
+    .shower-shell {
+      width: 100%;
+      max-width: 440px;
+      background: var(--sand-bg);
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nav-badge-sh {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--terracotta);
+      color: var(--terracotta);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .music-sh-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--mustard);
+      color: var(--mustard);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Cover Screen */
+    .cover-shower {
+      background: linear-gradient(180deg, #ecd8cb 0%, #e2c5b3 100%);
+      padding: 60px 20px 45px;
+      text-align: center;
+      position: relative;
+    }
+
+    .cover-shower.hidden { display: none; }
+
+    .balloon-hero {
+      font-size: 48px;
+      margin-bottom: 10px;
+      animation: floatBalloon 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBalloon {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    .shower-box-card {
+      width: 250px;
+      height: 190px;
+      margin: 20px auto 30px;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(184, 98, 70, 0.3);
+      border: 2px dashed var(--terracotta);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .btn-open-shower {
+      background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+      color: white;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* Main Baby Shower Body */
+    .main-shower {
+      display: none;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .main-shower.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-shower {
+      text-align: center;
+      padding: 50px 20px 30px;
+      background: linear-gradient(180deg, #ecd8cb 0%, var(--sand-bg) 100%);
+    }
+
+    .oliver-title {
+      font-family: var(--font-fun);
+      font-size: 50px;
+      color: var(--terracotta);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .shower-photo-box {
+      padding: 10px 25px 20px;
+    }
+
+    .shower-photo-frame {
+      border: 8px solid #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .shower-photo-frame img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Interactive Game: La Porra del Bebé */
+    .game-section {
+      background: #ffffff;
+      margin: 0 20px 25px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--sand-card);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .game-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .game-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #d5c8b8;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+    }
+
+    .predictions-list {
+      max-height: 140px;
+      overflow-y: auto;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pred-pill {
+      background: var(--sand-card);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Diaper Checklist */
+    .checklist-section {
+      background: #ffffff;
+      margin: 0 20px 25px;
+      padding: 22px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--sand-card);
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    /* Countdown */
+    .countdown-shower {
+      background: var(--terracotta);
+      color: white;
+      margin: 0 20px 25px;
+      padding: 20px 15px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .cnt-sh-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .cnt-sh-box {
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 8px 4px;
+    }
+
+    /* RSVP */
+    .rsvp-shower {
+      background: #ffffff;
+      margin: 0 20px 30px;
+      padding: 24px 20px;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+    }
+
+    .sh-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d5c8b8;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .footer-sh {
+      background: #e2c5b3;
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--terracotta-dark);
+      font-weight: 700;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <button id="musicShBtn" class="music-sh-btn" title="Música alegre">🦁</button>
+
+  <div class="shower-shell">
+
+    <!-- Screen 1: Cover -->
+    <div id="coverShower" class="cover-shower">
+      <div class="balloon-hero">🎈🦒</div>
+      <div style="font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--terracotta); font-weight: 700;">¡YA CASI ESTÁS AQUÍ!</div>
+      <h1 class="oliver-title">OLIVER</h1>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Baby Shower & Tarde Dulce</p>
+
+      <div class="shower-box-card" onclick="openShower()">
+        <div style="font-size: 42px;">🎁</div>
+        <p style="font-size: 11px; font-weight: 700; color: var(--terracotta); margin-top: 10px; text-transform: uppercase;">Abre la sorpresa</p>
+      </div>
+
+      <button class="btn-open-shower" onclick="openShower()">Abrir Invitación</button>
+    </div>
+
+    <!-- Screen 2: Main Event -->
+    <div id="mainShower" class="main-shower">
+
+      <header class="header-shower">
+        <p style="font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--terracotta); font-weight: 700;">BABY SHOWER</p>
+        <h2 class="oliver-title">OLIVER</h2>
+        <div style="font-family: var(--font-serif); font-size: 15px; color: var(--mustard); font-weight: 600;">8 DE AGOSTO DE 2026 — 17:30 H</div>
+      </header>
+
+      <div class="shower-photo-box">
+        <div class="shower-photo-frame">
+          <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80" alt="Embarazo de Oliver">
+        </div>
+      </div>
+
+      <p style="text-align: center; padding: 15px 25px; font-style: italic; color: var(--text-muted); font-size: 15px; line-height: 1.6;">
+        "Una nueva aventura safari está a punto de empezar. Queremos celebrar la dulzura de la dulce espera contigo."
+      </p>
+
+      <!-- Countdown -->
+      <section class="countdown-shower">
+        <div style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">Cuenta atrás para la fiesta</div>
+        <div class="cnt-sh-grid">
+          <div class="cnt-sh-box"><div id="shDays" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Días</div></div>
+          <div class="cnt-sh-box"><div id="shHours" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Horas</div></div>
+          <div class="cnt-sh-box"><div id="shMinutes" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Min</div></div>
+          <div class="cnt-sh-box"><div id="shSeconds" style="font-size: 22px; font-weight: 700;">00</div><div style="font-size: 9px;">Seg</div></div>
+        </div>
+      </section>
+
+      <!-- Interactive Game: La Porra del Bebé -->
+      <section class="game-section">
+        <h3 style="font-family: var(--font-serif); font-size: 19px; color: var(--terracotta); text-align: center; margin-bottom: 4px;">🎮 La Porra de Oliver</h3>
+        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 14px;">¿Adivinas qué día nacerá y cuánto pesará?</p>
+
+        <div class="game-input-row">
+          <input type="text" id="predName" class="game-input" placeholder="Tu nombre">
+          <input type="text" id="predDate" class="game-input" placeholder="Día (ej. 15 Ago)">
+          <input type="text" id="predWeight" class="game-input" placeholder="Peso (ej. 3.4 kg)">
+        </div>
+        <button class="btn-open-shower" style="width: 100%; padding: 10px;" onclick="addPrediction()">Guardar Mi Apuesta</button>
+
+        <div id="predictionsBox" class="predictions-list">
+          <div class="pred-pill"><span>Tía Marta</span><strong>12 Ago — 3.35 kg</strong></div>
+          <div class="pred-pill"><span>Abuelo Paco</span><strong>18 Ago — 3.60 kg</strong></div>
+        </div>
+      </section>
+
+      <!-- Diaper Checklist -->
+      <section class="checklist-section">
+        <h3 style="font-family: var(--font-serif); font-size: 19px; color: var(--terracotta); text-align: center; margin-bottom: 12px;">🍼 Lluvia de Pañales</h3>
+        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 14px;">
+          Si quieres traer un paquetito de pañales para la rifa del baby shower:
+        </p>
+
+        <label class="check-item"><input type="checkbox"> Pañales Talla 1 o Recién Nacido</label>
+        <label class="check-item"><input type="checkbox" checked> Pañales Talla 2 o 3 (¡Los que más usará!)</label>
+        <label class="check-item"><input type="checkbox"> Toallitas biodegradables al agua</label>
+        <label class="check-item"><input type="checkbox"> Crema balsámica de pañal ecológica</label>
+      </section>
+
+      <!-- Venue -->
+      <section style="background: #ffffff; margin: 0 20px 25px; padding: 20px; border-radius: 18px; text-align: center;">
+        <div style="font-size: 24px; margin-bottom: 6px;">🏡</div>
+        <h4 style="font-family: var(--font-serif); font-size: 18px; color: var(--terracotta);">Terraza & Jardín de Casa</h4>
+        <p style="font-size: 13px; color: var(--text-muted);">Calle de los Almendros, 14, Pozuelo de Alarcón</p>
+      </section>
+
+      <!-- RSVP -->
+      <section class="rsvp-shower">
+        <h3 style="font-family: var(--font-serif); font-size: 19px; color: var(--terracotta); text-align: center; margin-bottom: 6px;">Confirma tu Asistencia</h3>
+        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 14px;">Para preparar rica merienda y juegos</p>
+
+        <form id="showerForm" onsubmit="submitShower(event)">
+          <input type="text" id="shName" class="sh-input" placeholder="Tu nombre *" required>
+          <select id="shFood" class="sh-input">
+            <option value="Dulce">¡Me pierde la mesa de dulces!</option>
+            <option value="Salado">Prefiero canapés y cositas saladas</option>
+            <option value="Ambos">¡Me apunto a todo!</option>
+          </select>
+          <button type="submit" class="btn-open-shower" style="width: 100%;">Confirmar Asistencia</button>
+        </form>
+        <div id="shSuccess" style="display:none; text-align:center; padding:15px; color: var(--terracotta); font-weight:700;">
+          ¡Confirmado! Oliver está deseando escucharte.
+        </div>
+      </section>
+
+      <footer class="footer-sh">
+        ¡Nos vemos muy pronto! — Mamá, Papá y Oliver 💛
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function openShower() {
+      document.getElementById('coverShower').classList.add('hidden');
+      document.getElementById('mainShower').classList.add('active');
+      playSafariTune();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const shTarget = new Date('2026-08-08T17:30:00').getTime();
+    function updateShowerTimer() {
+      const now = new Date().getTime();
+      const diff = shTarget - now;
+      if (diff > 0) {
+        document.getElementById('shDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('shHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('shMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('shSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }
+    setInterval(updateShowerTimer, 1000);
+    updateShowerTimer();
+
+    function addPrediction() {
+      const name = document.getElementById('predName').value.trim();
+      const date = document.getElementById('predDate').value.trim();
+      const weight = document.getElementById('predWeight').value.trim();
+
+      if (!name || !date || !weight) {
+        alert('Por favor completa los tres campos de la apuesta');
+        return;
+      }
+
+      const box = document.getElementById('predictionsBox');
+      const item = document.createElement('div');
+      item.className = 'pred-pill';
+      item.innerHTML = `<span>${name}</span><strong>${date} — ${weight}</strong>`;
+      box.prepend(item);
+
+      document.getElementById('predName').value = '';
+      document.getElementById('predDate').value = '';
+      document.getElementById('predWeight').value = '';
+      playSafariTune();
+    }
+
+    function submitShower(e) {
+      e.preventDefault();
+      document.getElementById('showerForm').style.display = 'none';
+      document.getElementById('shSuccess').style.display = 'block';
+      playSafariTune();
+    }
+
+    let shCtx = null;
+    function playSafariTune() {
+      if (!shCtx) shCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (shCtx.state === 'suspended') shCtx.resume();
+
+      const notes = [392, 523.25, 659.25, 783.99];
+      const now = shCtx.currentTime;
+      notes.forEach((f, i) => {
+        const o = shCtx.createOscillator();
+        const g = shCtx.createGain();
+        o.type = 'triangle';
+        o.frequency.setValueAtTime(f, now + i * 0.12);
+        g.gain.setValueAtTime(0, now + i * 0.12);
+        g.gain.linearRampToValueAtTime(0.09, now + i * 0.12 + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 1.4);
+        o.connect(g);
+        g.connect(shCtx.destination);
+        o.start(now + i * 0.12);
+        o.stop(now + i * 0.12 + 1.4);
+      });
+    }
+
+    document.getElementById('musicShBtn').addEventListener('click', playSafariTune);
+  </script>
+</body>
+</html>
