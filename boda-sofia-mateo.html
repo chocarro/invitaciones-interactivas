@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Sofía & Mateo — Invitación de Boda</title>
   <meta name="description" content="Nos casamos el 12 de Septiembre de 2026. ¡Acompáñanos a celebrar nuestro amor!">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1068,6 +1068,54 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+  
+    /* Full Responsive & Mobile-friendly Enhancements */
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .invitation-container, .invitation-shell, .card-shell, .shell-container, .baby-shell, .leo-shell, .shower-shell, .vip-shell {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        min-height: 100vh;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+    }
+
+    /* Prevent iOS zoom on input focus */
+    input[type="text"], input[type="number"], select, textarea {
+      font-size: 16px !important;
+    }
+
+    /* Responsive scaling for envelopes on ultra-compact screens (<360px) */
+    @media (max-width: 359px) {
+      .envelope-wrapper, .ticket-card, .ribbon-box, .seal-box-mateo, .baby-envelope-card, .kraft-card-box, .shower-box-card, .vip-badge {
+        transform: scale(0.88);
+        transform-origin: center center;
+      }
+      .timer-grid, .countdown-grid, .cnt-carmen-grid, .cnt-mateo-grid, .baby-timer-grid, .leo-cnt-grid, .cnt-sh-grid, .party-cnt-grid {
+        gap: 4px !important;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
   </style>
 </head>
 <body>
