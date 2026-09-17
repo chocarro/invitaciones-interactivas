@@ -10,17 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-cream: #f9f7f2;
-      --bg-card: #f3efe6;
-      --sage-dark: #3a4b3d;
-      --sage-medium: #5b6e5e;
-      --sage-light: #7c8e7e;
-      --sage-soft: #dbe2dc;
+      --bg-cream: #F1F1EC;
+      --bg-card: #D0C7B3;
+      --sage-dark: #43442B;
+      --sage-medium: #939474;
+      --sage-light: #a5a687;
+      --sage-soft: #D0C7B3;
       --gold-accent: #c4a46a;
-      --gold-dark: #99783f;
+      --gold-dark: #876d33;
       --wine: #6e2633;
-      --text-main: #2b2b28;
-      --text-muted: #686762;
+      --text-main: #292728;
+      --text-muted: #5e5e54;
       --white: #ffffff;
       --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 10px 30px rgba(58, 75, 61, 0.12);
@@ -146,7 +146,7 @@
     =================================================== */
     .envelope-screen {
       position: relative;
-      background: linear-gradient(180deg, #445647 0%, #2f3e32 100%);
+      background: linear-gradient(rgba(41, 39, 40, 0.4), rgba(41, 39, 40, 0.7)), url('Fondos/dac91a3928e242f951957e56917d14b3.jpg') center/cover;
       padding: 50px 20px 40px;
       text-align: center;
       color: var(--white);
@@ -1103,13 +1103,13 @@
         <div class="wax-seal" title="Pulsa para abrir">
           <div class="wax-seal-inner">
             <span class="wax-seal-initials">S & M</span>
-            <span class="wax-seal-leaf">🌿</span>
+            <span class="wax-seal-leaf">&bull;</span>
           </div>
         </div>
       </div>
 
       <p class="envelope-instruction">
-        <span>✦</span> Pulsa el lacre de cera para abrir tu invitación <span>✦</span>
+        <span>&bull;</span> Pulsa el lacre de cera para abrir tu invitación <span>&bull;</span>
       </p>
 
       <button class="open-btn" onclick="openInvitation()">Abrir Invitación</button>
@@ -1251,25 +1251,25 @@
         </p>
 
         <div class="palette-container">
-          <div class="swatch-item" onclick="showToast('Verde Salvia sugerido')">
-            <div class="swatch-circle" style="background-color: #6b7f6e;"></div>
-            <span class="swatch-name">Salvia</span>
+          <div class="swatch-item" onclick="showToast('Rifle Green sugerido')">
+            <div class="swatch-circle" style="background-color: #43442B;"></div>
+            <span class="swatch-name">Rifle Green</span>
           </div>
-          <div class="swatch-item" onclick="showToast('Verde Eucalipto sugerido')">
-            <div class="swatch-circle" style="background-color: #3e5241;"></div>
-            <span class="swatch-name">Eucalipto</span>
+          <div class="swatch-item" onclick="showToast('Oyster sugerido')">
+            <div class="swatch-circle" style="background-color: #939474;"></div>
+            <span class="swatch-name">Oyster</span>
           </div>
-          <div class="swatch-item" onclick="showToast('Champán Dorado sugerido')">
-            <div class="swatch-circle" style="background-color: #dfceab;"></div>
-            <span class="swatch-name">Champán</span>
+          <div class="swatch-item" onclick="showToast('Kangaroo sugerido')">
+            <div class="swatch-circle" style="background-color: #D0C7B3;"></div>
+            <span class="swatch-name">Kangaroo</span>
           </div>
-          <div class="swatch-item" onclick="showToast('Rosa Palo sugerido')">
-            <div class="swatch-circle" style="background-color: #d8b8b4;"></div>
-            <span class="swatch-name">Rosa Palo</span>
+          <div class="swatch-item" onclick="showToast('Merino sugerido')">
+            <div class="swatch-circle" style="background-color: #F1F1EC; border: 1px solid #ccc;"></div>
+            <span class="swatch-name">Merino</span>
           </div>
-          <div class="swatch-item" onclick="showToast('Arena Cálido sugerido')">
-            <div class="swatch-circle" style="background-color: #d1c5af;"></div>
-            <span class="swatch-name">Arena</span>
+          <div class="swatch-item" onclick="showToast('Cedar sugerido')">
+            <div class="swatch-circle" style="background-color: #292728;"></div>
+            <span class="swatch-name">Cedar</span>
           </div>
         </div>
       </section>
@@ -1333,7 +1333,7 @@
         </form>
 
         <div id="rsvpSuccess" class="rsvp-success">
-          <div class="success-icon">✓</div>
+          <div class="success-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h4 class="success-title">¡Muchas Gracias!</h4>
           <p class="success-msg" id="successDetails">Tu respuesta ha sido registrada correctamente. ¡Estamos deseando darte un abrazo!</p>
           <button class="btn-action" style="margin-top: 16px;" onclick="sendWhatsAppConfirmation()">

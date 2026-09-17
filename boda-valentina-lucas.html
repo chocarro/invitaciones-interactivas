@@ -10,11 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --burgundy-dark: #280a11;
-      --burgundy-rich: #4f101d;
-      --burgundy-light: #721929;
-      --cream-light: #faf7f0;
-      --cream-parchment: #f3ecde;
+      --burgundy-dark: #191A1E;
+      --burgundy-rich: #49110B;
+      --burgundy-light: #56483B;
+      --cream-light: #E7E5DB;
+      --cream-parchment: #C8C2B7;
       --gold-primary: #d4af37;
       --gold-glow: #f3e5ab;
       --gold-deep: #9d7c1a;
@@ -135,7 +135,7 @@
        1. ENVELOPE / TICKET ENTRANCE
     =================================================== */
     .intro-screen {
-      background: linear-gradient(180deg, var(--burgundy-dark) 0%, #170407 100%);
+      background: linear-gradient(rgba(25, 26, 30, 0.78), rgba(73, 17, 11, 0.88)), url('Fondos/2eb3dac7a46589d9e5da688507e9121e.jpg') center/cover;
       padding: 50px 24px;
       text-align: center;
       color: #ffffff;
@@ -944,7 +944,7 @@
 
         <div class="timeline-curve-box">
           <div class="t-event">
-            <div class="t-circle">✦</div>
+            <div class="t-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></div>
             <div class="t-content">
               <div class="t-hour">16:30 h</div>
               <div class="t-name">Ceremonia Religiosa</div>
@@ -952,7 +952,7 @@
             </div>
           </div>
           <div class="t-event">
-            <div class="t-circle">🍸</div>
+            <div class="t-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 22h8M12 11v11M19 3l-7 8-7-8h14z"/></svg></div>
             <div class="t-content">
               <div class="t-hour">18:00 h</div>
               <div class="t-name">Cóctel de Bienvenida</div>
@@ -960,7 +960,7 @@
             </div>
           </div>
           <div class="t-event">
-            <div class="t-circle">🍽️</div>
+            <div class="t-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg></div>
             <div class="t-content">
               <div class="t-hour">20:30 h</div>
               <div class="t-name">Banquete de Gala</div>
@@ -968,7 +968,7 @@
             </div>
           </div>
           <div class="t-event">
-            <div class="t-circle">✨</div>
+            <div class="t-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
             <div class="t-content">
               <div class="t-hour">23:30 h</div>
               <div class="t-name">Apertura de Baile & Fiesta</div>
@@ -1000,25 +1000,29 @@
         </p>
 
         <div class="pantone-row">
-          <div class="pantone-card" onclick="showPopup('Tono Borgoña Imperial')">
-            <div class="pantone-color" style="background: #4f101d;"></div>
-            <div class="pantone-label">Burgundy</div>
+          <div class="pantone-card" onclick="showPopup('Mulled Wine #49110B')">
+            <div class="pantone-color" style="background: #49110B;"></div>
+            <div class="pantone-label">Mulled Wine</div>
           </div>
-          <div class="pantone-card" onclick="showPopup('Tono Oro Viejo')">
-            <div class="pantone-color" style="background: #c5a059;"></div>
-            <div class="pantone-label">Old Gold</div>
+          <div class="pantone-card" onclick="showPopup('Woodland #56483B')">
+            <div class="pantone-color" style="background: #56483B;"></div>
+            <div class="pantone-label">Woodland</div>
           </div>
-          <div class="pantone-card" onclick="showPopup('Tono Rosa Terciopelo')">
-            <div class="pantone-color" style="background: #c2959d;"></div>
-            <div class="pantone-label">Velvet Rose</div>
+          <div class="pantone-card" onclick="showPopup('Sandlight #AD9E89')">
+            <div class="pantone-color" style="background: #AD9E89;"></div>
+            <div class="pantone-label">Sandlight</div>
           </div>
-          <div class="pantone-card" onclick="showPopup('Tono Verde Bosque')">
-            <div class="pantone-color" style="background: #253d2c;"></div>
-            <div class="pantone-label">Forest</div>
+          <div class="pantone-card" onclick="showPopup('Antique Marble #C8C2B7')">
+            <div class="pantone-color" style="background: #C8C2B7;"></div>
+            <div class="pantone-label">Marble</div>
           </div>
-          <div class="pantone-card" onclick="showPopup('Tono Champán Seda')">
-            <div class="pantone-color" style="background: #e8ded2;"></div>
-            <div class="pantone-label">Champagne</div>
+          <div class="pantone-card" onclick="showPopup('Goat Milk #E7E5DB')">
+            <div class="pantone-color" style="background: #E7E5DB;"></div>
+            <div class="pantone-label">Goat Milk</div>
+          </div>
+          <div class="pantone-card" onclick="showPopup('Charcoal Smoke #191A1E')">
+            <div class="pantone-color" style="background: #191A1E;"></div>
+            <div class="pantone-label">Charcoal</div>
           </div>
         </div>
       </section>
@@ -1068,7 +1072,7 @@
         </form>
 
         <div id="wineConfirmation" class="confirmation-msg">
-          <div style="font-size: 32px; color: var(--gold-deep); margin-bottom: 10px;">❦</div>
+          
           <h3 style="font-family: var(--font-display); font-size: 22px; color: var(--burgundy-rich); margin-bottom: 6px;">¡Confirmación Registrada!</h3>
           <p id="wineDetailsText" style="font-size: 13px; color: var(--text-muted); line-height: 1.5;"></p>
           <button class="btn-gold-action" onclick="sendWineWhatsApp()">Avisar por WhatsApp</button>
