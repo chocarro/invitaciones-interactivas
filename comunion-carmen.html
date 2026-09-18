@@ -10,30 +10,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose-soft: #fbf2ef;
-      --rose-accent: #e8c5be;
-      --rose-deep: #b3736b;
-      --rose-dark: #6e3d37;
+      /* User Palette 1 & 3: Vanilla, Soft Dune, Classic Taupe, Umber, Mulled Wine */
+      --vanilla: #F8F4EE;
+      --soft-dune: #E4DDCC;
+      --classic-taupe: #C5B49D;
+      --umber: #443A35;
+      --black: #252525;
+      --mulled-wine: #49110B;
+      --woodland: #56483B;
+      --antique-marble: #C8C2B7;
+      
+      --rose-soft: var(--vanilla);
+      --rose-accent: var(--classic-taupe);
+      --rose-deep: var(--mulled-wine);
+      --rose-dark: var(--umber);
       --gold: #cbb279;
-      --gold-dark: #8c733f;
-      --gold-light: #f5eedc;
-      --cream: #fdfaf7;
-      --cream-warm: #f4ece4;
-      --text: #3c3433;
-      --text-light: #7a6e6d;
-      --text-muted: #9c8e8d;
+      --gold-dark: var(--woodland);
+      --cream: var(--vanilla);
+      --cream-warm: var(--soft-dune);
+      --text: var(--black);
+      --text-light: var(--umber);
+      --text-muted: #756a62;
       --font-cursive: 'Great Vibes', cursive;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Montserrat', -apple-system, sans-serif;
-      --shadow-soft: 0 10px 30px rgba(179, 115, 107, 0.08);
-      --shadow-elevated: 0 18px 40px rgba(60, 52, 51, 0.12);
+      --shadow-soft: 0 10px 30px rgba(68, 58, 53, 0.08);
+      --shadow-elevated: 0 18px 40px rgba(37, 37, 37, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #2b2221;
-      background-image: radial-gradient(circle at 50% 25%, #463432 0%, #1c1514 100%);
+      background: #1e1714;
+      background-image: radial-gradient(circle at 50% 25%, #382923 0%, #120e0c 100%);
       font-family: var(--font-sans);
       color: var(--text);
       min-height: 100vh;
@@ -617,11 +626,11 @@
       border: 2px solid white;
     }
 
-    .swatch-1 { background-color: #e8c5be; }
-    .swatch-2 { background-color: #fbf2ef; }
-    .swatch-3 { background-color: #cbb279; }
-    .swatch-4 { background-color: #b3736b; }
-    .swatch-5 { background-color: #a5a687; }
+    .swatch-1 { background-color: #F8F4EE; }
+    .swatch-2 { background-color: #E4DDCC; }
+    .swatch-3 { background-color: #C5B49D; }
+    .swatch-4 { background-color: #443A35; }
+    .swatch-5 { background-color: #49110B; }
 
     /* Children & Fun */
     .feature-grid {
@@ -1269,11 +1278,11 @@
           Agradecemos vestir con colores luminosos y suaves que acompañen la frescura primaveral de los jardines de la finca.
         </p>
         <div class="palette-row">
-          <div class="palette-circle swatch-1" title="Rosa Pálido"></div>
-          <div class="palette-circle swatch-2" title="Crema Lino"></div>
-          <div class="palette-circle swatch-3" title="Dorado Suave"></div>
-          <div class="palette-circle swatch-4" title="Terracota Claro"></div>
-          <div class="palette-circle swatch-5" title="Salvia Verde"></div>
+          <div class="palette-circle swatch-1" title="Vanilla #F8F4EE"></div>
+          <div class="palette-circle swatch-2" title="Soft Dune #E4DDCC"></div>
+          <div class="palette-circle swatch-3" title="Classic Taupe #C5B49D"></div>
+          <div class="palette-circle swatch-4" title="Umber #443A35"></div>
+          <div class="palette-circle swatch-5" title="Mulled Wine #49110B"></div>
         </div>
         <p style="font-size: 11px; color: var(--text-muted);">Sugerencia: Traje formal sin corbata o vestido cóctel fluido.</p>
       </div>

@@ -10,31 +10,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose-soft: #fcf6f7;
-      --rose-cloud: #f7e6eb;
-      --rose-accent: #df9aa8;
-      --rose-deep: #9d4858;
-      --rose-dark: #63222e;
+      /* User Palette 3: Mulled Wine, Woodland, Antique Marble, Charcoal Smoke, Sandlight, Goat Milk */
+      --mulled-wine: #49110B;
+      --woodland: #56483B;
+      --antique-marble: #C8C2B7;
+      --charcoal-smoke: #191A1E;
+      --sandlight: #AD9E89;
+      --goat-milk: #E7E5DB;
+
+      --rose-soft: var(--goat-milk);
+      --rose-cloud: var(--antique-marble);
+      --rose-accent: var(--sandlight);
+      --rose-deep: var(--mulled-wine);
+      --rose-dark: var(--woodland);
       --gold: #c5a059;
-      --gold-soft: #f4ecdc;
-      --cream: #fdfbf9;
-      --cream-warm: #f6efe9;
-      --text: #3d3335;
-      --text-light: #7b6d70;
-      --text-muted: #9e8e91;
+      --gold-soft: var(--antique-marble);
+      --cream: var(--goat-milk);
+      --cream-warm: var(--antique-marble);
+      --text: var(--charcoal-smoke);
+      --text-light: var(--woodland);
+      --text-muted: #7d726b;
       --font-cursive: 'Great Vibes', cursive;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Montserrat', -apple-system, sans-serif;
-      --shadow-sm: 0 4px 15px rgba(157, 72, 88, 0.08);
-      --shadow-md: 0 12px 30px rgba(99, 34, 46, 0.12);
+      --shadow-sm: 0 4px 15px rgba(73, 17, 11, 0.08);
+      --shadow-md: 0 12px 30px rgba(73, 17, 11, 0.12);
       --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.35);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #231619;
-      background-image: radial-gradient(circle at 50% 25%, #3e242a 0%, #150c0e 100%);
+      background: #191A1E;
+      background-image: radial-gradient(circle at 50% 25%, #2d181b 0%, #100b0c 100%);
       font-family: var(--font-sans);
       color: var(--text);
       min-height: 100vh;
@@ -1264,11 +1272,11 @@
           Tonos pastel, lino y colores luminosos para acompañar la luz de este día tan especial.
         </p>
         <div class="palette-strip">
-          <div class="swatch-dot" style="background:#df9aa8;" title="Rosa Pastel"></div>
-          <div class="swatch-dot" style="background:#f7e6eb;" title="Rosa Nube"></div>
-          <div class="swatch-dot" style="background:#c5a059;" title="Dorado Suave"></div>
-          <div class="swatch-dot" style="background:#fdfbf9;" title="Blanco Marfil"></div>
-          <div class="swatch-dot" style="background:#a5a687;" title="Salvia Claro"></div>
+          <div class="swatch-dot" style="background:#49110B;" title="Mulled Wine #49110B"></div>
+          <div class="swatch-dot" style="background:#56483B;" title="Woodland #56483B"></div>
+          <div class="swatch-dot" style="background:#C8C2B7;" title="Antique Marble #C8C2B7"></div>
+          <div class="swatch-dot" style="background:#AD9E89;" title="Sandlight #AD9E89"></div>
+          <div class="swatch-dot" style="background:#E7E5DB;" title="Goat Milk #E7E5DB"></div>
         </div>
       </div>
     </section>

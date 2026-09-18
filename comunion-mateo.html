@@ -10,24 +10,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
   <style>
     :root {
-      --navy-deep: #0e1c36;
-      --navy-dark: #1b2d4f;
+      /* User Palette 2: Bone, Silt, Ether, Thicket, Ink */
+      --bone: #D9CDBF;
+      --silt: #8C7D6E;
+      --ether: #A9BDC4;
+      --thicket: #4B5244;
+      --ink: #121212;
+
+      --navy-deep: var(--ink);
+      --navy-dark: var(--thicket);
       --navy-royal: #2a4374;
-      --navy-light: #A9BDC4;
-      --navy-pale: #e9eff5;
-      --gold-royal: #c0a062;
-      --gold-deep: #8C7D6E;
-      --gold-soft: #D9CDBF;
+      --navy-light: var(--ether);
+      --navy-pale: #eef3f5;
+      --gold-royal: var(--silt);
+      --gold-deep: var(--silt);
+      --gold-soft: var(--bone);
       --white: #ffffff;
-      --cream: #fbf9f5;
-      --cream-warm: #f2ede4;
-      --text: #1d2536;
-      --text-muted: #5e6b82;
+      --cream: #faf8f5;
+      --cream-warm: var(--bone);
+      --text: var(--ink);
+      --text-muted: var(--silt);
       --font-serif: 'Prata', Georgia, serif;
       --font-royal: 'Cinzel', serif;
       --font-sans: 'Montserrat', -apple-system, sans-serif;
-      --shadow-sm: 0 4px 15px rgba(14, 28, 54, 0.08);
-      --shadow-md: 0 15px 35px rgba(14, 28, 54, 0.12);
+      --shadow-sm: 0 4px 15px rgba(18, 18, 18, 0.08);
+      --shadow-md: 0 15px 35px rgba(18, 18, 18, 0.12);
       --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.4);
     }
 
@@ -620,11 +627,11 @@
       border: 2px solid white;
     }
 
-    .swatch-mateo-1 { background-color: #0e1c36; }
-    .swatch-mateo-2 { background-color: #2a4374; }
-    .swatch-mateo-3 { background-color: #c0a062; }
+    .swatch-mateo-1 { background-color: #121212; }
+    .swatch-mateo-2 { background-color: #4B5244; }
+    .swatch-mateo-3 { background-color: #8C7D6E; }
     .swatch-mateo-4 { background-color: #A9BDC4; }
-    .swatch-mateo-5 { background-color: #f2ede4; }
+    .swatch-mateo-5 { background-color: #D9CDBF; }
 
     /* Children Activities */
     .activity-grid {
@@ -1276,11 +1283,11 @@
           Recomendamos traje de lino o blazer con calzado cómodo para caminar por las praderas y jardines de la finca.
         </p>
         <div class="palette-row">
-          <div class="palette-circle swatch-mateo-1" title="Azul Noche"></div>
-          <div class="palette-circle swatch-mateo-2" title="Azul Real"></div>
-          <div class="palette-circle swatch-mateo-3" title="Dorado Envejecido"></div>
-          <div class="palette-circle swatch-mateo-4" title="Azul Neblina"></div>
-          <div class="palette-circle swatch-mateo-5" title="Arena Lino"></div>
+          <div class="palette-circle swatch-mateo-1" title="Ink #121212"></div>
+          <div class="palette-circle swatch-mateo-2" title="Thicket #4B5244"></div>
+          <div class="palette-circle swatch-mateo-3" title="Silt #8C7D6E"></div>
+          <div class="palette-circle swatch-mateo-4" title="Ether #A9BDC4"></div>
+          <div class="palette-circle swatch-mateo-5" title="Bone #D9CDBF"></div>
         </div>
         <p style="font-size: 11px; color: var(--text-muted);">Sugerencia: Vestido fluido o conjunto de dos piezas / Blazer sin corbata.</p>
       </div>

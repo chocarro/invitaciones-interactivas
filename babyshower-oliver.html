@@ -10,30 +10,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --terracotta: #b86b53;
-      --terracotta-dark: #7a3a27;
-      --terracotta-soft: #e8c5bb;
-      --terracotta-pale: #fcf1ed;
-      --olive-dark: #443a35;
-      --gold: #c29d5b;
-      --sand-bg: #faf7f2;
-      --sand-card: #f0e9df;
-      --text: #332a26;
-      --text-light: #70635c;
-      --text-muted: #998981;
+      /* User Palette 1: Vanilla, Soft Dune, Classic Taupe, Umber, Black */
+      --vanilla: #F8F4EE;
+      --soft-dune: #E4DDCC;
+      --classic-taupe: #C5B49D;
+      --umber: #443A35;
+      --black: #252525;
+
+      --terracotta: var(--umber);
+      --terracotta-dark: var(--black);
+      --terracotta-soft: var(--classic-taupe);
+      --terracotta-pale: var(--soft-dune);
+      --olive-dark: var(--umber);
+      --gold: var(--classic-taupe);
+      --sand-bg: var(--vanilla);
+      --sand-card: var(--soft-dune);
+      --text: var(--black);
+      --text-light: var(--umber);
+      --text-muted: #786d65;
       --font-cursive: 'Great Vibes', cursive;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Montserrat', -apple-system, sans-serif;
-      --shadow-sm: 0 4px 15px rgba(122, 58, 39, 0.08);
-      --shadow-md: 0 12px 30px rgba(122, 58, 39, 0.12);
+      --shadow-sm: 0 4px 15px rgba(68, 58, 53, 0.08);
+      --shadow-md: 0 12px 30px rgba(68, 58, 53, 0.12);
       --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.35);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #201713;
-      background-image: radial-gradient(circle at 50% 25%, #38241d 0%, #140d0a 100%);
+      background: #252525;
+      background-image: radial-gradient(circle at 50% 25%, #443A35 0%, #151515 100%);
       font-family: var(--font-sans);
       color: var(--text);
       min-height: 100vh;
@@ -1261,11 +1268,11 @@
           Tonos terracota, mostaza suave, lino y blanco para una sesión de fotos preciosa.
         </p>
         <div class="palette-strip">
-          <div class="swatch-dot" style="background:#b86b53;" title="Terracota"></div>
-          <div class="swatch-dot" style="background:#e8c5bb;" title="Rosa Arcilla"></div>
-          <div class="swatch-dot" style="background:#c29d5b;" title="Mostaza Claro"></div>
-          <div class="swatch-dot" style="background:#f0e9df;" title="Arena"></div>
-          <div class="swatch-dot" style="background:#443a35;" title="Marrón Suave"></div>
+          <div class="swatch-dot" style="background:#F8F4EE;" title="Vanilla #F8F4EE"></div>
+          <div class="swatch-dot" style="background:#E4DDCC;" title="Soft Dune #E4DDCC"></div>
+          <div class="swatch-dot" style="background:#C5B49D;" title="Classic Taupe #C5B49D"></div>
+          <div class="swatch-dot" style="background:#443A35;" title="Umber #443A35"></div>
+          <div class="swatch-dot" style="background:#252525;" title="Black #252525"></div>
         </div>
       </div>
     </section>

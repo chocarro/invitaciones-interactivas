@@ -10,31 +10,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --sage-dark: #374238;
-      --sage-deep: #4c5b4e;
-      --sage-medium: #788c7a;
-      --sage-soft: #c4d1c6;
-      --sage-pale: #eaf0eb;
+      /* User Palette 4: Merino, Kangaroo, Oyster, Rifle Green, Cedar */
+      --merino: #F1F1EC;
+      --kangaroo: #D0C7B3;
+      --oyster: #939474;
+      --rifle-green: #43442B;
+      --cedar: #292728;
+      --thicket: #4B5244;
+
+      --sage-dark: var(--rifle-green);
+      --sage-deep: var(--thicket);
+      --sage-medium: var(--oyster);
+      --sage-soft: var(--kangaroo);
+      --sage-pale: var(--merino);
       --gold: #bda061;
-      --gold-dark: #8c733f;
-      --cream: #fbf9f6;
-      --cream-warm: #f2ece4;
-      --text: #2c332d;
-      --text-light: #647065;
-      --text-muted: #8c998d;
+      --gold-dark: var(--rifle-green);
+      --cream: var(--merino);
+      --cream-warm: var(--kangaroo);
+      --text: var(--cedar);
+      --text-light: var(--rifle-green);
+      --text-muted: var(--oyster);
       --font-cursive: 'Great Vibes', cursive;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Montserrat', -apple-system, sans-serif;
-      --shadow-sm: 0 4px 15px rgba(55, 66, 56, 0.08);
-      --shadow-md: 0 12px 30px rgba(55, 66, 56, 0.12);
+      --shadow-sm: 0 4px 15px rgba(67, 68, 43, 0.08);
+      --shadow-md: 0 12px 30px rgba(67, 68, 43, 0.12);
       --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.35);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #18221a;
-      background-image: radial-gradient(circle at 50% 25%, #27362a 0%, #0f1610 100%);
+      background: #292728;
+      background-image: radial-gradient(circle at 50% 25%, #43442B 0%, #1a191a 100%);
       font-family: var(--font-sans);
       color: var(--text);
       min-height: 100vh;
@@ -1264,11 +1272,11 @@
           Tonos tierra, verde oliva, salvia y blanco marfil para disfrutar del entorno natural.
         </p>
         <div class="palette-strip">
-          <div class="swatch-dot" style="background:#4c5b4e;" title="Verde Bosque"></div>
-          <div class="swatch-dot" style="background:#788c7a;" title="Salvia"></div>
-          <div class="swatch-dot" style="background:#bda061;" title="Dorado"></div>
-          <div class="swatch-dot" style="background:#eaf0eb;" title="Salvia Suave"></div>
-          <div class="swatch-dot" style="background:#f2ece4;" title="Lino"></div>
+          <div class="swatch-dot" style="background:#43442B;" title="Rifle Green #43442B"></div>
+          <div class="swatch-dot" style="background:#939474;" title="Oyster #939474"></div>
+          <div class="swatch-dot" style="background:#D0C7B3;" title="Kangaroo #D0C7B3"></div>
+          <div class="swatch-dot" style="background:#F1F1EC;" title="Merino #F1F1EC"></div>
+          <div class="swatch-dot" style="background:#292728;" title="Cedar #292728"></div>
         </div>
       </div>
     </section>
