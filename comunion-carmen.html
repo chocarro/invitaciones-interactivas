@@ -4,700 +4,1627 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Mi Primera Comunión — Carmen</title>
-  <meta name="description" content="Te invito a celebrar mi Primera Comunión el 16 de Mayo de 2026.">
+  <meta name="description" content="Te invito a celebrar mi Primera Comunión el 16 de Mayo de 2026. Acompáñanos en este día tan especial.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --rose-soft: #fbf2ef;
       --rose-accent: #e8c5be;
       --rose-deep: #b3736b;
+      --rose-dark: #6e3d37;
       --gold: #cbb279;
       --gold-dark: #8c733f;
+      --gold-light: #f5eedc;
       --cream: #fdfaf7;
+      --cream-warm: #f4ece4;
       --text: #3c3433;
       --text-light: #7a6e6d;
+      --text-muted: #9c8e8d;
       --font-cursive: 'Great Vibes', cursive;
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Montserrat', sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Montserrat', -apple-system, sans-serif;
+      --shadow-soft: 0 10px 30px rgba(179, 115, 107, 0.08);
+      --shadow-elevated: 0 18px 40px rgba(60, 52, 51, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #382c2b;
-      background-image: radial-gradient(circle at 50% 30%, #523f3d 0%, #221817 100%);
+      background: #2b2221;
+      background-image: radial-gradient(circle at 50% 25%, #463432 0%, #1c1514 100%);
       font-family: var(--font-sans);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 20px 10px;
+      align-items: flex-start;
+      padding: 24px 12px;
+      overflow-x: hidden;
     }
 
     .card-shell {
       width: 100%;
-      max-width: 440px;
+      max-width: 450px;
       background: var(--cream);
-      border-radius: 20px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      border-radius: 24px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(232, 197, 190, 0.3);
       overflow: hidden;
       position: relative;
     }
 
-    .top-badge {
+    /* Ambient Audio Button */
+    .audio-toggle-btn {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.9);
+      top: 22px;
+      right: 22px;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
       border: 1px solid var(--rose-accent);
-      color: var(--rose-deep);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .music-bell-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
     }
 
-    /* Screen 1: Ribbon Cover */
-    .cover-ribbon-screen {
-      background: linear-gradient(rgba(248, 244, 238, 0.7), rgba(228, 221, 204, 0.85)), url('Fondos/ebc7d91e4f318dbeb94049d5fce8ef79.jpg') center/cover;
-      padding: 55px 20px 45px;
-      text-align: center;
+    .audio-toggle-btn:hover {
+      transform: scale(1.08);
+      background: #ffffff;
+      border-color: var(--rose-deep);
+    }
+
+    .audio-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .audio-bar {
+      width: 3px;
+      background-color: var(--rose-deep);
+      border-radius: 3px;
+      height: 6px;
+      transition: height 0.2s ease;
+    }
+
+    .audio-playing .audio-bar:nth-child(1) { animation: bounceBar 0.8s ease-in-out infinite alternate; }
+    .audio-playing .audio-bar:nth-child(2) { animation: bounceBar 1.1s ease-in-out infinite alternate 0.2s; }
+    .audio-playing .audio-bar:nth-child(3) { animation: bounceBar 0.9s ease-in-out infinite alternate 0.4s; }
+
+    @keyframes bounceBar {
+      0% { height: 4px; }
+      100% { height: 18px; }
+    }
+
+    /* Hero Section */
+    .hero {
       position: relative;
+      padding: 65px 28px 45px;
+      text-align: center;
+      background: url('Fondos/872cfd8768abb07e76789c02b46630a0.jpg') center/cover no-repeat;
+      border-bottom: 2px solid var(--rose-accent);
+      overflow: hidden;
     }
 
-    .cover-ribbon-screen.hidden { display: none; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(253, 250, 247, 0.86) 0%, rgba(251, 242, 239, 0.94) 75%, var(--cream) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
 
     .cross-symbol {
-      width: 50px;
-      height: 50px;
-      margin: 0 auto 15px;
-      color: var(--gold);
-    }
-
-    .cover-script {
-      font-family: var(--font-cursive);
-      font-size: 52px;
-      color: var(--rose-deep);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .cover-subtitle {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold-dark);
-      font-weight: 600;
-      margin-bottom: 25px;
-    }
-
-    /* Interactive Silk Ribbon */
-    .ribbon-box {
-      width: 250px;
-      height: 220px;
-      margin: 0 auto 25px;
-      background: #ffffff;
-      border-radius: 14px;
-      position: relative;
-      box-shadow: 0 15px 35px rgba(179, 115, 107, 0.25);
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
       border: 1px solid var(--rose-accent);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    /* Horizontal ribbon band */
-    .ribbon-h {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 28px;
-      background: linear-gradient(180deg, #f0dfb3 0%, var(--gold) 50%, #b09556 100%);
-      transform: translateY(-50%);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-
-    /* Vertical ribbon band */
-    .ribbon-v {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 28px;
-      background: linear-gradient(90deg, #f0dfb3 0%, var(--gold) 50%, #b09556 100%);
-      transform: translateX(-50%);
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-
-    .ribbon-bow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 68px;
-      height: 68px;
       border-radius: 50%;
-      background: radial-gradient(circle, #fff7d6 0%, var(--gold) 70%, #9e7f3c 100%);
-      box-shadow: 0 8px 20px rgba(140, 115, 63, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #3b2a08;
-      font-size: 26px;
-      animation: pulseBow 2s infinite ease-in-out;
-      z-index: 5;
+      box-shadow: 0 4px 16px rgba(179, 115, 107, 0.15);
     }
 
-    @keyframes pulseBow {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.08); }
+    .cross-symbol svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--gold-dark);
     }
 
-    .btn-untie {
-      background: linear-gradient(135deg, var(--rose-deep), #8c524c);
-      color: white;
-      border: none;
-      padding: 13px 32px;
-      border-radius: 30px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(179, 115, 107, 0.4);
-      transition: all 0.3s;
-    }
-
-    .btn-untie:hover { transform: translateY(-2px); }
-
-    /* Screen 2: Full Content */
-    .communion-main {
-      display: none;
-      animation: fadeIn 0.8s ease;
-    }
-
-    .communion-main.active { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .header-floral {
-      padding: 45px 20px 25px;
-      text-align: center;
-      background: linear-gradient(180deg, #fcedf0 0%, var(--cream) 100%);
-    }
-
-    .carmen-name {
-      font-family: var(--font-cursive);
-      font-size: 68px;
-      color: var(--rose-deep);
-      line-height: 0.9;
-      margin-bottom: 6px;
-    }
-
-    .communion-tag {
-      font-family: var(--font-serif);
-      font-size: 14px;
+    .hero-subtitle {
+      font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--gold-dark);
+      color: var(--rose-deep);
       font-weight: 600;
+      margin-bottom: 8px;
     }
 
-    .portrait-wrap {
-      padding: 15px 25px;
-      text-align: center;
+    .hero-title {
+      font-family: var(--font-cursive);
+      font-size: 64px;
+      line-height: 1.1;
+      color: var(--rose-dark);
+      margin-bottom: 8px;
+      font-weight: normal;
     }
 
-    .portrait-frame {
-      border: 8px solid #ffffff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(179, 115, 107, 0.15);
-      background: #fff;
-    }
-
-    .portrait-frame img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .blessing-quote {
-      padding: 25px 24px 10px;
-      text-align: center;
+    .hero-description {
       font-family: var(--font-serif);
-      font-size: 17px;
-      line-height: 1.6;
+      font-size: 20px;
       color: var(--text-light);
       font-style: italic;
+      margin-bottom: 24px;
+      line-height: 1.4;
     }
 
-    /* Calendar */
-    .communion-calendar {
-      background: #ffffff;
-      margin: 20px 20px 30px;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid var(--rose-accent);
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    }
-
-    .cal-title-comm {
-      font-family: var(--font-cursive);
-      font-size: 38px;
-      color: var(--rose-deep);
-      margin-bottom: 10px;
-    }
-
-    .cal-grid-mini {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .cal-pill {
-      display: flex;
-      flex-direction: column;
+    .date-badge {
+      display: inline-flex;
       align-items: center;
-      padding: 8px 12px;
-      border-radius: 12px;
+      gap: 12px;
+      background: white;
+      padding: 10px 22px;
+      border-radius: 40px;
+      border: 1px solid var(--rose-accent);
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--rose-dark);
+      text-transform: uppercase;
     }
 
-    .cal-pill.selected {
-      background: var(--rose-soft);
-      border: 2px solid var(--rose-deep);
-    }
-
-    .cal-num {
-      font-family: var(--font-serif);
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--rose-deep);
+    .date-badge svg {
+      width: 15px;
+      height: 15px;
+      fill: var(--gold);
     }
 
     /* Countdown */
-    .countdown-carmen {
-      background: linear-gradient(135deg, #b3736b, #844c45);
-      margin: 0 20px 30px;
-      padding: 22px 15px;
-      border-radius: 16px;
-      text-align: center;
-      color: white;
-    }
-
-    .cnt-carmen-grid {
+    .countdown-wrap {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
+      margin: 28px 0 16px;
+    }
+
+    .count-box {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.5);
+      border-radius: 12px;
+      padding: 12px 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .count-number {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--rose-dark);
+      line-height: 1;
+    }
+
+    .count-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    .action-btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-cal {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--rose-deep);
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 11px 20px;
+      border-radius: 30px;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(179, 115, 107, 0.3);
+    }
+
+    .btn-cal:hover {
+      background: var(--rose-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-cal svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 40px 24px;
+      position: relative;
+    }
+
+    .section-border-top {
+      border-top: 1px solid rgba(232, 197, 190, 0.4);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      color: var(--rose-dark);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .section-deco {
+      width: 50px;
+      height: 2px;
+      background: var(--rose-accent);
+      margin: 12px auto 0;
+      position: relative;
+    }
+
+    .section-deco::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* Editorial Quote Card */
+    .story-card {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.6);
+      border-radius: 18px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .story-quote-mark {
+      width: 30px;
+      height: 30px;
+      fill: var(--rose-accent);
+      margin: 0 auto 12px;
+    }
+
+    .story-text {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .story-signature {
+      font-family: var(--font-cursive);
+      font-size: 32px;
+      color: var(--rose-deep);
+    }
+
+    .parents-note {
       margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(232, 197, 190, 0.6);
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
     }
 
-    .cnt-carmen-item {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      padding: 8px 4px;
-    }
-
-    .cnt-val { font-family: var(--font-serif); font-size: 24px; font-weight: 700; }
-    .cnt-lbl { font-size: 9px; text-transform: uppercase; opacity: 0.9; }
-
-    /* Ceremony & Banquet */
-    .event-card {
-      background: #ffffff;
-      margin: 0 20px 20px;
-      padding: 22px 20px;
-      border-radius: 16px;
+    /* Photo Frame Vignette */
+    .vignette-container {
+      background: url('Fondos/ebc7d91e4f318dbeb94049d5fce8ef79.jpg') center/cover;
+      border-radius: 18px;
+      padding: 4px;
       border: 1px solid var(--rose-accent);
+      box-shadow: var(--shadow-elevated);
+      margin-bottom: 26px;
+      overflow: hidden;
+    }
+
+    .vignette-inner {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(4px);
+      border-radius: 14px;
+      padding: 24px 18px;
       text-align: center;
     }
 
-    .event-icon { font-size: 28px; margin-bottom: 8px; }
-    .event-title { font-family: var(--font-serif); font-size: 22px; color: var(--rose-deep); margin-bottom: 4px; }
-    .event-time { font-size: 13px; font-weight: 600; color: var(--gold-dark); margin-bottom: 8px; }
-    .event-place { font-size: 13px; color: var(--text-light); margin-bottom: 14px; line-height: 1.4; }
+    .vignette-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--rose-dark);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
 
-    .btn-map {
+    .vignette-body {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-light);
+    }
+
+    /* Locations Grid */
+    .location-card {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.5);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s;
+    }
+
+    .location-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .loc-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--rose-soft);
-      border: 1px solid var(--rose-accent);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       color: var(--rose-deep);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .loc-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .loc-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--rose-dark);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .loc-time {
+      font-size: 13px;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .loc-time svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .loc-address {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .loc-detail-note {
+      background: var(--cream-warm);
+      border-left: 3px solid var(--rose-deep);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: white;
+      border: 1px solid var(--rose-deep);
+      color: var(--rose-deep);
+      padding: 11px 16px;
+      border-radius: 28px;
       text-decoration: none;
-      padding: 9px 20px;
-      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .btn-maps:hover {
+      background: var(--rose-deep);
+      color: white;
+    }
+
+    .btn-maps svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      margin-top: 10px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      bottom: 20px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--rose-accent), var(--gold));
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .tl-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-bullet {
+      position: absolute;
+      left: -28px;
+      top: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--rose-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .tl-bullet svg {
+      width: 11px;
+      height: 11px;
+      fill: var(--rose-deep);
+    }
+
+    .tl-time {
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--rose-deep);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .tl-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--rose-dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tl-desc {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Dress Code & Palette */
+    .dresscode-box {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.5);
+      border-radius: 18px;
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .dresscode-tag {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .dresscode-headline {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--rose-dark);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .dresscode-note {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .palette-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .palette-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border: 2px solid white;
+    }
+
+    .swatch-1 { background-color: #e8c5be; }
+    .swatch-2 { background-color: #fbf2ef; }
+    .swatch-3 { background-color: #cbb279; }
+    .swatch-4 { background-color: #b3736b; }
+    .swatch-5 { background-color: #a5a687; }
+
+    /* Children & Fun */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.5);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .feature-icon-circle {
+      width: 40px;
+      height: 40px;
+      background: var(--cream-warm);
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--rose-accent);
+    }
+
+    .feature-icon-circle svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--rose-deep);
+    }
+
+    .feature-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--rose-dark);
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 11px;
+      color: var(--text-light);
+      line-height: 1.4;
+    }
+
+    /* Gift Registry Box */
+    .gift-card {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.6);
+      border-radius: 18px;
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 24px;
+    }
+
+    .gift-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--cream-warm);
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gift-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--gold-dark);
+    }
+
+    .gift-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      color: var(--rose-dark);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .gift-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .iban-display {
+      background: var(--cream-warm);
+      border: 1px dashed var(--rose-accent);
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      color: var(--rose-dark);
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-dark);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
+      cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-map:hover { background: var(--rose-deep); color: white; }
 
-    /* Guestbook / Deseos para Carmen */
-    .guestbook-section {
-      background: #ffffff;
-      margin: 0 20px 25px;
-      padding: 24px 20px;
-      border-radius: 16px;
-      border: 1px solid var(--rose-accent);
+    .btn-copy:hover {
+      background: var(--gold);
     }
 
-    .msg-board {
-      max-height: 160px;
-      overflow-y: auto;
-      margin: 15px 0;
+    .btn-copy svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    /* FAQ Accordion */
+    .faq-list {
       display: flex;
       flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .faq-item {
+      background: white;
+      border: 1px solid rgba(232, 197, 190, 0.6);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-header {
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--rose-dark);
+      user-select: none;
+    }
+
+    .faq-header svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--rose-deep);
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-header svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-body {
+      padding: 0 18px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-body {
+      padding: 0 18px 16px;
+      max-height: 200px;
+    }
+
+    /* RSVP Form */
+    .rsvp-card {
+      background: white;
+      border: 2px solid var(--rose-accent);
+      border-radius: 20px;
+      padding: 30px 22px;
+      box-shadow: var(--shadow-elevated);
+      position: relative;
+    }
+
+    .rsvp-intro {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: var(--rose-dark);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid rgba(232, 197, 190, 0.8);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 16px; /* Avoid mobile safari auto zoom */
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--rose-deep);
+      background: white;
+    }
+
+    .radio-pill-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .msg-bubble {
-      background: var(--rose-soft);
-      padding: 10px 14px;
+    .radio-pill {
+      position: relative;
+    }
+
+    .radio-pill input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-pill label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px;
+      border: 1px solid rgba(232, 197, 190, 0.8);
       border-radius: 10px;
       font-size: 12px;
-      color: var(--text);
-      line-height: 1.4;
-      border-left: 3px solid var(--rose-deep);
-    }
-
-    .msg-author {
       font-weight: 600;
-      color: var(--rose-deep);
-      margin-top: 4px;
-      font-size: 11px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--cream);
     }
 
-    /* RSVP */
-    .rsvp-carmen {
-      background: #ffffff;
-      margin: 0 20px 30px;
-      padding: 24px 20px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(179, 115, 107, 0.1);
-      border: 1px solid var(--rose-accent);
+    .radio-pill input:checked + label {
+      background: var(--rose-deep);
+      color: white;
+      border-color: var(--rose-deep);
     }
 
-    .input-carmen {
+    .btn-submit {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #e0d0cc;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      font-family: var(--font-sans);
-      font-size: 13px;
-    }
-
-    .btn-submit-carmen {
-      width: 100%;
-      background: linear-gradient(135deg, var(--rose-deep), #8c524c);
+      background: var(--rose-dark);
       color: white;
       border: none;
-      padding: 14px;
+      padding: 15px;
       border-radius: 30px;
-      font-size: 12px;
+      font-size: 13px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 6px 20px rgba(110, 61, 55, 0.35);
+      transition: all 0.3s;
+      margin-top: 10px;
     }
 
-    .footer-carmen {
+    .btn-submit:hover {
+      background: #522c27;
+      transform: translateY(-2px);
+    }
+
+    /* WhatsApp direct contact */
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--rose-accent);
+      padding: 10px 18px;
+      border-radius: 25px;
+      color: var(--rose-dark);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.2s;
+    }
+
+    .btn-contact:hover {
+      background: var(--cream-warm);
+    }
+
+    .btn-contact svg {
+      width: 15px;
+      height: 15px;
+      fill: #25D366;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--rose-soft);
+      border-top: 1px solid var(--rose-accent);
+      padding: 40px 20px 35px;
       text-align: center;
-      padding: 30px 20px;
-      background: #f7e8eb;
+    }
+
+    .footer-cross {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-cross svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold-dark);
+    }
+
+    .footer-monogram {
       font-family: var(--font-cursive);
       font-size: 40px;
-      color: var(--rose-deep);
-    }
-  
-    /* Full Responsive & Mobile-friendly Enhancements */
-    html {
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
+      color: var(--rose-dark);
+      margin-bottom: 6px;
     }
 
-    body {
-      overflow-x: hidden;
-      width: 100%;
-      margin: 0;
-      padding: 0;
+    .footer-tagline {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-light);
+      margin-bottom: 14px;
     }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 0;
-      }
-      .invitation-container, .invitation-shell, .card-shell, .shell-container, .baby-shell, .leo-shell, .shower-shell, .vip-shell {
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        min-height: 100vh;
-        max-width: 100% !important;
-        width: 100% !important;
-      }
+    .footer-copy {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
-    /* Prevent iOS zoom on input focus */
-    input[type="text"], input[type="number"], select, textarea {
-      font-size: 16px !important;
+    /* Toast notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #2b2221;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      z-index: 10000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
     }
 
-    /* Responsive scaling for envelopes on ultra-compact screens (<360px) */
-    @media (max-width: 359px) {
-      .envelope-wrapper, .ticket-card, .ribbon-box, .seal-box-mateo, .baby-envelope-card, .kraft-card-box, .shower-box-card, .vip-badge {
-        transform: scale(0.88);
-        transform-origin: center center;
-      }
-      .timer-grid, .countdown-grid, .cnt-carmen-grid, .cnt-mateo-grid, .baby-timer-grid, .leo-cnt-grid, .cnt-sh-grid, .party-cnt-grid {
-        gap: 4px !important;
-      }
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
     }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
   </style>
 </head>
 <body>
 
-
-
-  <button id="bellBtn" class="music-bell-btn" title="Sonido de campanas celestiales"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+  <!-- Background Music Control -->
+  <button class="audio-toggle-btn" id="audioToggle" aria-label="Control de música">
+    <div class="audio-bars">
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+    </div>
+  </button>
 
   <div class="card-shell">
 
-    <!-- Screen 1: Cover with Ribbon -->
-    <div id="ribbonScreen" class="cover-ribbon-screen">
-      <svg class="cross-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <line x1="12" y1="2" x2="12" y2="22"/>
-        <line x1="5" y1="8" x2="19" y2="8"/>
-      </svg>
-      <div class="cover-script">Carmen</div>
-      <div class="cover-subtitle">Mi Primera Comunión</div>
-
-      <div class="ribbon-box" onclick="untieRibbon()">
-        <div class="ribbon-h"></div>
-        <div class="ribbon-v"></div>
-        <div class="ribbon-bow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/></svg></div>
-      </div>
-
-      <button class="btn-untie" onclick="untieRibbon()">Desatar Lazo y Abrir</button>
-    </div>
-
-    <!-- Screen 2: Main Invitation -->
-    <div id="carmenContent" class="communion-main">
-
-      <header class="header-floral">
-        <p class="communion-tag">Mi Primera Comunión</p>
-        <h1 class="carmen-name">Carmen</h1>
-        <p style="font-family: var(--font-serif); font-size: 15px; color: var(--gold-dark); letter-spacing: 2px;">16 DE MAYO DE 2026</p>
-      </header>
-
-      <div class="portrait-wrap">
-        <div class="portrait-frame">
-          <img src="https://images.unsplash.com/photo-1543332164-6e82f355badc?auto=format&fit=crop&w=800&q=80" alt="Carmen en su comunión">
+    <!-- Hero Header -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="cross-symbol">
+          <svg viewBox="0 0 24 24">
+            <path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z"/>
+          </svg>
         </div>
-      </div>
-
-      <p class="blessing-quote">
-        "Jesús, quédate siempre en mi corazón y acompáñame en cada paso de mi vida."<br>
-        ¡Me llena de alegría que me acompañes en este día tan especial!
-      </p>
-
-      <!-- Calendar Strip -->
-      <section class="communion-calendar">
-        <div class="cal-title-comm">Mayo 2026</div>
-        <div class="cal-grid-mini">
-          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Jue</span><span class="cal-num" style="color:#888;">14</span></div>
-          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Vie</span><span class="cal-num" style="color:#888;">15</span></div>
-          <div class="cal-pill selected"><span style="font-size: 11px; font-weight:700; color:var(--rose-deep);">SÁB</span><span class="cal-num">16</span></div>
-          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Dom</span><span class="cal-num" style="color:#888;">17</span></div>
-          <div class="cal-pill"><span style="font-size: 11px; color:#888;">Lun</span><span class="cal-num" style="color:#888;">18</span></div>
+        <p class="hero-subtitle">Mi Primera Comunión</p>
+        <h1 class="hero-title">Carmen</h1>
+        <p class="hero-description">"Dejad que los niños vengan a mí, porque de ellos es el reino de los cielos"</p>
+        
+        <div class="date-badge">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+          </svg>
+          Sábado, 16 de Mayo de 2026
         </div>
-      </section>
 
-      <!-- Countdown -->
-      <section class="countdown-carmen">
-        <div style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">Cuenta atrás para mi gran día</div>
-        <div class="cnt-carmen-grid">
-          <div class="cnt-carmen-item"><div class="cnt-val" id="cDays">00</div><div class="cnt-lbl">Días</div></div>
-          <div class="cnt-carmen-item"><div class="cnt-val" id="cHours">00</div><div class="cnt-lbl">Horas</div></div>
-          <div class="cnt-carmen-item"><div class="cnt-val" id="cMinutes">00</div><div class="cnt-lbl">Min</div></div>
-          <div class="cnt-carmen-item"><div class="cnt-val" id="cSeconds">00</div><div class="cnt-lbl">Seg</div></div>
-        </div>
-      </section>
-
-      <!-- Event 1: Ceremony -->
-      <section class="event-card">
-        <div class="event-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></div>
-        <h3 class="event-title">Santa Misa de Comunión</h3>
-        <div class="event-time">12:00 horas</div>
-        <p class="event-place">Parroquia de San Jerónimo el Real<br>Calle Moreto, 4, Madrid</p>
-        <a href="https://maps.google.com/?q=San+Jeronimo+el+Real+Madrid" target="_blank" rel="noopener" class="btn-map">Ver Iglesia en Mapa</a>
-      </section>
-
-      <!-- Event 2: Banquet & Games -->
-      <section class="event-card">
-        <div class="event-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/></svg></div>
-        <h3 class="event-title">Comida & Juegos al Aire Libre</h3>
-        <div class="event-time">A partir de las 14:30 horas</div>
-        <p class="event-place">Finca Los Rosales<br>Carretera de El Pardo, Km 3, Madrid</p>
-        <a href="https://maps.google.com/?q=El+Pardo+Madrid" target="_blank" rel="noopener" class="btn-map">Ver Finca en Mapa</a>
-      </section>
-
-      <!-- Digital Guestbook / Mensajes para Carmen -->
-      <section class="guestbook-section">
-        <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--rose-deep); text-align: center; margin-bottom: 6px;">Libro de Recuerdos</h3>
-        <p style="font-size: 12px; color: var(--text-light); text-align: center; margin-bottom: 12px;">Deja tu mensaje o bendición para que Carmen lo guarde:</p>
-
-        <div id="messagesList" class="msg-board">
-          <div class="msg-bubble">
-            "¡Qué Dios bendiga tu camino hoy y siempre, preciosa Carmen! Con todo el amor de tus tíos."
-            <div class="msg-author">— Tía Laura y Tío Andrés</div>
+        <!-- Countdown -->
+        <div class="countdown-wrap">
+          <div class="count-box">
+            <div class="count-number" id="cdDays">00</div>
+            <div class="count-label">Días</div>
           </div>
-          <div class="msg-bubble">
-            "¡Estamos deseando verte vestida de blanco y darte un achuchón gigante!"
-            <div class="msg-author">— Abuela Mercedes</div>
+          <div class="count-box">
+            <div class="count-number" id="cdHours">00</div>
+            <div class="count-label">Horas</div>
+          </div>
+          <div class="count-box">
+            <div class="count-number" id="cdMins">00</div>
+            <div class="count-label">Min</div>
+          </div>
+          <div class="count-box">
+            <div class="count-number" id="cdSecs">00</div>
+            <div class="count-label">Seg</div>
           </div>
         </div>
 
-        <input type="text" id="signerName" class="input-carmen" placeholder="Tu nombre">
-        <textarea id="signerMsg" class="input-carmen" rows="2" placeholder="Escribe tu dedicatoria..."></textarea>
-        <button class="btn-submit-carmen" style="padding: 10px;" onclick="addMessage()">Publicar Mensaje</button>
-      </section>
+        <div class="action-btn-row">
+          <button class="btn-cal" onclick="addToCalendar()">
+            <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+            Guardar en Calendario
+          </button>
+        </div>
+      </div>
+    </header>
 
-      <!-- RSVP -->
-      <section class="rsvp-carmen">
-        <h3 style="font-family: var(--font-serif); font-size: 22px; color: var(--rose-deep); text-align: center; margin-bottom: 6px;">Confirmación de Familia</h3>
-        <p style="font-size: 12px; color: var(--text-light); text-align: center; margin-bottom: 16px;">Por favor avísanos antes del 20 de Abril</p>
+    <!-- Dedication / Message -->
+    <section>
+      <div class="section-header">
+        <p class="section-tag">Un Día Para Recordar</p>
+        <h2 class="section-title">Mi Gran Ilusión</h2>
+        <div class="section-deco"></div>
+      </div>
 
-        <form id="carmenRsvpForm" onsubmit="handleCarmenRSVP(event)">
-          <input type="text" id="familyNames" class="input-carmen" placeholder="Familia / Nombre completo *" required>
-          <input type="number" id="adultsCount" class="input-carmen" placeholder="Número de Adultos" min="1" value="2">
-          <input type="number" id="kidsCount" class="input-carmen" placeholder="Número de Niños" min="0" value="1">
-          <input type="text" id="allergies" class="input-carmen" placeholder="Alergias o menú celíaco/vegano">
-          <button type="submit" class="btn-submit-carmen">Confirmar Asistencia</button>
+      <div class="story-card">
+        <svg class="story-quote-mark" viewBox="0 0 24 24">
+          <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+        </svg>
+        <p class="story-text">
+          He esperado este momento con el corazón lleno de alegría y emoción. Recibir mi Primera Comunión junto a mi familia y mis personas favoritas hace que este día sea verdaderamente mágico.
+        </p>
+        <div class="story-signature">Carmen</div>
+        <div class="parents-note">
+          Con todo nuestro amor y orgullo,<br>
+          <strong>Ignacio y Beatriz</strong>
+        </div>
+      </div>
+
+      <!-- Illustrated Vignette with user background pattern -->
+      <div class="vignette-container">
+        <div class="vignette-inner">
+          <h3 class="vignette-title">Celebrando la Luz</h3>
+          <p class="vignette-body">
+            Una jornada de fe, sonrisas y momentos irrepetibles rodeados de quienes más queremos en un entorno natural lleno de encanto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Locations -->
+    <section class="section-border-top" style="background: var(--cream-warm);">
+      <div class="section-header">
+        <p class="section-tag">Dónde y Cuándo</p>
+        <h2 class="section-title">Ubicaciones</h2>
+        <div class="section-deco"></div>
+      </div>
+
+      <!-- Ceremony -->
+      <div class="location-card">
+        <div class="loc-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ceremonia Religiosa
+        </div>
+        <h3 class="loc-title">Parroquia San Jerónimo el Real</h3>
+        <div class="loc-time">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          12:00 Horas (Llegada recomendada 11:30h)
+        </div>
+        <p class="loc-address">Calle de Moreto, 4, Retiro, 28014 Madrid</p>
+        <div class="loc-detail-note">
+          Se ruega puntualidad para poder acomodar a todos los familiares antes del comienzo de la Eucaristía.
+        </div>
+        <a href="https://maps.google.com/?q=Parroquia+San+Jeronimo+el+Real+Madrid" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+
+      <!-- Celebration -->
+      <div class="location-card">
+        <div class="loc-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Banquete & Celebración
+        </div>
+        <h3 class="loc-title">Finca El Olivar de San Miguel</h3>
+        <div class="loc-time">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          14:00 Horas (Cóctel de Bienvenida en los jardines)
+        </div>
+        <p class="loc-address">Carretera de Colmenar Viejo, Km 18, 28760 Tres Cantos, Madrid</p>
+        <div class="loc-detail-note">
+          Disponemos de amplio aparcamiento privado vigilado en el interior del recinto.
+        </div>
+        <a href="https://maps.google.com/?q=Finca+El+Olivar+Madrid" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section-border-top">
+      <div class="section-header">
+        <p class="section-tag">Programa del Evento</p>
+        <h2 class="section-title">Itinerario</h2>
+        <div class="section-deco"></div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">11:30 H</div>
+          <h4 class="tl-title">Encuentro en la Iglesia</h4>
+          <p class="tl-desc">Recepción de invitados en el atrio y asignación de bancos reservados para la familia.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">12:00 H</div>
+          <h4 class="tl-title">Solemne Misa de Comunión</h4>
+          <p class="tl-desc">Ceremonia religiosa, ofrendas y cantos corales infantiles.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">13:15 H</div>
+          <h4 class="tl-title">Fotos de Recuerdo</h4>
+          <p class="tl-desc">Fotografías con padrinos, catequistas y todos los amigos en el pórtico.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">14:00 H</div>
+          <h4 class="tl-title">Cóctel en los Jardines</h4>
+          <p class="tl-desc">Aperitivos selectos al aire libre con música ambiental instrumental.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">15:15 H</div>
+          <h4 class="tl-title">Almuerzo de Celebración</h4>
+          <p class="tl-desc">Banquete familiar y menú especial para todos los niños.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">17:00 H</div>
+          <h4 class="tl-title">Corte de Tarta & Recordatorios</h4>
+          <p class="tl-desc">Carmen entregará personalmente sus estampitas y detalles a cada invitado.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">17:30 H</div>
+          <h4 class="tl-title">Animación Infantil & Fiesta</h4>
+          <p class="tl-desc">Monitores de magia, juegos tradicionales, hinchables y barra dulce.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-bullet">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="tl-time">20:30 H</div>
+          <h4 class="tl-title">Despedida & Cierre</h4>
+          <p class="tl-desc">Agradecimiento final y fin de una tarde inolvidable.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dress Code -->
+    <section class="section-border-top" style="background: var(--cream-warm);">
+      <div class="section-header">
+        <p class="section-tag">Código de Vestimenta</p>
+        <h2 class="section-title">Dress Code</h2>
+        <div class="section-deco"></div>
+      </div>
+
+      <div class="dresscode-box">
+        <p class="dresscode-tag">Elegante Primaveral</p>
+        <h3 class="dresscode-headline">Tonos Pastel & Neutros</h3>
+        <p class="dresscode-note">
+          Agradecemos vestir con colores luminosos y suaves que acompañen la frescura primaveral de los jardines de la finca.
+        </p>
+        <div class="palette-row">
+          <div class="palette-circle swatch-1" title="Rosa Pálido"></div>
+          <div class="palette-circle swatch-2" title="Crema Lino"></div>
+          <div class="palette-circle swatch-3" title="Dorado Suave"></div>
+          <div class="palette-circle swatch-4" title="Terracota Claro"></div>
+          <div class="palette-circle swatch-5" title="Salvia Verde"></div>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted);">Sugerencia: Traje formal sin corbata o vestido cóctel fluido.</p>
+      </div>
+
+      <!-- Children Features -->
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <h4 class="feature-title">Música & Magia</h4>
+          <p class="feature-desc">Espectáculo sorpresa con magos profesionales para asombrar a grandes y peques.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          </div>
+          <h4 class="feature-title">Candy Bar</h4>
+          <p class="feature-desc">Mesa de repostería artesanal, chuches seleccionadas y fuente de chocolate.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gift Registry -->
+    <section class="section-border-top">
+      <div class="section-header">
+        <p class="section-tag">Detalles de Cariño</p>
+        <h2 class="section-title">Muestra de Afecto</h2>
+        <div class="section-deco"></div>
+      </div>
+
+      <div class="gift-card">
+        <div class="gift-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+        </div>
+        <h3 class="gift-title">Vuestra Compañía</h3>
+        <p class="gift-desc">
+          El mejor regalo es compartir con nosotros este día tan esperado. Si además deseáis tener un detalle para la hucha de estudios y proyectos de Carmen, podéis hacerlo a través del siguiente número de cuenta:
+        </p>
+        <div class="iban-display" id="ibanCode">ES48 0049 1500 2312 3456 7890</div>
+        <button class="btn-copy" onclick="copyIBAN()">
+          <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copiar IBAN
+        </button>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section-border-top" style="background: var(--cream-warm);">
+      <div class="section-header">
+        <p class="section-tag">Dudas y Consultas</p>
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <div class="section-deco"></div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span>¿Hay menú adaptado para alergias o intolerancias?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-body">
+            Por supuesto. El equipo gastronómico de la finca cuenta con opciones específicas sin gluten, sin lactosa, veganas y vegetarianas. Por favor indícalo en el formulario de confirmación.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span>¿Dónde podemos aparcar en la iglesia y la finca?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-body">
+            En la Parroquia recomendamos el parking público de la Plaza de Murillo o Atocha a 3 minutos a pie. En la Finca El Olivar contamos con aparcamiento gratuito para más de 120 vehículos.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span>¿Habrá actividades organizadas para los más pequeños?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-body">
+            Sí, tendremos monitores titulados encargados de juegos al aire libre, pintacaras, castillo hinchable y talleres creativos durante toda la tarde.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span>¿Cuál es la fecha límite para confirmar asistencia?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-body">
+            Os agradecemos confirmar antes del 20 de Abril de 2026 para coordinar el aforo de la iglesia y la asignación de mesas del banquete.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section class="section-border-top" id="rsvpSection">
+      <div class="section-header">
+        <p class="section-tag">Confirmación</p>
+        <h2 class="section-title">Confirma tu Asistencia</h2>
+        <div class="section-deco"></div>
+      </div>
+
+      <div class="rsvp-card">
+        <p class="rsvp-intro">
+          Agradecemos tu respuesta antes del <strong>20 de Abril de 2026</strong> para que podamos preparar todo con el máximo detalle.
+        </p>
+
+        <form id="rsvpForm" onsubmit="handleRsvp(event)">
+          <div class="form-group">
+            <label class="form-label" for="guestName">Nombre y Apellidos *</label>
+            <input type="text" id="guestName" class="form-control" placeholder="Ej. Familia Gómez García" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">¿Podrás acompañarnos? *</label>
+            <div class="radio-pill-group">
+              <div class="radio-pill">
+                <input type="radio" name="attending" id="attYes" value="yes" checked>
+                <label for="attYes">Sí, asistiré</label>
+              </div>
+              <div class="radio-pill">
+                <input type="radio" name="attending" id="attNo" value="no">
+                <label for="attNo">No podré ir</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="guestAdults">Número de Adultos</label>
+            <select id="guestAdults" class="form-control">
+              <option value="1">1 Adulto</option>
+              <option value="2" selected>2 Adultos</option>
+              <option value="3">3 Adultos</option>
+              <option value="4">4 Adultos</option>
+              <option value="5+">5 o más</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="guestChildren">Número de Niños</label>
+            <select id="guestChildren" class="form-control">
+              <option value="0">0 Niños</option>
+              <option value="1">1 Niño</option>
+              <option value="2" selected>2 Niños</option>
+              <option value="3">3 Niños</option>
+              <option value="4+">4 o más</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dietary">Alergias o Dietas Especiales</label>
+            <input type="text" id="dietary" class="form-control" placeholder="Ej. Celíaco, alérgico a frutos secos, vegetariano...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="songWish">Canción Favorita para Bailar</label>
+            <input type="text" id="songWish" class="form-control" placeholder="Dinos qué tema no puede faltar en la fiesta">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Mensaje para Carmen</label>
+            <textarea id="message" class="form-control" rows="3" placeholder="Dedícale unas palabras bonitas..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Enviar Confirmación</button>
         </form>
-        <div id="carmenSuccess" style="display: none; text-align: center; padding: 15px; color: var(--rose-deep); font-weight: 600;">
-          ¡Gracias por confirmar! Nos vemos el 16 de Mayo.
+
+        <div class="contact-row">
+          <a href="https://wa.me/34600112233?text=Hola%20Beatriz,%20te%20escribo%20por%20la%20comunión%20de%20Carmen" target="_blank" rel="noopener noreferrer" class="btn-contact">
+            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.66 1.33-.44.05-.98.24-3.17-.67-2.31-.96-3.82-3.32-3.93-3.48-.11-.15-1.02-1.36-1.02-2.6 0-1.24.64-1.85.87-2.1.23-.25.5-.31.67-.31.17 0 .34 0 .49.01.16.01.37-.06.58.44.22.52.74 1.82.81 1.95.07.14.11.3.02.48-.09.17-.14.28-.28.43-.14.16-.29.35-.42.47-.14.14-.29.29-.12.58.16.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.72-.84.91-1.13.19-.29.39-.24.65-.14.27.09 1.7.8 1.99.95.29.14.49.22.56.34.07.13.07.72-.17 1.4z"/></svg>
+            WhatsApp Mamá
+          </a>
+          <a href="https://wa.me/34611223344?text=Hola%20Ignacio,%20te%20escribo%20por%20la%20comunión%20de%20Carmen" target="_blank" rel="noopener noreferrer" class="btn-contact">
+            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.66 1.33-.44.05-.98.24-3.17-.67-2.31-.96-3.82-3.32-3.93-3.48-.11-.15-1.02-1.36-1.02-2.6 0-1.24.64-1.85.87-2.1.23-.25.5-.31.67-.31.17 0 .34 0 .49.01.16.01.37-.06.58.44.22.52.74 1.82.81 1.95.07.14.11.3.02.48-.09.17-.14.28-.28.43-.14.16-.29.35-.42.47-.14.14-.29.29-.12.58.16.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.72-.84.91-1.13.19-.29.39-.24.65-.14.27.09 1.7.8 1.99.95.29.14.49.22.56.34.07.13.07.72-.17 1.4z"/></svg>
+            WhatsApp Papá
+          </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <footer class="footer-carmen">
-        ¡Gracias por acompañarme!
-        <div style="font-family: var(--font-sans); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-dark); margin-top: 6px;">Carmen — 2026</div>
-      </footer>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-cross">
+        <svg viewBox="0 0 24 24"><path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6V2z"/></svg>
+      </div>
+      <div class="footer-monogram">Carmen</div>
+      <p class="footer-tagline">16 de Mayo de 2026 — Madrid</p>
+      <p class="footer-copy">Gracias por formar parte de mi vida</p>
+    </footer>
 
-    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="toast" class="toast-msg">
+    <svg style="width:16px;height:16px;fill:#4CAF50" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    <span id="toastText">¡Respuesta recibida! Gracias.</span>
   </div>
 
   <script>
-    function untieRibbon() {
-      document.getElementById('ribbonScreen').classList.add('hidden');
-      document.getElementById('carmenContent').classList.add('active');
-      playCelestialChime();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // Countdown Timer Target: May 16, 2026 12:00:00
+    const targetDate = new Date('2026-05-16T12:00:00').getTime();
 
-    // Countdown to 16 May 2026 12:00
-    const targetCommunion = new Date('2026-05-16T12:00:00').getTime();
-    function updateCommunionCountdown() {
+    function updateCountdown() {
       const now = new Date().getTime();
-      const diff = targetCommunion - now;
-      if (diff > 0) {
-        document.getElementById('cDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-        document.getElementById('cHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-        document.getElementById('cMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-        document.getElementById('cSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-      }
-    }
-    setInterval(updateCommunionCountdown, 1000);
-    updateCommunionCountdown();
+      const diff = targetDate - now;
 
-    function addMessage() {
-      const name = document.getElementById('signerName').value.trim();
-      const text = document.getElementById('signerMsg').value.trim();
-      if (!name || !text) {
-        alert('Por favor indica tu nombre y mensaje');
+      if (diff <= 0) {
+        document.getElementById('cdDays').innerText = '00';
+        document.getElementById('cdHours').innerText = '00';
+        document.getElementById('cdMins').innerText = '00';
+        document.getElementById('cdSecs').innerText = '00';
         return;
       }
-      const board = document.getElementById('messagesList');
-      const item = document.createElement('div');
-      item.className = 'msg-bubble';
-      item.innerHTML = `"${text}"<div class="msg-author">— ${name}</div>`;
-      board.prepend(item);
-      document.getElementById('signerName').value = '';
-      document.getElementById('signerMsg').value = '';
-      playCelestialChime();
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cdDays').innerText = String(days).padStart(2, '0');
+      document.getElementById('cdHours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('cdMins').innerText = String(mins).padStart(2, '0');
+      document.getElementById('cdSecs').innerText = String(secs).padStart(2, '0');
     }
 
-    function handleCarmenRSVP(e) {
-      e.preventDefault();
-      document.getElementById('carmenRsvpForm').style.display = 'none';
-      document.getElementById('carmenSuccess').style.display = 'block';
-      playCelestialChime();
-    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-    // Web Audio Celestial Bells
+    // Audio Player Synthesis
     let audioCtx = null;
-    function playCelestialChime() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
+    let isPlaying = false;
+    let melodyInterval = null;
 
-      const tones = [523.25, 659.25, 783.99, 1046.50, 1318.51];
-      const now = audioCtx.currentTime;
-      tones.forEach((f, i) => {
+    const audioToggle = document.getElementById('audioToggle');
+
+    function playSoftArpeggio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const notes = [329.63, 392.00, 493.88, 587.33, 659.25, 783.99]; // E major pentatonic
+      let noteIndex = 0;
+
+      melodyInterval = setInterval(() => {
+        if (!isPlaying) return;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
+
+        const freq = notes[noteIndex % notes.length];
+        noteIndex = (noteIndex + 1);
+
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(f, now + i * 0.12);
-        gain.gain.setValueAtTime(0, now + i * 0.12);
-        gain.gain.linearRampToValueAtTime(0.08, now + i * 0.12 + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 2.0);
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.start(now + i * 0.12);
-        osc.stop(now + i * 0.12 + 2.0);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.3);
+      }, 700);
+    }
+
+    audioToggle.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        audioToggle.classList.add('audio-playing');
+        playSoftArpeggio();
+        showToast('Música ambiental activada');
+      } else {
+        audioToggle.classList.remove('audio-playing');
+        if (melodyInterval) clearInterval(melodyInterval);
+        showToast('Música pausada');
+      }
+    });
+
+    // Calendar Integration
+    function addToCalendar() {
+      const icsData = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'URL:https://chocarro.github.io/invitaciones-interactivas/comunion-carmen.html',
+        'DTSTART:20260516T100000Z',
+        'DTEND:20260516T180000Z',
+        'SUMMARY:Primera Comunión de Carmen',
+        'DESCRIPTION:Celebración de la Primera Comunión de Carmen en Madrid. Parroquia San Jerónimo el Real y posterior banquete en Finca El Olivar.',
+        'LOCATION:Parroquia San Jerónimo el Real, Calle de Moreto, 4, 28014 Madrid',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\\n');
+
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'Comunion-Carmen-2026.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Descargando evento de calendario...');
+    }
+
+    // Copy IBAN
+    function copyIBAN() {
+      const iban = document.getElementById('ibanCode').innerText;
+      navigator.clipboard.writeText(iban).then(() => {
+        showToast('IBAN copiado al portapapeles');
+      }).catch(() => {
+        showToast('IBAN: ' + iban);
       });
     }
 
-    document.getElementById('bellBtn').addEventListener('click', playCelestialChime);
+    // Toggle FAQ
+    function toggleFaq(elem) {
+      const parent = elem.parentElement;
+      parent.classList.toggle('open');
+    }
+
+    // Toast Utility
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toastText');
+      text.innerText = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // RSVP Form Handler
+    function handleRsvp(e) {
+      e.preventDefault();
+      const guestName = document.getElementById('guestName').value;
+      const attending = document.querySelector('input[name="attending"]:checked').value;
+      const adults = document.getElementById('guestAdults').value;
+      const children = document.getElementById('guestChildren').value;
+
+      showToast(`¡Gracias ${guestName}! Tu confirmación ha sido registrada.`);
+      e.target.reset();
+    }
   </script>
 </body>
 </html>

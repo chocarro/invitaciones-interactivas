@@ -4,37 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Martina's 30th — VIP Birthday Party</title>
-  <meta name="description" content="Celebramos mis 30 por todo lo alto. Rooftop, cócteles y música en directo el 19 de Septiembre de 2026.">
+  <meta name="description" content="Celebramos mis 30 por todo lo alto. Rooftop, cócteles de autor y DJ set el 19 de Septiembre de 2026 en Madrid.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Syne:wght@700;800&family=Italianno&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Italianno&family=Montserrat:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #0a0b0e;
-      --bg-card: #13161c;
+      --bg-dark: #0d0f14;
+      --bg-card: #151922;
+      --bg-card-alt: #1c2230;
       --gold-bright: #ffdf78;
       --gold-metallic: #d4af37;
-      --gold-dark: #99751e;
-      --purple-accent: #9d4edd;
-      --pink-neon: #ff007f;
-      --text: #f0f2f5;
-      --text-muted: #9ba1ad;
-      --font-club: 'Syne', sans-serif;
-      --font-body: 'Montserrat', sans-serif;
+      --gold-dark: #8f721e;
+      --gold-soft: #f4e8c1;
+      --burgundy: #4a1320;
+      --text: #f3f5f8;
+      --text-muted: #9ba4b5;
+      --font-club: 'Syne', -apple-system, sans-serif;
+      --font-royal: 'Cinzel', serif;
       --font-script: 'Italianno', cursive;
+      --font-body: 'Montserrat', sans-serif;
+      --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.6);
+      --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.8);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: var(--bg-dark);
-      background-image: radial-gradient(circle at 50% 10%, #20182b 0%, #060709 100%);
+      background: #07080b;
+      background-image: radial-gradient(circle at 50% 15%, #1e1326 0%, #060709 100%);
       font-family: var(--font-body);
       color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       padding: 20px 10px;
+      overflow-x: hidden;
     }
 
     .vip-shell {
@@ -42,559 +49,1479 @@
       max-width: 440px;
       background: var(--bg-card);
       border-radius: 24px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 223, 120, 0.25);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(212, 175, 55, 0.25);
       overflow: hidden;
       position: relative;
     }
 
-    .nav-gold {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 100;
-      background: rgba(19, 22, 28, 0.85);
-      border: 1px solid var(--gold-metallic);
-      color: var(--gold-bright);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-decoration: none;
-      font-weight: 700;
-      backdrop-filter: blur(8px);
-    }
-
-    .dj-sound-btn {
+    /* Ambient Music Toggle */
+    .audio-btn {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 100;
+      z-index: 999;
+      background: rgba(21, 25, 34, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--gold-metallic);
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(19, 22, 28, 0.85);
-      border: 1px solid var(--gold-bright);
-      color: var(--gold-bright);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+      transition: all 0.3s;
     }
 
-    /* Screen 1: Holographic VIP Access Pass */
-    .vip-pass-screen {
-      padding: 60px 20px 45px;
+    .audio-btn:hover {
+      transform: scale(1.08);
+      background: #252c3c;
+    }
+
+    .audio-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .audio-bar {
+      width: 3px;
+      background-color: var(--gold-bright);
+      border-radius: 3px;
+      height: 5px;
+      transition: height 0.2s;
+    }
+
+    .playing .audio-bar:nth-child(1) { animation: barPlay 0.7s infinite alternate; }
+    .playing .audio-bar:nth-child(2) { animation: barPlay 0.9s infinite alternate 0.2s; }
+    .playing .audio-bar:nth-child(3) { animation: barPlay 0.8s infinite alternate 0.4s; }
+
+    @keyframes barPlay {
+      0% { height: 4px; }
+      100% { height: 16px; }
+    }
+
+    /* VIP Ticket Header (Ref: 68ba3c3b634111704b297c76f3687356.jpg) */
+    .vip-ticket-header {
+      background: linear-gradient(180deg, #1f121d 0%, #151922 100%);
+      padding: 55px 24px 35px;
       text-align: center;
       position: relative;
+      border-bottom: 2px dashed rgba(212, 175, 55, 0.4);
     }
 
-    .vip-pass-screen.hidden { display: none; }
-
-    .vip-badge {
-      width: 260px;
-      height: 340px;
-      margin: 20px auto 30px;
-      background: linear-gradient(135deg, #1c202a 0%, #0d0f14 100%);
-      border-radius: 20px;
-      border: 2px solid var(--gold-metallic);
-      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25);
-      padding: 24px 18px;
-      display: flex;
-      flex-direction: column;
+    .ticket-badge {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s;
-    }
-
-    .vip-badge:hover { transform: scale(1.03); }
-
-    /* Shimmer light beam */
-    .vip-badge::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent 40%, rgba(255, 223, 120, 0.15) 50%, transparent 60%);
-      animation: sweepShimmer 4s infinite linear;
-    }
-
-    @keyframes sweepShimmer {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .lanyard-hole {
-      width: 38px;
-      height: 8px;
-      background: #000;
-      border-radius: 10px;
+      gap: 6px;
+      background: rgba(212, 175, 55, 0.15);
       border: 1px solid var(--gold-metallic);
+      color: var(--gold-bright);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .ticket-badge svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    .vip-title-big {
+      font-family: var(--font-royal);
+      font-size: 34px;
+      letter-spacing: 3px;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+      text-shadow: 0 0 25px rgba(255, 223, 120, 0.3);
+    }
+
+    .vip-name-script {
+      font-family: var(--font-script);
+      font-size: 68px;
+      line-height: 0.95;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .vip-sub {
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    /* Mini Calendar Strip with Circled Date (Ref: 68ba3c3b /  .jpg) */
+    .mini-cal-card {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: inline-block;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+    }
+
+    .cal-month {
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-bright);
       margin-bottom: 10px;
     }
 
-    .btn-enter-club {
-      background: linear-gradient(135deg, var(--gold-bright), var(--gold-metallic));
-      color: #0d0f14;
-      border: none;
-      padding: 14px 36px;
-      border-radius: 30px;
-      font-family: var(--font-club);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 2px;
+    .cal-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .cal-day-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .day-name {
+      font-size: 9px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(255, 223, 120, 0.4);
+      color: var(--text-muted);
+      margin-bottom: 4px;
     }
 
-    /* Screen 2: Party Invitation */
-    .party-content {
-      display: none;
-      animation: fadeIn 0.8s ease;
+    .day-num {
+      font-family: var(--font-royal);
+      font-size: 17px;
+      color: var(--text);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
-    .party-content.active { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .day-num.circled-heart {
+      background: var(--gold-metallic);
+      color: #07080b;
+      font-weight: 800;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+      position: relative;
     }
 
-    .hero-party {
-      padding: 55px 20px 30px;
-      text-align: center;
-      background: linear-gradient(180deg, #1d1828 0%, var(--bg-card) 100%);
-      border-bottom: 1px solid rgba(255, 223, 120, 0.2);
+    .day-num.circled-heart::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1.5px dashed var(--gold-bright);
+      border-radius: 50%;
     }
 
-    .dirty-thirty {
-      font-family: var(--font-script);
-      font-size: 50px;
+    /* Countdown Grid */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 10px 0 16px;
+    }
+
+    .count-cell {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 12px;
+      padding: 10px 4px;
+    }
+
+    .count-val {
+      font-family: var(--font-royal);
+      font-size: 24px;
+      font-weight: 700;
       color: var(--gold-bright);
       line-height: 1;
     }
 
-    .party-name {
-      font-family: var(--font-club);
-      font-size: 52px;
-      line-height: 0.95;
-      letter-spacing: -1px;
-      color: #ffffff;
-      margin-bottom: 8px;
-      text-shadow: 0 0 20px rgba(255, 223, 120, 0.3);
+    .count-lbl {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
-    .party-photo-box {
-      padding: 15px 20px;
-    }
-
-    .party-photo-frame {
-      border: 2px solid var(--gold-metallic);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      position: relative;
-    }
-
-    .party-photo-frame img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      display: block;
-      filter: contrast(110%);
-    }
-
-    .photo-overlay-tag {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      background: rgba(10, 11, 14, 0.85);
-      border: 1px solid var(--gold-bright);
-      color: var(--gold-bright);
-      padding: 6px 14px;
-      border-radius: 20px;
+    .cal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-metallic);
+      color: #07080b;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 25px;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+      transition: all 0.2s;
     }
 
-    /* Countdown */
-    .party-countdown {
-      background: linear-gradient(135deg, #1c152b, #120e1c);
-      margin: 15px 20px 25px;
-      padding: 22px 15px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 223, 120, 0.3);
+    .cal-btn:hover {
+      background: var(--gold-bright);
+    }
+
+    .cal-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* Sections */
+    section {
+      padding: 38px 22px;
+      position: relative;
+    }
+
+    .border-top {
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .sec-head {
       text-align: center;
+      margin-bottom: 26px;
     }
 
-    .party-cnt-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 12px;
+    .sec-tag {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
-    .party-cnt-col {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 8px 4px;
+    .sec-title {
+      font-family: var(--font-royal);
+      font-size: 28px;
+      color: white;
+      font-weight: 600;
     }
 
-    /* Timing */
-    .party-timing {
-      background: #181c24;
-      margin: 0 20px 25px;
-      padding: 24px 20px;
+    .sec-rule {
+      width: 45px;
+      height: 2px;
+      background: var(--gold-metallic);
+      margin: 10px auto 0;
+      position: relative;
+    }
+
+    .sec-rule::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--gold-bright);
+      border-radius: 50%;
+    }
+
+    /* Welcome Letter Card */
+    .letter-card {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.3);
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 22px;
     }
 
-    .timing-row {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .timing-row:last-child { margin-bottom: 0; }
-
-    .t-icon-box {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--gold-metallic), var(--gold-dark));
-      color: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
+    .quote-icon {
+      width: 28px;
+      height: 28px;
+      fill: var(--gold-metallic);
+      margin: 0 auto 10px;
     }
 
-    /* Interactive DJ Box */
-    .dj-box {
-      background: #181c24;
-      margin: 0 20px 25px;
-      padding: 24px 20px;
-      border-radius: 18px;
-      border: 1px solid rgba(157, 78, 221, 0.4);
+    .letter-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 14px;
     }
 
-    .song-item {
-      background: #222733;
-      padding: 8px 12px;
-      border-radius: 8px;
-      margin-top: 6px;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-between;
+    .letter-sig {
+      font-family: var(--font-script);
+      font-size: 38px;
       color: var(--gold-bright);
     }
 
-    /* Venue */
-    .venue-rooftop {
-      background: #181c24;
-      margin: 0 20px 25px;
-      padding: 22px 20px;
+    /* Arched Striped Frame Vignette (Fondos/7cbd721328a505c561ebe979051a9b2c.jpg) */
+    .arch-vignette {
+      background: url('Fondos/7cbd721328a505c561ebe979051a9b2c.jpg') center/cover;
       border-radius: 18px;
+      padding: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+    }
+
+    .arch-inner {
+      background: rgba(13, 15, 20, 0.9);
+      backdrop-filter: blur(4px);
+      border-radius: 14px;
+      padding: 24px 18px;
       text-align: center;
-      border: 1px solid rgba(255, 223, 120, 0.2);
     }
 
-    /* RSVP */
-    .rsvp-martina {
-      background: #181c24;
-      margin: 0 20px 30px;
-      padding: 24px 20px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 223, 120, 0.3);
+    .arch-title {
+      font-family: var(--font-royal);
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--gold-bright);
+      margin-bottom: 6px;
     }
 
-    .club-input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #333a4a;
-      border-radius: 10px;
-      background: #0d0f14;
-      color: #ffffff;
-      font-family: var(--font-body);
+    .arch-desc {
       font-size: 13px;
-      margin-bottom: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    .footer-party {
-      background: #0d0f14;
-      text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid rgba(255, 223, 120, 0.2);
-    }
-  
-    /* Full Responsive & Mobile-friendly Enhancements */
-    html {
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
+    /* Location Card */
+    .venue-box {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      padding: 22px 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
     }
 
-    body {
-      overflow-x: hidden;
+    .venue-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .venue-type svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .venue-title {
+      font-family: var(--font-royal);
+      font-size: 22px;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .venue-time {
+      font-size: 13px;
+      color: var(--gold-bright);
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .venue-time svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .venue-address {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .venue-tip {
+      background: rgba(212, 175, 55, 0.1);
+      border-left: 3px solid var(--gold-metallic);
+      padding: 8px 12px;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px;
+      color: var(--gold-soft);
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .venue-map-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
-      margin: 0;
-      padding: 0;
+      background: transparent;
+      border: 1px solid var(--gold-metallic);
+      color: var(--gold-bright);
+      padding: 10px 16px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
     }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 0;
-      }
-      .invitation-container, .invitation-shell, .card-shell, .shell-container, .baby-shell, .leo-shell, .shower-shell, .vip-shell {
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        min-height: 100vh;
-        max-width: 100% !important;
-        width: 100% !important;
-      }
+    .venue-map-link:hover {
+      background: var(--gold-metallic);
+      color: #07080b;
     }
 
-    /* Prevent iOS zoom on input focus */
-    input[type="text"], input[type="number"], select, textarea {
-      font-size: 16px !important;
+    .venue-map-link svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
     }
 
-    /* Responsive scaling for envelopes on ultra-compact screens (<360px) */
-    @media (max-width: 359px) {
-      .envelope-wrapper, .ticket-card, .ribbon-box, .seal-box-mateo, .baby-envelope-card, .kraft-card-box, .shower-box-card, .vip-badge {
-        transform: scale(0.88);
-        transform-origin: center center;
-      }
-      .timer-grid, .countdown-grid, .cnt-carmen-grid, .cnt-mateo-grid, .baby-timer-grid, .leo-cnt-grid, .cnt-sh-grid, .party-cnt-grid {
-        gap: 4px !important;
-      }
+    /* Curved Timeline (Ref: 81cea2af / 2bb055) */
+    .curved-timeline {
+      position: relative;
+      padding: 10px 0;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
+    .tl-curve-node {
+      position: relative;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
     }
 
+    .tl-curve-node:last-child {
+      margin-bottom: 0;
+    }
+
+    .node-pin {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-card-alt);
+      border: 2px solid var(--gold-metallic);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .node-pin svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--gold-bright);
+    }
+
+    .node-content {
+      flex: 1;
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .node-time {
+      font-family: var(--font-royal);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--gold-bright);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .node-title {
+      font-family: var(--font-royal);
+      font-size: 17px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .node-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Cocktail Menu Showcase */
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .drink-card {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 14px;
+      padding: 16px 14px;
+      text-align: center;
+    }
+
+    .drink-icon-box {
+      width: 38px;
+      height: 38px;
+      background: rgba(212, 175, 55, 0.15);
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drink-icon-box svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold-bright);
+    }
+
+    .drink-name {
+      font-family: var(--font-royal);
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .drink-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Conversational Numbered Wishes (Ref:  .jpg) */
+    .wish-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .wish-item {
+      background: var(--bg-card-alt);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .wish-num {
+      width: 28px;
+      height: 28px;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid var(--gold-metallic);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-bright);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .wish-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wish-text strong {
+      color: var(--gold-bright);
+    }
+
+    /* Gift Hucha Box */
+    .gift-hucha {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 18px;
+      padding: 24px 18px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .gift-hucha svg {
+      width: 36px;
+      height: 36px;
+      fill: var(--gold-bright);
+      margin-bottom: 10px;
+    }
+
+    .hucha-title {
+      font-family: var(--font-royal);
+      font-size: 22px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hucha-p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .iban-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed var(--gold-metallic);
+      padding: 10px;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      color: var(--gold-bright);
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    .btn-copy-iban {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--gold-metallic);
+      color: #07080b;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-copy-iban:hover {
+      background: var(--gold-bright);
+    }
+
+    .btn-copy-iban svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+    }
+
+    /* Dress Code / Pantone Cards (Ref: 68ba3c3b) */
+    .dresscode-card {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 16px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .palette-strip {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 14px 0 10px;
+    }
+
+    .swatch-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    /* FAQ */
+    .faq-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .faq-card {
+      background: var(--bg-card-alt);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      user-select: none;
+    }
+
+    .faq-q svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--gold-bright);
+      transition: transform 0.3s;
+    }
+
+    .faq-card.open .faq-q svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-a {
+      padding: 0 16px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .faq-card.open .faq-a {
+      padding: 0 16px 14px;
+      max-height: 180px;
+    }
+
+    /* RSVP Form */
+    .rsvp-box {
+      background: var(--bg-card-alt);
+      border: 2px solid var(--gold-metallic);
+      border-radius: 20px;
+      padding: 26px 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-row {
+      margin-bottom: 16px;
+    }
+
+    .lbl {
+      display: block;
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-bright);
+      margin-bottom: 6px;
+    }
+
+    .f-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: white;
+      background: #0d0f14;
+    }
+
+    .f-input:focus {
+      outline: none;
+      border-color: var(--gold-bright);
+      background: #151922;
+    }
+
+    .btn-rsvp-send {
+      width: 100%;
+      background: var(--gold-metallic);
+      color: #07080b;
+      border: none;
+      padding: 14px;
+      border-radius: 25px;
+      font-family: var(--font-royal);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-rsvp-send:hover {
+      background: var(--gold-bright);
+    }
+
+    /* Contact */
+    .contact-btns {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--gold-metallic);
+      padding: 9px 16px;
+      border-radius: 20px;
+      color: var(--gold-bright);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-wa svg {
+      width: 14px;
+      height: 14px;
+      fill: #25D366;
+    }
+
+    /* Barcode Motif Footer (Ref: 68ba3c3b) */
+    .barcode-wrap {
+      margin: 20px auto 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .barcode-lines {
+      display: flex;
+      gap: 2px;
+      height: 28px;
+    }
+
+    .b-bar {
+      background: rgba(212, 175, 55, 0.6);
+      height: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: #080a0e;
+      padding: 35px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .footer-sig {
+      font-family: var(--font-script);
+      font-size: 46px;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+    }
+
+    .footer-sub {
+      font-family: var(--font-royal);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1c2230;
+      border: 1px solid var(--gold-metallic);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 12px;
+      z-index: 10000;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      transition: transform 0.3s;
+      white-space: nowrap;
+    }
+
+    .toast.active {
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
 
-
-
-  <button id="djBtn" class="dj-sound-btn" title="Party Beat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></button>
+  <!-- Ambient Audio Control -->
+  <button class="audio-btn" id="audioToggle" aria-label="Música">
+    <div class="audio-bars">
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+      <div class="audio-bar"></div>
+    </div>
+  </button>
 
   <div class="vip-shell">
 
-    <!-- Screen 1: VIP Pass -->
-    <div id="vipScreen" class="vip-pass-screen">
-      <div style="font-family: var(--font-club); font-size: 11px; letter-spacing: 4px; color: var(--gold-bright); text-transform: uppercase;">ALL ACCESS VIP</div>
-      <div class="dirty-thirty">Dirty Thirty</div>
-
-      <div class="vip-badge" onclick="enterParty()">
-        <div class="lanyard-hole"></div>
-        <div style="font-size: 10px; letter-spacing: 3px; color: #8892a4; text-transform: uppercase;">ROOFTOP PARTY PASS</div>
-        <div style="font-family: var(--font-club); font-size: 34px; color: var(--gold-bright); line-height: 1;">MARTINA</div>
-        <div style="font-family: var(--font-body); font-size: 20px; font-weight: 800; color: #fff;">MIS 30 AÑOS</div>
-        <div style="font-size: 12px; color: var(--gold-metallic); letter-spacing: 2px;">19 . SEP . 2026</div>
-        <div style="font-size: 9px; color: #667285; letter-spacing: 2px;">BARCODE: #M30-VIP-2026</div>
+    <!-- VIP Ticket Header (Ref: 68ba3c3b) -->
+    <header class="vip-ticket-header">
+      <div class="ticket-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        VIP ACCESS PASS
       </div>
+      <h2 class="vip-title-big">MARTINA'S 30TH</h2>
+      <h1 class="vip-name-script">Martina</h1>
+      <p class="vip-sub">Una noche mágica en las alturas de Madrid para celebrar el cambio de década</p>
 
-      <button class="btn-enter-club" onclick="enterParty()">Entrar a la Fiesta</button>
-    </div>
-
-    <!-- Screen 2: Party Invitation -->
-    <div id="partyContent" class="party-content">
-
-      <header class="hero-party">
-        <div class="dirty-thirty">¡Cumplo 30 y lo celebramos!</div>
-        <h1 class="party-name">MARTINA</h1>
-        <p style="font-size: 12px; letter-spacing: 3px; color: var(--gold-bright); font-weight: 700;">19 DE SEPTIEMBRE DE 2026 — 20:30 H</p>
-      </header>
-
-      <div class="party-photo-box">
-        <div class="party-photo-frame">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Martina Cumpleaños">
-          <div class="photo-overlay-tag">Golden 30th</div>
+      <!-- Mini Calendar Strip (Ref: 68ba3c3b /  .jpg) -->
+      <div class="mini-cal-card">
+        <p class="cal-month">Septiembre 2026</p>
+        <div class="cal-strip">
+          <div class="cal-day-col">
+            <span class="day-name">Jue</span>
+            <span class="day-num">17</span>
+          </div>
+          <div class="cal-day-col">
+            <span class="day-name">Vie</span>
+            <span class="day-num">18</span>
+          </div>
+          <div class="cal-day-col">
+            <span class="day-name">Sáb</span>
+            <span class="day-num circled-heart">19</span>
+          </div>
+          <div class="cal-day-col">
+            <span class="day-name">Dom</span>
+            <span class="day-num">20</span>
+          </div>
+          <div class="cal-day-col">
+            <span class="day-name">Lun</span>
+            <span class="day-num">21</span>
+          </div>
         </div>
       </div>
-
-      <p style="text-align: center; padding: 15px 24px; font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-        "Los 20 fueron increíbles, pero los 30 van a ser inolvidables. Prepárate para una noche de terraza, cócteles al atardecer y música hasta que salga el sol."
-      </p>
 
       <!-- Countdown -->
-      <section class="party-countdown">
-        <div style="font-family: var(--font-club); font-size: 11px; letter-spacing: 2px; color: var(--gold-bright);">COUNTDOWN TO PARTY</div>
-        <div class="party-cnt-grid">
-          <div class="party-cnt-col"><div id="pDays" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Días</div></div>
-          <div class="party-cnt-col"><div id="pHours" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Horas</div></div>
-          <div class="party-cnt-col"><div id="pMinutes" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Min</div></div>
-          <div class="party-cnt-col"><div id="pSeconds" style="font-size: 22px; font-weight: 800; color: #fff;">00</div><div style="font-size: 9px; color: #8892a4;">Seg</div></div>
+      <div class="countdown-grid">
+        <div class="count-cell">
+          <div class="count-val" id="dVal">00</div>
+          <div class="count-lbl">Días</div>
         </div>
-      </section>
+        <div class="count-cell">
+          <div class="count-val" id="hVal">00</div>
+          <div class="count-lbl">Horas</div>
+        </div>
+        <div class="count-cell">
+          <div class="count-val" id="mVal">00</div>
+          <div class="count-lbl">Min</div>
+        </div>
+        <div class="count-cell">
+          <div class="count-val" id="sVal">00</div>
+          <div class="count-lbl">Seg</div>
+        </div>
+      </div>
 
-      <!-- Timing -->
-      <section class="party-timing">
-        <h3 style="font-family: var(--font-club); font-size: 16px; color: var(--gold-bright); margin-bottom: 16px; letter-spacing: 1px;">PLANNING DE LA NOCHE</h3>
+      <div>
+        <button class="cal-btn" onclick="addCal()">
+          <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+          Guardar la Noche
+        </button>
+      </div>
 
-        <div class="timing-row">
-          <div class="t-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 22h8M12 11v11M19 3l-7 8-7-8h14z"/></svg></div>
-          <div>
-            <div style="font-weight: 700; font-size: 13px;">20:30 h — Golden Hour Welcome Drinks</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Aperitivos gourmet y cava al atardecer.</div>
+      <!-- Barcode Decorative Element (Ref: 68ba3c3b) -->
+      <div class="barcode-wrap">
+        <div class="barcode-lines">
+          <span class="b-bar" style="width:3px;"></span>
+          <span class="b-bar" style="width:1px;"></span>
+          <span class="b-bar" style="width:4px;"></span>
+          <span class="b-bar" style="width:2px;"></span>
+          <span class="b-bar" style="width:1px;"></span>
+          <span class="b-bar" style="width:5px;"></span>
+          <span class="b-bar" style="width:2px;"></span>
+          <span class="b-bar" style="width:3px;"></span>
+          <span class="b-bar" style="width:1px;"></span>
+          <span class="b-bar" style="width:4px;"></span>
+          <span class="b-bar" style="width:2px;"></span>
+          <span class="b-bar" style="width:1px;"></span>
+          <span class="b-bar" style="width:3px;"></span>
+          <span class="b-bar" style="width:5px;"></span>
+          <span class="b-bar" style="width:2px;"></span>
+        </div>
+        <span style="font-family:monospace; font-size:9px; letter-spacing:3px; color:var(--gold-bright);">VIP-30TH-MARTINA-MAD</span>
+      </div>
+    </header>
+
+    <!-- Welcome Message -->
+    <section>
+      <div class="sec-head">
+        <p class="sec-tag">Cambio de Década</p>
+        <h2 class="sec-title">Celebremos los 30</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="letter-card">
+        <svg class="quote-icon" viewBox="0 0 24 24"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg>
+        <p class="letter-text">
+          Los 30 llegan solo una vez y quiero vivirlos con las personas que hacen mi vida divertida, intensa y especial. Cócteles, buena música y vistas al skyline de Madrid.
+        </p>
+        <div class="letter-sig">Martina</div>
+      </div>
+
+      <!-- Arched Striped Frame Vignette (Fondos/7cbd721328a505c561ebe979051a9b2c.jpg) -->
+      <div class="arch-vignette">
+        <div class="arch-inner">
+          <h3 class="arch-title">ROOFTOP EXPERIENCE</h3>
+          <p class="arch-desc">
+            Luces tenues, sesión exclusiva con DJ en vivo, barra libre de cócteles premium y una puesta de sol inolvidable.
+          </p>
+        </div>
+      </div>
+
+      <!-- Signature Cocktails -->
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <div class="drink-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M7.5 7L5.5 5h13l-2 2H7.5zm-4.3-4l1.4-1.4L6 3h12l1.4-1.4L20.8 3 19 4.8V5c0 .3-.1.6-.2.8L13 13.6V20h3v2H8v-2h3v-6.4L5.2 5.8c-.1-.2-.2-.5-.2-.8v-.2L3.2 3z"/></svg>
           </div>
+          <h4 class="drink-name">ESPRESSO MARTINA</h4>
+          <p class="drink-desc">Café de especialidad, licor de vainilla y vodka premium con toque dorado.</p>
         </div>
 
-        <div class="timing-row">
-          <div class="t-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16h16M12 7V3M10 3h4"/></svg></div>
-          <div>
-            <div style="font-weight: 700; font-size: 13px;">22:30 h — Tarta, Velas & Brindis 30</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Soplamos las velas con champán y bengalas.</div>
+        <div class="drink-card">
+          <div class="drink-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M7.5 7L5.5 5h13l-2 2H7.5zm-4.3-4l1.4-1.4L6 3h12l1.4-1.4L20.8 3 19 4.8V5c0 .3-.1.6-.2.8L13 13.6V20h3v2H8v-2h3v-6.4L5.2 5.8c-.1-.2-.2-.5-.2-.8v-.2L3.2 3z"/></svg>
           </div>
+          <h4 class="drink-name">GOLDEN PALOMA</h4>
+          <p class="drink-desc">Tequila reposado, pomelo rosa, lima fresca y sal marina en escamas.</p>
         </div>
+      </div>
+    </section>
 
-        <div class="timing-row">
-          <div class="t-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <div>
-            <div style="font-weight: 700; font-size: 13px;">23:00 h — DJ Session & Dancefloor</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Pop, electrónica y hits de los 2000.</div>
-          </div>
+    <!-- Location -->
+    <section class="border-top" style="background: #11141c;">
+      <div class="sec-head">
+        <p class="sec-tag">Coordenadas VIP</p>
+        <h2 class="sec-title">Ubicación</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="venue-box">
+        <div class="venue-type">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Rooftop & Terraza Panorámica
         </div>
-      </section>
-
-      <!-- DJ Song Request Box -->
-      <section class="dj-box">
-        <h3 style="font-family: var(--font-club); font-size: 15px; color: var(--gold-bright); margin-bottom: 6px;">Pide tu cancion al DJ</h3>
-        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">¿Qué canción no puede faltar para que lo des todo en la pista?</p>
-
-        <div style="display: flex; gap: 8px;">
-          <input type="text" id="songInput" class="club-input" style="margin-bottom:0;" placeholder="Artista - Canción">
-          <button class="btn-enter-club" style="padding: 10px 18px;" onclick="addSong()">Pedir</button>
+        <h3 class="venue-title">Azotea del Círculo de Bellas Artes</h3>
+        <div class="venue-time">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+          20:30 Horas (Puntualidad para ver el atardecer)
         </div>
-
-        <div id="playlistContainer" style="margin-top: 10px;">
-          <div class="song-item"><span>Dua Lipa — Levitating</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-          <div class="song-item"><span>Gala — Freed from Desire</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <p class="venue-address">Calle de Alcalá, 42, Centro, 28014 Madrid</p>
+        <div class="venue-tip">
+          Acceso por el ascensor directo de la entrada principal indicando "Fiesta Martina 30". Guardarropa privado incluido.
         </div>
-      </section>
-
-      <!-- Venue & Location -->
-      <section class="venue-rooftop">
-        <div style="margin-bottom: 6px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <h4 style="font-family: var(--font-club); font-size: 18px; color: var(--gold-bright);">Skyline Rooftop Lounge</h4>
-        <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Gran Vía, 54, Planta 12, Madrid</p>
-        <a href="https://maps.google.com/?q=Gran+Via+54+Madrid" target="_blank" rel="noopener" class="btn-enter-club" style="display:inline-block; margin-top:12px; text-decoration:none;">
-          Ver en Google Maps
+        <a href="https://maps.google.com/?q=Circulo+de+Bellas+Artes+Madrid" target="_blank" rel="noopener noreferrer" class="venue-map-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+          Abrir en Google Maps
         </a>
-      </section>
+      </div>
+    </section>
+
+    <!-- Curved Timeline (Ref: 81cea2af / 2bb055) -->
+    <section class="border-top">
+      <div class="sec-head">
+        <p class="sec-tag">Timing de la Fiesta</p>
+        <h2 class="sec-title">Itinerario</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="curved-timeline">
+        <div class="tl-curve-node">
+          <div class="node-pin">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="node-content">
+            <div class="node-time">20:30 H</div>
+            <h4 class="node-title">Red Carpet & Champagne</h4>
+            <p class="node-desc">Recepción con copas de bienvenida al atardecer sobre la Gran Vía.</p>
+          </div>
+        </div>
+
+        <div class="tl-curve-node">
+          <div class="node-pin">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="node-content">
+            <div class="node-time">21:30 H</div>
+            <h4 class="node-title">Finger Food & Cócteles</h4>
+            <p class="node-desc">Pases de bocados gourmet, bao buns, sushi y delicias calientes.</p>
+          </div>
+        </div>
+
+        <div class="tl-curve-node">
+          <div class="node-pin">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="node-content">
+            <div class="node-time">23:00 H</div>
+            <h4 class="node-title">Tarta 30th & Show Bengala</h4>
+            <p class="node-desc">Soplo de velas, brindis multitudinario y dedicatorias con micrófono abierto.</p>
+          </div>
+        </div>
+
+        <div class="tl-curve-node">
+          <div class="node-pin">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="node-content">
+            <div class="node-time">23:30 H</div>
+            <h4 class="node-title">DJ Live Set & Fiesta</h4>
+            <p class="node-desc">Música electrónica, pop y grandes éxitos para no parar de bailar.</p>
+          </div>
+        </div>
+
+        <div class="tl-curve-node">
+          <div class="node-pin">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></svg>
+          </div>
+          <div class="node-content">
+            <div class="node-time">03:30 H</div>
+            <h4 class="node-title">Recena & Cierre</h4>
+            <p class="node-desc">Mini hamburguesas, churros con chocolate caliente y fin de fiesta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Numbered Wishes (Ref:  .jpg) -->
+    <section class="border-top" style="background: #11141c;">
+      <div class="sec-head">
+        <p class="sec-tag">Good to Know</p>
+        <h2 class="sec-title">Detalles Importantes</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="wish-list">
+        <div class="wish-item">
+          <div class="wish-num">1</div>
+          <div class="wish-text">
+            <strong>El mayor regalo:</strong> Verte dándolo todo en la pista de baile conmigo hasta que nos echen.
+          </div>
+        </div>
+
+        <div class="wish-item">
+          <div class="wish-num">2</div>
+          <div class="wish-text">
+            <strong>Bote viaje a Japón:</strong> Si prefieres hacer un detalle, estoy ahorrando para mi gran viaje soñado a Tokio.
+          </div>
+        </div>
+
+        <div class="wish-item">
+          <div class="wish-num">3</div>
+          <div class="wish-text">
+            <strong>DJ Request:</strong> Dinos qué canción no puede faltar para quemar la suela de los zapatos.
+          </div>
+        </div>
+
+        <div class="wish-item">
+          <div class="wish-num">4</div>
+          <div class="wish-text">
+            <strong>Confirmación:</strong> Por favor confírmame antes del 1 de Septiembre para el pase de lista en puerta.
+          </div>
+        </div>
+      </div>
+
+      <!-- Gift / Hucha Box -->
+      <div class="gift-hucha">
+        <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+        <h3 class="hucha-title">Bote Tokio 2026</h3>
+        <p class="hucha-p">
+          Para quienes queráis aportar un granito de arena a mi aventura por tierras niponas:
+        </p>
+        <div class="iban-box" id="ibanMartina">ES33 2100 8820 4402 0045 6789</div>
+        <button class="btn-copy-iban" onclick="copyMartinaIban()">
+          <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          Copiar IBAN
+        </button>
+      </div>
 
       <!-- Dress Code -->
-      <section style="background: #181c24; margin: 0 20px 25px; padding: 20px; border-radius: 18px; text-align: center;">
-        <div style="font-family: var(--font-club); font-size: 14px; color: var(--gold-bright); letter-spacing: 2px;">DRESS CODE</div>
-        <div style="font-weight: 700; font-size: 15px; margin-top: 4px;">Cocktail Chic & Touch of Gold</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Saca tus mejores galas para una noche con mucho brillo.</p>
-      </section>
-
-      <!-- RSVP -->
-      <section class="rsvp-martina">
-        <h3 style="font-family: var(--font-club); font-size: 16px; color: var(--gold-bright); text-align: center; margin-bottom: 6px;">CONFIRMA TU ASISTENCIA</h3>
-        <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 14px;">Lista de invitados VIP antes del 5 de Septiembre</p>
-
-        <form id="partyForm" onsubmit="submitParty(event)">
-          <input type="text" id="partyGuest" class="club-input" placeholder="Tu nombre *" required>
-          <select id="partyDrink" class="club-input">
-            <option value="Gin Tonic">Bebida favorita: Gin Tonic Premium</option>
-            <option value="Aperol">Bebida favorita: Aperol Spritz</option>
-            <option value="Vino/Cerveza">Bebida favorita: Vino / Cerveza</option>
-            <option value="Mocktail 0.0">Bebida favorita: Mocktail sin alcohol</option>
-          </select>
-          <button type="submit" class="btn-enter-club" style="width: 100%;">¡Voy a darlo todo!</button>
-        </form>
-        <div id="partySuccess" style="display:none; text-align:center; padding:15px; color: var(--gold-bright); font-weight:700;">
-          ¡Acceso VIP confirmado! Tu nombre está en la lista de puerta.
+      <div class="dresscode-card">
+        <p class="sec-tag">Dress Code</p>
+        <h3 style="font-family:var(--font-royal); font-size:20px; color:var(--gold-bright); margin-bottom:6px;">Chic & Glam / Night Cocktail</h3>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+          Negro elegante, brillos dorados, terciopelo o detalles metálicos para brillar con la noche madrileña.
+        </p>
+        <div class="palette-strip">
+          <div class="swatch-dot" style="background:#0d0f14;" title="Negro Profundo"></div>
+          <div class="swatch-dot" style="background:#d4af37;" title="Oro"></div>
+          <div class="swatch-dot" style="background:#4a1320;" title="Burdeos Chic"></div>
+          <div class="swatch-dot" style="background:#ffdf78;" title="Oro Claro"></div>
+          <div class="swatch-dot" style="background:#f3f5f8;" title="Blanco Roto"></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <footer class="footer-party">
-        <div style="font-family: var(--font-club); font-size: 16px; color: var(--gold-bright);">MARTINA'S 30TH</div>
-        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">A night to remember forever</p>
-      </footer>
+    <!-- FAQ -->
+    <section class="border-top">
+      <div class="sec-head">
+        <p class="sec-tag">Info Útil</p>
+        <h2 class="sec-title">Preguntas Frecuentes</h2>
+        <div class="sec-rule"></div>
+      </div>
 
-    </div>
+      <div class="faq-wrapper">
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>¿Cómo funciona el acceso al rooftop?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-a">
+            Habrá un control en la planta baja con la lista oficial de invitados. Solo tienes que dar tu nombre y apellidos y subirás directo en el ascensor VIP.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>¿Habrá comida suficiente para cenar?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-a">
+            ¡Totalmente! Es una cena cóctel muy contundente con pases continuos fríos y calientes, además de recena de madrugada.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>¿Hasta cuándo puedo confirmar asistencia?</span>
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="faq-a">
+            El 1 de Septiembre cerramos la lista con la seguridad del Círculo, por lo que te agradezco confirmarme antes de ese día.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="border-top" style="background: #11141c;" id="rsvpSec">
+      <div class="sec-head">
+        <p class="sec-tag">Confirmación VIP</p>
+        <h2 class="sec-title">¿Te Vienes de Fiesta?</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="rsvp-box">
+        <form onsubmit="submitRsvp(event)">
+          <div class="form-row">
+            <label class="lbl">Nombre y Apellidos *</label>
+            <input type="text" id="rName" class="f-input" placeholder="Tu nombre para la lista en puerta" required>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl">¿Vienes a celebrar conmigo? *</label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <label style="display:flex; align-items:center; gap:8px; background:#0d0f14; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.4); cursor:pointer; font-size:12px; font-weight:700; color:var(--gold-bright);">
+                <input type="radio" name="att" value="yes" checked> ¡Por supuesto!
+              </label>
+              <label style="display:flex; align-items:center; gap:8px; background:#0d0f14; padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,0.4); cursor:pointer; font-size:12px; font-weight:600; color:var(--text-muted);">
+                <input type="radio" name="att" value="no"> No podré ir
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl">Tu Canción para el DJ Set</label>
+            <input type="text" id="rSong" class="f-input" placeholder="El temazo con el que lo das todo en la pista">
+          </div>
+
+          <div class="form-row">
+            <label class="lbl">Alergias o Intolerancias</label>
+            <input type="text" id="rDiet" class="f-input" placeholder="Ej. Celíaco, alérgico a marisco, vegano...">
+          </div>
+
+          <div class="form-row">
+            <label class="lbl">Mensaje para Martina</label>
+            <textarea id="rMsg" class="f-input" rows="3" placeholder="Dedícale unas palabras por sus 30..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-rsvp-send">CONFIRMAR MI ASISTENCIA</button>
+        </form>
+
+        <div class="contact-btns">
+          <a href="https://wa.me/34600998877?text=Hola%20Martina,%20te%20escribo%20por%20tu%20fiesta%20de%2030" target="_blank" rel="noopener noreferrer" class="btn-wa">
+            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.2 1.28-1.66 1.33-.44.05-.98.24-3.17-.67-2.31-.96-3.82-3.32-3.93-3.48-.11-.15-1.02-1.36-1.02-2.6 0-1.24.64-1.85.87-2.1.23-.25.5-.31.67-.31.17 0 .34 0 .49.01.16.01.37-.06.58.44.22.52.74 1.82.81 1.95.07.14.11.3.02.48-.09.17-.14.28-.28.43-.14.16-.29.35-.42.47-.14.14-.29.29-.12.58.16.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.72-.84.91-1.13.19-.29.39-.24.65-.14.27.09 1.7.8 1.99.95.29.14.49.22.56.34.07.13.07.72-.17 1.4z"/></svg>
+            WhatsApp Martina
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-sig">Martina</div>
+      <p class="footer-sub">19 de Septiembre de 2026 — Madrid</p>
+      <p style="font-size:11px; color:var(--text-muted); margin-top:8px;">Gracias por hacer que mis 30 sean inolvidables</p>
+    </footer>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <span id="toastMsg">Mensaje</span>
   </div>
 
   <script>
-    function enterParty() {
-      document.getElementById('vipScreen').classList.add('hidden');
-      document.getElementById('partyContent').classList.add('active');
-      playClubBeat();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // Countdown Target: Sept 19, 2026 20:30:00
+    const target = new Date('2026-09-19T20:30:00').getTime();
 
-    const pTarget = new Date('2026-09-19T20:30:00').getTime();
-    function updatePartyTimer() {
+    function updateCd() {
       const now = new Date().getTime();
-      const diff = pTarget - now;
-      if (diff > 0) {
-        document.getElementById('pDays').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-        document.getElementById('pHours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-        document.getElementById('pMinutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-        document.getElementById('pSeconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      const diff = target - now;
+      if (diff <= 0) return;
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('dVal').innerText = String(d).padStart(2, '0');
+      document.getElementById('hVal').innerText = String(h).padStart(2, '0');
+      document.getElementById('mVal').innerText = String(m).padStart(2, '0');
+      document.getElementById('sVal').innerText = String(s).padStart(2, '0');
+    }
+
+    setInterval(updateCd, 1000);
+    updateCd();
+
+    // Audio Synth
+    let audioCtx = null;
+    let isPlaying = false;
+    let synthTimer = null;
+    const audioBtn = document.getElementById('audioToggle');
+
+    function playNightBeat() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const notes = [220.00, 261.63, 293.66, 329.63, 392.00]; // Deep rhythmic chillout
+      let idx = 0;
+
+      synthTimer = setInterval(() => {
+        if (!isPlaying) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(notes[idx % notes.length], audioCtx.currentTime);
+        idx++;
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.025, audioCtx.currentTime + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.9);
+      }, 600);
     }
-    setInterval(updatePartyTimer, 1000);
-    updatePartyTimer();
 
-    function addSong() {
-      const input = document.getElementById('songInput');
-      const val = input.value.trim();
-      if (!val) return;
-      const list = document.getElementById('playlistContainer');
-      const row = document.createElement('div');
-      row.className = 'song-item';
-      row.innerHTML = `<span>${val}</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`;
-      list.prepend(row);
-      input.value = '';
-      playClubBeat();
+    audioBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        audioBtn.classList.add('playing');
+        playNightBeat();
+        showToast('Música activada');
+      } else {
+        audioBtn.classList.remove('playing');
+        if (synthTimer) clearInterval(synthTimer);
+        showToast('Música pausada');
+      }
+    });
+
+    // Calendar
+    function addCal() {
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'URL:https://chocarro.github.io/invitaciones-interactivas/cumpleanos-martina.html',
+        'DTSTART:20260919T183000Z',
+        'DTEND:20260920T020000Z',
+        'SUMMARY:Martina 30th Birthday VIP Party',
+        'DESCRIPTION:Celebración de los 30 de Martina en el Rooftop del Círculo de Bellas Artes de Madrid.',
+        'LOCATION:Calle de Alcalá 42, 28014 Madrid',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = window.URL.createObjectURL(blob);
+      a.setAttribute('download', 'Martina-30th-Birthday.ics');
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Descargando pase de calendario...');
     }
 
-    function submitParty(e) {
-      e.preventDefault();
-      document.getElementById('partyForm').style.display = 'none';
-      document.getElementById('partySuccess').style.display = 'block';
-      playClubBeat();
-    }
-
-    let pCtx = null;
-    function playClubBeat() {
-      if (!pCtx) pCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (pCtx.state === 'suspended') pCtx.resume();
-
-      const chords = [220, 261.63, 329.63, 440];
-      const now = pCtx.currentTime;
-      chords.forEach((f, i) => {
-        const o = pCtx.createOscillator();
-        const g = pCtx.createGain();
-        o.type = 'sawtooth';
-        o.frequency.setValueAtTime(f, now + i * 0.08);
-        g.gain.setValueAtTime(0, now + i * 0.08);
-        g.gain.linearRampToValueAtTime(0.06, now + i * 0.08 + 0.05);
-        g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 1.2);
-        o.connect(g);
-        g.connect(pCtx.destination);
-        o.start(now + i * 0.08);
-        o.stop(now + i * 0.08 + 1.2);
+    // Copy IBAN
+    function copyMartinaIban() {
+      const iban = document.getElementById('ibanMartina').innerText;
+      navigator.clipboard.writeText(iban).then(() => {
+        showToast('IBAN copiado al portapapeles');
+      }).catch(() => {
+        showToast('IBAN: ' + iban);
       });
     }
 
-    document.getElementById('djBtn').addEventListener('click', playClubBeat);
+    // FAQ Toggle
+    function toggleFaq(el) {
+      el.parentElement.classList.toggle('open');
+    }
+
+    // Toast
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      t.classList.add('active');
+      setTimeout(() => t.classList.remove('active'), 2800);
+    }
+
+    // RSVP Form
+    function submitRsvp(e) {
+      e.preventDefault();
+      const name = document.getElementById('rName').value;
+      showToast(`¡Gracias ${name}! Estás en la lista VIP.`);
+      e.target.reset();
+    }
   </script>
 </body>
 </html>
